@@ -7,29 +7,12 @@
     
     
     
-    <updated>Mon, 01 Jan 0001 00:00:00 UTC</updated>
-    
-    <item>
-      <title>Linkdump Bare-Metal Edition</title>
-      <link>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition</guid>
-      <description>&lt;p&gt;Here goes the first post on the Hugo platform on the github blog. Some links I had to close out as I consolidated memory to fire up a multi-devstack.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://theforeman.org/manuals/1.5/quickstart_guide.html&#34;&gt;http://theforeman.org/manuals/1.5/quickstart_guide.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/theforeman/foreman_discovery&#34;&gt;https://github.com/theforeman/foreman_discovery&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.cobblerd.org/&#34;&gt;http://www.cobblerd.org/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://ma.ttwagner.com/bare-metal-deploys-with-devstack-and-ironic/&#34;&gt;http://ma.ttwagner.com/bare-metal-deploys-with-devstack-and-ironic/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-    </item>
+    <updated>Thu, 14 Aug 2014 00:00:00 UTC</updated>
     
     <item>
       <title>Multi-Node Devstack with Neutron and Cells</title>
       <link>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <pubDate>Thu, 14 Aug 2014 00:00:00 UTC</pubDate>
       
       <guid>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells</guid>
       <description>
@@ -242,6 +225,23 @@ cell_type=comput
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://openlystacking.blogspot.com/2013/07/creating-cell-environment-using-devstack.html&#34;&gt;http://openlystacking.blogspot.com/&lt;sup&gt;2013&lt;/sup&gt;&amp;frasl;&lt;sub&gt;07&lt;/sub&gt;/creating-cell-environment-using-devstack.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.xlcloud.org/bin/view/Blog/Devstack+with+Quantum+in+a+multi-node+configuration?language=en&#34;&gt;http://www.xlcloud.org/bin/view/Blog/Devstack+with+Quantum+in+a+multi-node+configuration?language=en&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linkdump Bare-Metal Edition</title>
+      <link>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition</guid>
+      <description>&lt;p&gt;Here goes the first post on the Hugo platform on the github blog. Some links I had to close out as I consolidated memory to fire up a multi-devstack.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://theforeman.org/manuals/1.5/quickstart_guide.html&#34;&gt;http://theforeman.org/manuals/1.5/quickstart_guide.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/theforeman/foreman_discovery&#34;&gt;https://github.com/theforeman/foreman_discovery&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cobblerd.org/&#34;&gt;http://www.cobblerd.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ma.ttwagner.com/bare-metal-deploys-with-devstack-and-ironic/&#34;&gt;http://ma.ttwagner.com/bare-metal-deploys-with-devstack-and-ironic/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
