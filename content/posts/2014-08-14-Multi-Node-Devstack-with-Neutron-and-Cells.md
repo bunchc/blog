@@ -12,9 +12,9 @@ From the OpenStack.org docs: **Note** *I've added the bold on some important poi
 
 >When this functionality is enabled, the hosts in an OpenStack Compute cloud are partitioned into groups called cells. Cells are configured as a tree. The top-level cell should have a host that runs a nova-api service, but no nova-compute services. Each child cell should run all of the typical nova-* services in a regular Compute cloud except for nova-api. **You can think of cells as a normal Compute deployment in that each cell has its own database server and message queue broker.**
 
-So, in addition to breaking down at physical boundaries or failure domains, you can break nova-compute into smaller chunks based on DB and MQ scaling limts. 
+So, in addition to breaking down at physical boundaries or failure domains, you can break nova-compute into smaller chunks based on DB and MQ scaling limits. 
 
-However, not all of us have multi-geo hundred plus node compute labs to play with... so how do we test out this functionaility before hand? Devstack!
+However, not all of us have multi-geo hundred plus node compute labs to play with... so how do we test out this functionality before hand? Devstack!
 
 ## Getting Started
 
@@ -195,7 +195,7 @@ Then in screen, find the n-cell-* services and restart them.
 
 ## Conclusion
 
-In this post, we created two virtual machines, installed Devstack while enabling nova-cells. Finally, we actually configured the cells to talk to one another. This post was largely an almagmation of two other posts highlighted in the resources section
+In this post, we created two virtual machines, installed Devstack while enabling nova-cells. Finally, we actually configured the cells to talk to one another. This post was largely an amalgamation of two other posts highlighted in the resources section
 
 ## Resources
 - [http://openlystacking.blogspot.com/2013/07/creating-cell-environment-using-devstack.html](http://openlystacking.blogspot.com/2013/07/creating-cell-environment-using-devstack.html)
