@@ -65,6 +65,64 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork'> Vagrant and Hanlon (The other Razor Fork)</a> </h2>
+      <div class="meta">Fri, Aug 15, 2014</div>
+    </header>
+
+    
+
+<p>You may or may not know that Razor, the bare-metal lifecycle tool, has forked from its original bits. This is a good thing, but it&rsquo;s still really early days on the new forks, so we&rsquo;ll see ultimately what plays out.</p>
+
+<p>The Puppet-Labs &ldquo;Razor-Server&rdquo; fork can be found <a href="https://github.com/puppetlabs/razor-server">here</a>. If you want to work with it, or test it locally, you can use the bits written by Egle <a href="http://anystacker.com/2014/01/vagrant-up-razor-server/">here</a>.</p>
+
+<p>Hanlon, the CSC fork <a href="https://github.com/csc/Hanlon">here</a>, is being perused by Tom McSweeney who helped get the original razor off the ground.</p>
+
+<p>To help me work with it and contribute some, I&rsquo;ve built a small Vagrant environment (largely basd on the Vagrant environment for &lsquo;the other&rsquo; razor.).</p>
+
+<h2 id="toc_0">Vagrant Up Hanlon</h2>
+
+<p>To get started, clone the repo and vagrant up, like so:</p>
+
+<pre><code>git clone https://github.com/bunchc/vagrant-hanlon.git
+cd vagrant-hanlon
+vagrant up
+</code></pre>
+
+<p>What this does during the vagrant up process is:</p>
+
+<ul>
+<li>Install dnsmasq</li>
+<li>Configure IPtables for NAT</li>
+<li>Installs Mongodb</li>
+<li>Installs Java</li>
+<li>Installs RBENV</li>
+<li>Installs both jruby and ruby 1.9.3</li>
+<li>Downloads Hanlon</li>
+<li>Starts Puma (to run Hanlon)</li>
+<li>Pulls down a few images to add to Hanlon</li>
+</ul>
+
+<p>Once you have Hanlon running, command wise it works very similar to the old Razor. That is:</p>
+
+<pre><code>hanlon node
+hanlon policy
+hanlon image
+</code></pre>
+
+<h2 id="toc_1">Summary</h2>
+
+<p>In this post, you cloned and started to work with Hanlon, one of the derivatives of the Razor bare-metal provisioning framework.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow'> Updated Blog / Markdown workflow</a> </h2>
       <div class="meta">Thu, Aug 14, 2014</div>
     </header>
