@@ -7,7 +7,59 @@
     
     
     
-    <updated>Thu, 14 Aug 2014 00:00:00 UTC</updated>
+    <updated>Fri, 15 Aug 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Vagrant and Hanlon (The other Razor Fork)</title>
+      <link>http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork</link>
+      <pubDate>Fri, 15 Aug 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork</guid>
+      <description>
+
+&lt;p&gt;You may or may not know that Razor, the bare-metal lifecycle tool, has forked from its original bits. This is a good thing, but it&amp;rsquo;s still really early days on the new forks, so we&amp;rsquo;ll see ultimately what plays out.&lt;/p&gt;
+
+&lt;p&gt;The Puppet-Labs &amp;ldquo;Razor-Server&amp;rdquo; fork can be found &lt;a href=&#34;https://github.com/puppetlabs/razor-server&#34;&gt;here&lt;/a&gt;. If you want to work with it, or test it locally, you can use the bits written by Egle &lt;a href=&#34;http://anystacker.com/2014/01/vagrant-up-razor-server/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hanlon, the CSC fork &lt;a href=&#34;https://github.com/csc/Hanlon&#34;&gt;here&lt;/a&gt;, is being perused by Tom McSweeney who helped get the original razor off the ground.&lt;/p&gt;
+
+&lt;p&gt;To help me work with it and contribute some, I&amp;rsquo;ve built a small Vagrant environment (largely basd on the Vagrant environment for &amp;lsquo;the other&amp;rsquo; razor.).&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Vagrant Up Hanlon&lt;/h2&gt;
+
+&lt;p&gt;To get started, clone the repo and vagrant up, like so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/bunchc/vagrant-hanlon.git
+cd vagrant-hanlon
+vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What this does during the vagrant up process is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Install dnsmasq&lt;/li&gt;
+&lt;li&gt;Configure IPtables for NAT&lt;/li&gt;
+&lt;li&gt;Installs Mongodb&lt;/li&gt;
+&lt;li&gt;Installs Java&lt;/li&gt;
+&lt;li&gt;Installs RBENV&lt;/li&gt;
+&lt;li&gt;Installs both jruby and ruby 1.9.3&lt;/li&gt;
+&lt;li&gt;Downloads Hanlon&lt;/li&gt;
+&lt;li&gt;Starts Puma (to run Hanlon)&lt;/li&gt;
+&lt;li&gt;Pulls down a few images to add to Hanlon&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once you have Hanlon running, command wise it works very similar to the old Razor. That is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hanlon node
+hanlon policy
+hanlon image
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post, you cloned and started to work with Hanlon, one of the derivatives of the Razor bare-metal provisioning framework.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Updated Blog / Markdown workflow</title>
