@@ -7,7 +7,194 @@
     
     
     
-    <updated>Fri, 15 Aug 2014 00:00:00 UTC</updated>
+    <updated>Tue, 19 Aug 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Raspberry Pi as PXE Server</title>
+      <link>http://blog.codybunch.com/posts/2014-08-19-Raspberry-Pi-as-PXE-Server</link>
+      <pubDate>Tue, 19 Aug 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-08-19-Raspberry-Pi-as-PXE-Server</guid>
+      <description>
+
+&lt;p&gt;As I start to move from OpenStack Compute Cells in Devstack to OpenStack Compute Cells physicall, I needed to re-think my homelab some. It had been running some variation of vsphere and the OpenStack Cookbook work from various projects prior. Basically, it was a Hodor of a home lab.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Hodor!&lt;/h2&gt;
+
+&lt;p&gt;Rather than lose a bit of hardware to foreman, or one of the new razor forks (I may still go this route later), I decided instead to pound a Raspberry Pi into service. To turn the rPI into a usable provisioning server, I did the following:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Provision a 16gb card with Raspbian&lt;/li&gt;
+&lt;li&gt;Beat Networking Into Submission&lt;/li&gt;
+&lt;li&gt;Setup IP Tables for Nat&lt;/li&gt;
+&lt;li&gt;Configure DHCP, PXE, TFTP, etc&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;We&amp;rsquo;ll skip step 1 as the folks at &lt;a href=&#34;http://www.raspberrypi.org/&#34;&gt;raspberrypi.org&lt;/a&gt; cover that pretty well already.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Beat Networking Into Submission&lt;/h2&gt;
+
+&lt;p&gt;So the rPI does some auto-hotplugging bits that can cause you some issues if you try to use both wifi and ethernet at the same time. If you&amp;rsquo;re not expecting them, well&amp;hellip; let&amp;rsquo;s just say I spent too long trying to solve before googling the problem. Here&amp;rsquo;s what my networking config files look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# cat /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auth eth0
+allow-hotplug eth0
+iface eth0 inet static
+    address 172.16.0.1
+    netmask 255.255.255.0
+
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet static
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+    address 10.0.1.15
+    netmask 255.255.255.0
+    broadcast 10.0.1.255
+    gateway 10.0.1.1
+
+iface default inet dhcp
+
+# cat /etc/default/ifplugd
+INTERFACES=&amp;quot;eth0&amp;quot;
+HOTPLUG_INTERFACES=&amp;quot;eth0&amp;quot;
+ARGS=&amp;quot;-q -f -u0 -d10 -w -I&amp;quot;
+SUSPEND_ACTION=&amp;quot;stop&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once you have that, reboot the rPI and you should be good to go.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Setup IP Tables for NAT&lt;/h2&gt;
+
+&lt;p&gt;This is also pretty well straight forward, but for some reason I end up googling it each time. Here it is for reference:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# NAT
+iptables --table nat --append POSTROUTING --out-interface wlan0 -j MASQUERADE
+iptables --append FORWARD --in-interface eth0 -j ACCEPT
+iptables-save | sudo tee /etc/iptables.conf
+iptables-restore &amp;lt; /etc/iptables.conf
+sh -c &amp;quot;echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&amp;quot;
+sed -i &amp;quot;s/exit 0/iptables-restore &amp;lt; \/etc\/\iptables.conf \nexit 0/g&amp;quot; /etc/rc.local
+sed -i &amp;quot;s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g&amp;quot; /etc/sysctl.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;Configure DHCP, PXE, TFTP, etc&lt;/h2&gt;
+
+&lt;p&gt;This one is a bit more involved, but is all done via the following bash commands:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;MY_IP=$(ifconfig eth0 | awk &#39;/inet addr/ {split ($2,A,&amp;quot;:&amp;quot;); print A[2]}&#39;)
+
+# Install the things
+sudo apt-get install -y dnsmasq nfs-kernel-server syslinux-common
+
+# Setup some shell folders
+sudo mkdir -p /tftpboot/images/ubuntu/14.04/amd64
+sudo cp -r /usr/lib/syslinux/* /tftpboot/
+sudo mkdir -p /tftpboot/pxelinux.cfg/Ubuntu
+sudo cp /usr/lib/syslinux/vesamenu.c32 /tftpboot/
+
+# Create a pxe.conf file
+sudo cat &amp;gt; /tftpboot/pxelinux.cfg/pxe.conf &amp;lt;&amp;lt;EOF
+MENU TITLE  PXE Server 
+NOESCAPE 1
+ALLOWOPTIONS 1
+PROMPT 0
+MENU WIDTH 80
+MENU ROWS 14
+MENU TABMSGROW 24
+MENU MARGIN 10
+MENU COLOR border               30;44      #ffffffff #00000000 std
+EOF
+
+# Create our PXE Menu
+sudo cat &amp;gt; /tftpboot/pxelinux.cfg/default &amp;lt;&amp;lt;EOF
+DEFAULT vesamenu.c32 
+TIMEOUT 600
+ONTIMEOUT BootLocal
+PROMPT 0
+MENU INCLUDE pxelinux.cfg/pxe.conf
+NOESCAPE 1
+LABEL BootLocal
+        localboot 0
+        TEXT HELP
+        Boot to local hard disk
+        ENDTEXT
+MENU BEGIN Ubuntu
+MENU TITLE Ubuntu 
+        LABEL Previous
+        MENU LABEL Previous Menu
+        TEXT HELP
+        Return to previous menu
+        ENDTEXT
+        MENU EXIT
+        MENU SEPARATOR
+        MENU INCLUDE Ubuntu/Ubuntu.menu
+MENU END
+EOF
+
+sudo cat &amp;gt; /tftpboot/pxelinux.cfg/Ubuntu/Ubuntu.menu &amp;lt;&amp;lt;EOF
+LABEL 2
+        MENU LABEL Ubuntu 14.04 (64-bit)
+        kernel tftp://$MY_IP/images/ubuntu/14.04/amd64/install/netboot/ubuntu-installer/amd64/linux
+        append auto=true priority=critical vga=788 initrd=tftp://$MY_IP/images/ubuntu/14.04/amd64/install/netboot/ubuntu-installer/amd64/initrd.gz locale=en_US.UTF-8 kbd-chooser/method=us netcfg/choose_interface=auto url=tftp://172.16.11.250/preseed.cfg
+        TEXT HELP
+        Boot the Ubuntu 14.04 64-bit DVD
+        ENDTEXT
+EOF
+
+# Configure dnsmasq for tftp &amp;amp; dhcp
+sudo cat &amp;gt;&amp;gt; /etc/dnsmasq.conf &amp;lt;&amp;lt;EOF
+server=$MY_IP@eth0
+interface=eth0
+no-dhcp-interface=wlan0
+dhcp-range=172.16.0.10,172.16.0.253,12h
+dhcp-boot=pxelinux.0
+pxe-service=x86PC,&amp;quot;Booting from Network...&amp;quot;,pxelinux
+enable-tftp
+tftp-root=/tftpboot
+dhcp-boot=pxelinux.0,servername,$MY_IP
+EOF
+sudo service dnsmasq restart
+
+# Get 14.04 and extract the needful
+wget -O ~/ubuntu-14.04-server-amd64.iso http://mirror.anl.gov/pub/ubuntu-iso/CDs/trusty/ubuntu-14.04.1-server-amd64.iso
+
+sudo mkdir /mnt/loop
+sudo mount -o loop -t iso9660 ~/ubuntu-14.04-server-amd64.iso /mnt/loop
+sudo cp -R /mnt/loop/* /tftpboot/images/ubuntu/14.04/amd64
+sudo cp -R /mnt/loop/.disk /tftpboot/images/ubuntu/14.04/amd64
+sudo umount /mnt/loop
+
+# Get a generic preseed
+wget -O /tftpboot/preseed.cfg https://help.ubuntu.com/lts/installation-guide/example-preseed.txt
+
+# Setup NFS mounts
+echo &amp;quot;
+/tftpboot/images/ubuntu/    *(ro,sync,no_subtree_check)&amp;quot; | sudo tee -a /etc/exports
+
+# Enable RPCBind, NFS, and restart them
+update-rc.d rpcbind enable &amp;amp;&amp;amp; update-rc.d nfs-common enable
+service rpcbind start
+service nfs-kernel-server restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The commands themselves are commented pretty well. Generically what they do is install dnsmasq for dhcp &amp;amp; tftp. From there we download and extract all the things from the ISO that we&amp;rsquo;ll need, configure some menus, download a basic preseed, and restart some services.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_4&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post, we took a lowly Raspberry Pi and indentured it into some network servitude as a pxe / tftp server. We did this by installing and configuring dnsmasq for tftp and dhcp. Additionally we set up some fancy pxeboot menus and configured them to boot locally as a priority and to the network in times of need. Finally, we pulled down an Ubuntu 14.04 image and generic preseed file to use for automatic installs.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://raspberrypi.stackexchange.com/questions/8851/setting-up-wifi-and-ethernet&#34;&gt;http://raspberrypi.stackexchange.com/questions/8851/setting-up-wifi-and-ethernet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://it-joe.com/howtos/pxe.php&#34;&gt;http://it-joe.com/howtos/pxe.php&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://wernerstrydom.com/2014/05/25/automatically-installing-ubuntu-server-14-04-tftp/&#34;&gt;http://wernerstrydom.com/&lt;sup&gt;2014&lt;/sup&gt;&amp;frasl;&lt;sub&gt;05&lt;/sub&gt;/25/automatically-installing-ubuntu-server-14-04-tftp/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Vagrant and Hanlon (The other Razor Fork)</title>
