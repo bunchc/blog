@@ -1,0 +1,150 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <base href="http://blog.codybunch.com">
+    <title> MariaDB With Galera on Vagrant </title>
+    <link rel="canonical" href="http://blog.codybunch.com/posts/2014-09-10-MariaDB-With-Galera-on-Vagrant">
+    
+
+<link rel="stylesheet" href="/css/poole.css">
+<link rel="stylesheet" href="/css/syntax.css">
+<link rel="stylesheet" href="/css/lanyon.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    <a class="sidebar-nav-item" href="/posts">Blog</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014 Spencer Lyon. Powered by <a href="http://hugo.spf13.com">Hugo</a>. Design adapted from <a href="http://lanyon.getpoole.com">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          <a href="/posts" title="Blog">Blog Posts</a>
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content">
+      <h1 class="post-title">MariaDB With Galera on Vagrant</h1>
+        <section id="main">
+          <h5 id="date"> Wed Sep 10, 2014 </h5>
+          
+
+<p>Found myself in some training this last week using MariaDB, and being that I like to get a bit more hands on than most, using the class provided lab environment wasn&rsquo;t going to cut it. This meant wrapping some scripting into a Vagrant environment so I could reliably reporduce the three node lab.</p>
+
+<h2 id="toc_0">Getting Started</h2>
+
+<p>You&rsquo;ll need Vagrant and Git. It&rsquo;s also preferred that you have vagrant-cachier installed. You should have vagrant-cachier anyways, but alas, that is not for right now. Once you have these out of the way, do the following:</p>
+
+<ol>
+<li><code>git clone https://github.com/bunchc/mariadb-galera-vagrant.git</code></li>
+<li><code>cd mariadb-galera-vagrant</code></li>
+<li><code>vagrant up</code></li>
+</ol>
+
+<h2 id="toc_1">Validating the Cluster</h2>
+
+<p>After a few minutes, you should be able to log into any of the nodes. Specifically, node-01 will be used to &lsquo;bootstrap&rsquo; the cluster, the other two nodes will join from there.</p>
+
+<p>To validate the cluster:</p>
+
+<pre><code>vagrant ssh mariadb-02
+sudo su -
+mysql -uroot
+SHOW GLOBAL STATUS LIKE 'wsrep%';
+</code></pre>
+
+<p>You should be able to do the above from any of the nodes in the cluster.</p>
+
+        </section>
+    </div>
+  </div>
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+
+<div class="container">
+  <hr />
+  <hr />
+  
+
+  
+    <span class="right">
+    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2014-08-19-Raspberry-Pi-as-PXE-Server"> &nbsp; Raspberry Pi as PXE Server</a> &raquo;
+    </span>
+  
+</div>
+
+  <br />
+  
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+  </ul>
+</div>
+
+
+
+  
+  
+
+<div class="container content">
+<footer>
+  <div>
+    <p class="right credit">
+    Fancy footer here. Link to <a href="/">Home Page</a>
+    </p>
+  </div>
+</footer>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
