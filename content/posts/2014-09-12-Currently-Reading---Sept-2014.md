@@ -13,6 +13,8 @@ I've found overtime my reading habbits have changed from mostly tech books to a 
 - [Systemantics. The Systems Bible](http://www.amazon.com/SYSTEMANTICS-SYSTEMS-BIBLE-John-Gall-ebook/dp/B00AK1BIDM/ref=sr_1_1?s=digital-text&ie=UTF8&qid=1410546946&sr=1-1&keywords=systemantics)
 - [The Essential Drucker](http://www.amazon.com/Essential-Drucker-Collins-Business-Essentials-ebook/dp/B000FC11LK/ref=sr_1_1?s=digital-text&ie=UTF8&qid=1410546958&sr=1-1&keywords=essential+drucker)
 - [Pragmatism and Other Writings](http://www.amazon.com/Pragmatism-Other-Writings-Penguin-Classics/dp/0140437355/ref=sr_1_1?ie=UTF8&qid=undefined&sr=8-1&keywords=pragmatism+and+other+essays)
+- [Book of Promises](http://markburgess.org/BookOfPromises.pdf) Promise Theory!
+- [A static Theory of Promises](http://arxiv.org/pdf/0810.3294v5.pdf)
 
 Then on the more fun side:
 
