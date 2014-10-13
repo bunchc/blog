@@ -7,7 +7,78 @@
     
     
     
-    <updated>Mon, 13 Oct 2014 00:00:00 UTC</updated>
+    <updated>Tue, 14 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Instance Shelving</title>
+      <link>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving</link>
+      <pubDate>Tue, 14 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving</guid>
+      <description>
+
+&lt;p&gt;Shelving? No no no, not that kind of shelving. Similar however. Image Shelving in Nova allows you to power off instances without experiencing the resource penalty in keeping them around.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Instance Shelving&lt;/h2&gt;
+
+&lt;p&gt;Before instance shelving in OpenStack, if a user powered down an instance, the resources would still be in use on the compute node that housed said instance. Quite wasteful, no? Say an instance is powered off for 72+ hours. Shelving allows you to keep all the various bits associated with the VM while moving it to somewhere that is not the hypervisor to conserve resources.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Working with Shelving&lt;/h2&gt;
+
+&lt;p&gt;The assumption here is that you have either devstack or some other flavor of OpenStack running. There isn&amp;rsquo;t anything additional you need to configure to make this work.&lt;/p&gt;
+
+&lt;p&gt;First, let&amp;rsquo;s log into our controller and look around at what&amp;rsquo;s running:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# nova list
++--------------------------------------+-------+--------+------------+-------------+-----------------------------------------------+
+| ID                                   | Name  | Status | Task State | Power State | Networks                                      |
++--------------------------------------+-------+--------+------------+-------------+-----------------------------------------------+
+| 05617907-3931-414f-88f3-fd180f69fde6 | test1 | ACTIVE | -          | Running     | cookbook_network_1=10.200.0.2, 192.168.100.11 |
++--------------------------------------+-------+--------+------------+-------------+-----------------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, let&amp;rsquo;s shelve an instance:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# nova shelve test1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Did it get shelved?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# nova list
++--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
+| ID                                   | Name  | Status            | Task State | Power State | Networks                                      |
++--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
+| 05617907-3931-414f-88f3-fd180f69fde6 | test1 | SHELVED_OFFLOADED | -          | Shutdown    | cookbook_network_1=10.200.0.2, 192.168.100.11 |
++--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; The change in status to &amp;ldquo;SHELVED_OFFLOADED&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Now let&amp;rsquo;s unshelve it &amp;amp; check status:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# nova unshelve test1
+# nova list
++--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
+| ID                                   | Name  | Status            | Task State | Power State | Networks                                      |
++--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
+| 05617907-3931-414f-88f3-fd180f69fde6 | test1 | SHELVED_OFFLOADED | spawning   | Shutdown    | cookbook_network_1=10.200.0.2, 192.168.100.11 |
++--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There we go!&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post, we worked with one of the new-ish features in Nova, instance shelving. Good for when you need to stop instances for a long time in a non-impactful way.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blueprints.launchpad.net/nova/+spec/shelve-instance&#34;&gt;Blueprint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.openstack.org/user-guide/content/shelve_server.html&#34;&gt;OpenStack Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Running Rackspace Private Cloud on the Rackspace Public Cloud</title>
