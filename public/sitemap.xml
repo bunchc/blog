@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://blog.codybunch.com/</loc>
-    <lastmod>2014-10-10T00:00:00+00:00</lastmod>
+    <lastmod>2014-10-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud</loc>
+    <lastmod>2014-10-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>

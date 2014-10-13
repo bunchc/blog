@@ -65,6 +65,126 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud'> Running Rackspace Private Cloud on the Rackspace Public Cloud</a> </h2>
+      <div class="meta">Mon, Oct 13, 2014</div>
+    </header>
+
+    
+
+<p>Private Cloud on the Public Cloud? As odd as that sounds, or as inception as it makes you feel (Clouds in clouds?!), I&rsquo;ve found that since downsizing my homelab quite a bit, I&rsquo;ve needed to find other ways to work on and try out various things that exceed the capacity of my laptop. RPC 9 is one of them.</p>
+
+<p><strong>Disclaimer:</strong> I work for Rackspace, and while this post is largely focused around two of our products, I put it out here in the hopes that a) someone will find it useful, and b) it&rsquo;ll help me later.</p>
+
+<h2 id="toc_0">Rackspace Private Cloud (RPC)</h2>
+
+<p>Our docs will do it a lot more justice in terms of description than I can, so I encourage you to go <a href="http://docs.rackspace.com/rpc/api/v9/bk-rpc-installation/content/index.html">here</a> and take a few minutes to get familiar.</p>
+
+<p>A few things I want to point out are related to the architecture of RPC9, specifically:</p>
+
+<p><img src="http://docs.rackspace.com/rpc/api/v9/bk-rpc-installation/content/figures/1/a/a/a/rpc-common/figures/rpc9-environment-overview.png" alt="RPC Infrastructure" />
+</p>
+
+<p>Looking over the diagram, there are a <em>lot</em> of hosts involved now. 3x Infrastructure nodes, a logging host, n-Compute hosts, deployment hosts, and finally a set of load balancers. This thing is big. Bigger than my laptop that&rsquo;s for sure.</p>
+
+<h2 id="toc_1">Running Cloud on Cloud</h2>
+
+<p>Thankfully, however, while it&rsquo;s big, the folks who wrote this provided some OpenStack Heat templates that make setting it up externally much easier. Those can be found <a href="https://github.com/rcbops/ansible-lxc-rpc/tree/master/scripts">here.</a></p>
+
+<h3 id="toc_2">Getting Started</h3>
+
+<p>To build the cloud on the cloud you&rsquo;ll need the following info &amp; apps installed somewhere you have access to:</p>
+
+<ul>
+<li>An &ldquo;heatrc&rdquo; or similar file containing
+
+<ul>
+<li>Rackspace Username</li>
+<li>Rackspace API Key</li>
+<li>Endpoint(s) to deploy to</li>
+</ul></li>
+<li>Python-HeatClient</li>
+<li>An SSH Key</li>
+</ul>
+
+<p>To create the &ldquo;heatrc&rdquo; file, start with the below template and then edit as needed:</p>
+
+<pre><code>export OS_USERNAME=rackspace_cloud_username
+export OS_PASSWORD=rackspace_cloud_password
+export OS_TENANT_ID=rackspace_cloud_account_number
+export OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/
+export HEAT_URL=https://ord.orchestration.api.rackspacecloud.com/v1/${OS_TENANT_ID}
+</code></pre>
+
+<p><strong>Note:</strong> OS_TENANT_ID is your cloud account number. You can get to this by logging into mycloud.rackspace.com and clicking your account name in the upper right.</p>
+
+<p>Once you&rsquo;ve created the file and replaced said values, install the Heat client: <code>pip install python-heatclient</code></p>
+
+<h3 id="toc_3">Installing RPC 9 on the Rackspace Public Cloud</h3>
+
+<p>To kick off the installation, follow these commands:</p>
+
+<pre><code>curl https://raw.githubusercontent.com/rcbops/ansible-lxc-rpc/master/scripts/rpc9.0.0-aio-rax-heat-template.yml &gt; rpc9-rax-heat.yaml
+
+source ./heatrc
+
+heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
+  -P image_name=&quot;Ubuntu 14.04 LTS (Trusty Tahr)&quot; \
+  -P ssh_key_name=&quot;lol_ssh_key&quot; \
+  -P flavor_name=&quot;8 GB Performance&quot;
+
++--------------------------------------+------------+--------------------+----------------------+
+| id                                   | stack_name | stack_status       | creation_time        |
++--------------------------------------+------------+--------------------+----------------------+
+| c2b6c1b0-0098-441d-9999-c778b108a181 | RPC9-Stack | CREATE_IN_PROGRESS | 2014-10-13T15:13:58Z |
++--------------------------------------+------------+--------------------+----------------------+
+
+</code></pre>
+
+<p>This next part takes quite a bit of time to complete and is why we used a performance instance, to make the provision happen just a bit faster. You can keep an eye on it&rsquo;s build status with <code>watch -n 15 heat stack-list</code></p>
+
+<p>Once it completes, you will need to find out what IP address it has been assigned, to do that, use these commands:</p>
+
+<p>List the stacks:</p>
+
+<pre><code>$ heat stack-list
++--------------------------------------+------------+-----------------+----------------------+
+| id                                   | stack_name | stack_status    | creation_time        |
++--------------------------------------+------------+-----------------+----------------------+
+| c2b6c1b0-0098-441d-9999-c778b108a181 | RPC9-Stack | CREATE_COMPLETE | 2014-10-13T15:13:58Z |
++--------------------------------------+------------+-----------------+----------------------+
+</code></pre>
+
+<p>List the available outputs:</p>
+
+<pre><code>$ heat output-list RPC9-Stack
++------------------+-------------------------------------------------------+
+| output_key       | description                                           |
++------------------+-------------------------------------------------------+
+| RPCAIO_password  | The password for all the things.                      |
+| RPCAIO_public_ip | The public IP address of the newly configured Server. |
++------------------+-------------------------------------------------------+
+</code></pre>
+
+<p>Finally show the IP:</p>
+
+<pre><code>$ heat output-show RPC9-Stack RPCAIO_public_ip
+&quot;127.0.0.100&quot;
+</code></pre>
+
+<h2 id="toc_4">Summary</h2>
+
+<p>In this post we showed you how to nest the Rackspace Private Cloud installation on the Rackspace Public Cloud. A useful trick for testing it out without having to use <em>ALL</em> your local resources up.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition'> OpenStack Cookbook 3rd Edition</a> </h2>
       <div class="meta">Fri, Oct 10, 2014</div>
     </header>
