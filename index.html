@@ -65,6 +65,110 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background'> ZeroVM - Some Background</a> </h2>
+      <div class="meta">Wed, Oct 15, 2014</div>
+    </header>
+
+    
+
+<p>In a little over three weeks, at the <a href="https://www.openstack.org/summit/openstack-paris-summit-2014/">Paris Summit </a>, I&rsquo;ll be helping give a 90 minute workshop on <a href="http://zerovm.org/">ZeroVM</a>. 90 minutes is not actually a lot of time to get a good grasp on what ZeroVM is, how it operates, and most importantly, <em>why</em> it is important.</p>
+
+<p>These next few posts however, I am hoping, will shed some light on that.</p>
+
+<h2 id="toc_0">What is ZeroVM?</h2>
+
+<p>From the ZeroVM website:</p>
+
+<pre><code>ZeroVM is an open source virtualization technology that is based on the Chromium Native Client (NaCl) project. ZeroVM creates a secure and isolated execution environment which can run a single thread or application
+</code></pre>
+
+<p>Read that over a few times. What it is saying, is where Docker provides packaging, traditional virtualization provides full OS isolation, ZeroVM provides an environment specific to a single application or thread.</p>
+
+<p>Explained another way, ZeroVM provides isolation at the thread or application level. It provides a &ldquo;sandbox&rdquo; environment for you to run arbitrary &ldquo;untrusted&rdquo; code. Some examples of how this could be useful can be found <a href="http://play.golang.org/">here</a> and <a href="https://www.python.org/shell/">here</a>.</p>
+
+<p>ZeroVM does this by using the <a href="http://en.wikipedia.org/wiki/Google_Native_Client">NaCL from Google</a> to provide isolation and security. ZeroVM also has a number of other layers that provide additional services for things like a Posix filesystem, I/O, and channels.</p>
+
+<h3 id="toc_1">Use Cases</h3>
+
+<p>Due to the small size, speed, and isolation nature of ZeroVM, it is able to solve some problems that are very &ldquo;big data&rdquo; or cloud centric. Let&rsquo;s take a look at some:</p>
+
+<ul>
+<li><a href="http://incubator.apache.org/drill/">Apache Drill</a></li>
+<li><a href="http://docs.zerovm.org/en/latest/zerocloud/overview.html">ZeroCloud</a>
+
+<ul>
+<li>More on that <a href="http://openstack.prov12n.com/getting-started-with-zerovm/">here</a></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_2">Where Does ZeroVM Fit?</h2>
+
+<p>This diagram from the Atlanta OpenStack Summit should help:</p>
+
+<p><img src="http://openstack.prov12n.com/screens/Using_ZeroVM_and_Swift_to_Build_a_Compute_Enabled_Storage_Platform_-_YouTube_2014-10-13_14-00-42.jpg" alt="ZeroVM vs Traditional Virt" />
+</p>
+
+<p>Additionally, <a href="https://www.youtube.com/watch?v=oR1RUSdUQCs#t=424">this</a> OpenStack Summit presentation should help clarify some as well.</p>
+
+<h3 id="toc_3">Traditional Virtualization</h3>
+
+<p>Traditional Virtualization is perhaps the easiest to cover, it&rsquo;s the most familiar way of isolating the things. I&rsquo;ve been running VMware Workstation/Fusion, their enterprise products, etc for <em>ages</em>. I imagine a lot of you have as well. To recap tho:</p>
+
+<ul>
+<li>Type 1 or 2 hypervisor</li>
+<li>Each VM is a set of processes</li>
+<li>CPU instructions virtualized (it&rsquo;s a bit more complicated now-a-days with Hardware extensions)</li>
+<li>Carries around a full OS installation</li>
+<li>All resources isolated</li>
+<li>Very few <em>published</em> VM escapes</li>
+</ul>
+
+<p>A few clarifying points. I&rsquo;ve simplified the CPU bits for this discussion. That is, while hardware extensions provide native or near native execution, there is still quite a bit that happens in software for those instructions that don&rsquo;t translate. Additionally, the &ldquo;all resources isolated&rdquo; is a bit of a simplification as well. Most modern hypervisors will do some manner of memory sharing, compression, and consolidation. That said, one VMs memory still belongs only to that VM.</p>
+
+<h3 id="toc_4">Containers (Docker / LXC)</h3>
+
+<p>Containers are all the rage these days. Docker has popularized and simplified the way we manage them. You get the same or better benefit from the shared hardware, however, containers strip quite a few of the layers:</p>
+
+<ul>
+<li>Shared Kernel / OS</li>
+<li>Super low overhead</li>
+<li>Fast startup</li>
+<li>&lsquo;secure&rsquo;</li>
+<li>Managed via namespaces and process isolation</li>
+</ul>
+
+<p>The important bits to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times and a potentially smaller attack surface.</p>
+
+<h3 id="toc_5">ZeroVM</h3>
+
+<p>Finally, and most important to what we&rsquo;re talking about are the ZeroVM bits. ZeroVM is somewhere a bit beyond containers. That is you still have:</p>
+
+<ul>
+<li>Shared hardware</li>
+<li>Low Overhead</li>
+<li>Fast Startup</li>
+</ul>
+
+<p>However, you are no longer carrying an OS or Kernel around. In turn, this further minimizes the attack surface. That is, there are a total of 6 system calls available from within ZeroVM.</p>
+
+<p>In addition, due to it&rsquo;s extremely small size one can spin up a new ZeroVM instance in miliseconds, vs seconds or minutes for the other technologies. This speed advantage lends itself well to one of ZeroVMs primary use cases in the data-pipeline / data-processing space. Indeed it is the magic that makes Zero Cloud work. It does, however, require a different way of thinking about and approaching the problem.</p>
+
+<p>That is, ZeroVM instances are designed to be extremely temporary in nature. Load your data in, handle the processing, push it back out to disk (if that&rsquo;s what you&rsquo;re after) and move on. Conceptually, it takes you a few steps further down the &lsquo;everything is disposable&rsquo; path, in that you will need to design and rewrite your apps to work with ZeroVM.</p>
+
+<h2 id="toc_6">Summary</h2>
+
+<p>While a wall of words, I hope I have provided some clarity around the what of ZeroVM and the Where it fits.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving'> Instance Shelving</a> </h2>
       <div class="meta">Tue, Oct 14, 2014</div>
     </header>
@@ -737,232 +841,6 @@ categories:
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells'> Multi-Node Devstack with Neutron and Cells</a> </h2>
-      <div class="meta">Thu, Aug 14, 2014</div>
-    </header>
-
-    
-
-<p>OpenStack Cells allow you to break up Nova into smaller domains. In turn, this allows for a number of interesting things. Not the least of which is scale.</p>
-
-<p>From the OpenStack.org docs: <strong>Note</strong> <em>I&rsquo;ve added the bold on some important points.</em></p>
-
-<blockquote>
-<p>Cells functionality enables you to scale an OpenStack Compute cloud in a more distributed fashion without having to use complicated technologies like database and message queue clustering. It supports very large deployments.</p>
-
-<p>When this functionality is enabled, the hosts in an OpenStack Compute cloud are partitioned into groups called cells. Cells are configured as a tree. The top-level cell should have a host that runs a nova-api service, but no nova-compute services. Each child cell should run all of the typical nova-* services in a regular Compute cloud except for nova-api. <strong>You can think of cells as a normal Compute deployment in that each cell has its own database server and message queue broker.</strong></p>
-</blockquote>
-
-<p>So, in addition to breaking down at physical boundaries or failure domains, you can break nova-compute into smaller chunks based on DB and MQ scaling limits.</p>
-
-<p>However, not all of us have multi-geo hundred plus node compute labs to play with&hellip; so how do we test out this functionality before hand? Devstack!</p>
-
-<h2 id="toc_0">Getting Started</h2>
-
-<p>tl;dr - <code>git clone https://github.com/bunchc/devstack-cells.git; cd devstack-cells; vagrant up</code>, and go to &ldquo;Configuring and Creating Cells&rdquo;</p>
-
-<p>To get started, you&rsquo;ll need the following:</p>
-
-<ul>
-<li>virtualbox (fusion or workstation work just as well)</li>
-<li>a minimum of two Ubuntu 14.04 VM with:
-
-<ul>
-<li>About 2GB ram</li>
-<li>2x networks
-
-<ul>
-<li>eth0 = NAT</li>
-<li>eth1 = host only</li>
-</ul></li>
-</ul></li>
-</ul>
-
-<h3 id="toc_1">Both Nodes</h3>
-
-<p>Once you have that taken care of, on each node we need to create a stack user:</p>
-
-<pre><code>sudo adduser --disabled-password --gecos &quot;&quot; stack
-echo &quot;stack ALL=(ALL) NOPASSWD: ALL&quot; &gt;&gt; /etc/sudoers
-</code></pre>
-
-<h3 id="toc_2">Parent Node</h3>
-
-<p>Time to Download devstack:</p>
-
-<pre><code>sudo su - stack
-git clone -b stable/icehouse https://github.com/openstack-dev/devstack 
-</code></pre>
-
-<blockquote>
-<p>Note the sudo command. Everything from this point is done as stack</p>
-</blockquote>
-
-<p>Next, let&rsquo;s make the local.conf file:</p>
-
-<pre><code>echo &quot;
-[[local|localrc]]
-ADMIN_PASSWORD=$ADMIN_PASSWORD
-DATABASE_PASSWORD=$ADMIN_PASSWORD
-RABBIT_PASSWORD=$ADMIN_PASSWORD
-SERVICE_PASSWORD=$ADMIN_PASSWORD
-SERVICE_TOKEN=a682f596-76f3-11e3-b3b2-e716f9080d50
-
-GIT_BASE=${GIT_BASE:-https://git.openstack.org}
-
-# Cells!
-ENABLED_SERVICES+=,n-cell,n-api-meta
-DISABLED_SERVICE+=,n-cpu,n-net,n-sch
-
-# Neutron - Networking Service
-# If Neutron is not declared the old good nova-network will be used
-ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron,q-lbaas,q-vpn,q-fwaas
-
-# Neutron Stuff
-OVS_VLAN_RANGES=RegionOne:1:4000
-OVS_ENABLE_TUNNELING=False
-
-## Images
-# 32bit image (~660MB)
-IMAGE_URLS+=&quot;,http://fedorapeople.org/groups/heat/prebuilt-jeos-images/F19-i386-cfntools.qcow2&quot;
-# 64bit image (~640MB)
-IMAGE_URLS+=&quot;,http://fedorapeople.org/groups/heat/prebuilt-jeos-images/F19-x86_64-cfntools.qcow2&quot;
-IMAGE_URLS+=&quot;,http://mirror.chpc.utah.edu/pub/fedora/linux/releases/20/Images/x86_64/Fedora-x86_64-20-20131211.1-sda.qcow2&quot;
-IMAGE_URLS+=&quot;,http://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-uec.tar.gz&quot;
-
-# Output
-LOGFILE=/opt/stack/logs/stack.sh.log
-VERBOSE=True
-LOG_COLOR=False
-SCREEN_LOGDIR=/opt/stack/logs
-&quot; | tee -a /home/stack/devstack/local.conf
-</code></pre>
-
-<p>The important bit for cells in this file are:</p>
-
-<pre><code>ENABLED_SERVICES+=,n-cell,n-api-meta
-DISABLED_SERVICE+=,n-cpu,n-net,n-sch
-</code></pre>
-
-<p>This enables the cell service, and the nova-api metadata service. It then disables compute, nova-networking, and the scheduler. Those tasks will be handled on the children.</p>
-
-<p>With that out of the way run <code>./stack.sh</code> and grab a coffee. When it completes, add the following to <code>/etc/nova/nova.conf</code>:</p>
-
-<pre><code>[cells]
-enable=True
-name=api
-cell_type=api
-</code></pre>
-
-<p>Finally, restart the n-api serivice.</p>
-
-<h3 id="toc_3">Child Node</h3>
-
-<p>Time to Download devstack:</p>
-
-<pre><code>sudo su - stack
-git clone -b stable/icehouse https://github.com/openstack-dev/devstack 
-</code></pre>
-
-<blockquote>
-<p>Note the sudo command. Everything from this point is done as stack</p>
-</blockquote>
-
-<p>Next, on the child node, we create a local.conf file</p>
-
-<pre><code>cd devstack
-echo &quot;
-[[local|localrc]]
-ADMIN_PASSWORD=$ADMIN_PASSWORD
-DATABASE_PASSWORD=$ADMIN_PASSWORD
-RABBIT_PASSWORD=$ADMIN_PASSWORD
-SERVICE_PASSWORD=$ADMIN_PASSWORD
-SERVICE_TOKEN=a682f596-76f3-11e3-b3b2-e716f9080d50
-
-HOST_IP=&lt;ipaddres of eth0&gt;
-SERVICE_HOST=&lt;ip address of controllers eth0&gt;
-MYSQL_HOST=$SERVICE_HOST
-RABBIT_HOST=$SERVICE_HOST
-Q_HOST=$SERVICE_HOST
-GLANCE_HOSTPORT=$SERVICE_HOST:9292
-
-GIT_BASE=${GIT_BASE:-https://git.openstack.org}
-
-# Cells!
-ENABLED_SERVICES+=,n-cell
-DISABLED_SERVICE+=,n-api,key,g-api
-
-# Neutron - Networking Service
-# If Neutron is not declared the old good nova-network will be used
-ENABLED_SERVICES+=,q-svc,q-agt,q-dhcp,q-l3,q-meta,neutron,q-lbaas,q-vpn,q-fwaas
-
-# Neutron Stuff
-OVS_VLAN_RANGES=RegionOne:1:4000
-OVS_ENABLE_TUNNELING=False
-
-# Output
-LOGFILE=/opt/stack/logs/stack.sh.log
-VERBOSE=True
-LOG_COLOR=False
-SCREEN_LOGDIR=/opt/stack/logs
-&quot; | tee -a /home/stack/devstack/local.conf
-</code></pre>
-
-<p>The important bit for cells is:</p>
-
-<pre><code>ENABLED_SERVICES+=,n-cell
-DISABLED_SERVICE+=,n-api,key,g-api
-</code></pre>
-
-<p>This enables the cell service and turns of keystone along with nova-api and glance-api services. Those in turn will be handled by the parent.</p>
-
-<p>Next, run <code>./stack.sh</code> and grab a coffee. When it completes, add the following to <code>/etc/nova/nova.conf</code></p>
-
-<pre><code>[cells]
-enable=True
-name=cell1
-cell_type=comput
-</code></pre>
-
-<h2 id="toc_4">Configuring and Creating Cells</h2>
-
-<p>Ok, what happened above was we got two nodes up and running and ready to go with Devstack and the prerequsite services for cells. Now we actually have to actuall make the cells. To do that:</p>
-
-<h3 id="toc_5">Parent</h3>
-
-<pre><code>nova-manage cell create --name=cell1 --cell_type=child --username=guest --password=password --hostname=&lt;child ip&gt; --port=5672 --virtual_host=/ --woffset=1.0 --wscale=1.0
-</code></pre>
-
-<p>Then in screen, find the n-cell-* services and restart them.</p>
-
-<h3 id="toc_6">Child</h3>
-
-<pre><code>nova-manage cell create --name=parent --cell_type=parent --username=guest --password=password --hostname=&lt;parent ip&gt; --port=5672 --virtual_host=/ --woffset=1.0 --wscale=1.0
-</code></pre>
-
-<p>Then in screen, find the n-cell-* services and restart them.</p>
-
-<h2 id="toc_7">Conclusion</h2>
-
-<p>In this post, we created two virtual machines, installed Devstack while enabling nova-cells. Finally, we actually configured the cells to talk to one another. This post was largely an amalgamation of two other posts highlighted in the resources section</p>
-
-<h2 id="toc_8">Resources</h2>
-
-<ul>
-<li><a href="http://openlystacking.blogspot.com/2013/07/creating-cell-environment-using-devstack.html">http://openlystacking.blogspot.com/<sup>2013</sup>&frasl;<sub>07</sub>/creating-cell-environment-using-devstack.html</a></li>
-<li><a href="http://www.xlcloud.org/bin/view/Blog/Devstack+with+Quantum+in+a+multi-node+configuration?language=en">http://www.xlcloud.org/bin/view/Blog/Devstack+with+Quantum+in+a+multi-node+configuration?language=en</a></li>
-</ul>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
