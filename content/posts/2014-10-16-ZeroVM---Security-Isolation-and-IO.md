@@ -4,7 +4,7 @@ date: 2014-10-16
 categories: 
 ---
 
-Here we go with another post on ZeroVM. This time to help get you up to speed on how things how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post [here](http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/), or the ZeroVM docs [here](http://docs.zerovm.org/zerovm).
+Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post [here](http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/), or the ZeroVM docs [here](http://docs.zerovm.org/zerovm).
 
 ## Isolation
 
