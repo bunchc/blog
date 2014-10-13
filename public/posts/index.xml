@@ -98,6 +98,62 @@ Camuel Gilydov and Constantine Peresypkin at OpenStack Summit [2013-04]
     </item>
     
     <item>
+      <title>ZeroVM - Getting Started, Again</title>
+      <link>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again</link>
+      <pubDate>Fri, 17 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again</guid>
+      <description>
+
+&lt;p&gt;Ok, so now that we&amp;rsquo;ve covered a LOT of ZeroVM background &amp;amp; isolation details, let&amp;rsquo;s actually start to get our hands dirty.&lt;/p&gt;
+
+&lt;p&gt;tl;dr - &lt;code&gt;git clone https://github.com/bunchc/vagrant-zerovm.git &amp;amp;&amp;amp; cd vagrant-zerovm &amp;amp;&amp;amp; vagrant up&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;ZeroVM has packages for Ubuntu 12.04, so in order to get started you will either need hardware with 12.04 installed or a VM of the same. Once you have a VM up and running you are ready to install.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Installing ZeroVM&lt;/h2&gt;
+
+&lt;p&gt;To install ZeroVM, log into your Ubuntu 12.04 setup and run the following commands:&lt;/p&gt;
+
+&lt;p&gt;Install some needed packages:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get install -y curl wget
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install the ZeroVM repository and key:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo su -c &#39;echo &amp;quot;deb http://packages.zerovm.org/apt/ubuntu/ precise main&amp;quot; &amp;gt; /etc/apt/sources.list.d/zerovm-precise.list&#39; 
+wget -O- http://packages.zerovm.org/apt/ubuntu/zerovm.pkg.key | sudo apt-key add - 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, refresh our repository and install ZeroVM.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get update
+sudo apt-get install -y zerovm zerovm-cli
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With that, you have ZeroVM installed.&lt;/p&gt;
+
+&lt;p&gt;By itself that is not interesting, so let&amp;rsquo;s show off a the Python version of &amp;ldquo;Hello world&amp;rdquo; run inside ZeroVM:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;wget http://packages.zerovm.org/zerovm-samples/python.tar 
+echo &#39;print &amp;quot;Hello&amp;quot;&#39; &amp;gt; hello.py
+
+zvsh --zvm-image python.tar python @hello.py 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first command fetches a cPython which has been cross compiled to work in ZeroVM. Next we set up our example file and run it. There are some even more interesting examples if you head over the &lt;a href=&#34;http://www.zerovm.org/download.html&#34;&gt;ZeroVM download site.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post, you setup an Ubuntu 12.04 machine, installed the ZeroVM apt repositories, and installed ZeroVM. Finally, you created a Python of hello world and ran that within your newly installed ZeroVM.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>ZeroVM - Isolation</title>
       <link>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO</link>
       <pubDate>Thu, 16 Oct 2014 00:00:00 UTC</pubDate>
