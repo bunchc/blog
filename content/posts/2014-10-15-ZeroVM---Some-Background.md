@@ -4,7 +4,7 @@ date: 2014-10-15
 categories: 
 ---
 
-In a little over three weeks, at the [Paris Summit ](https://www.openstack.org/summit/openstack-paris-summit-2014/), I'll be helping give a 90 minute workshop on [ZeroVM](http://zerovm.org/). 90 minutes is not actually a lot of time to get a good grasp on what ZeroVM is, how it operates, and most importantly, *why* it is important.
+In a little over three weeks, at the [Paris Summit](https://www.openstack.org/summit/openstack-paris-summit-2014/), I'll be helping give a 90 minute workshop on [ZeroVM](http://zerovm.org/). 90 minutes is not actually a lot of time to get a good grasp on what ZeroVM is, how it operates, and most importantly, *why* it is important.
 
 These next few posts however, I am hoping, will shed some light on that.
 
