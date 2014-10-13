@@ -67,25 +67,26 @@
 
 <p>From the ZeroVM website:</p>
 
-<pre><code>ZeroVM is an open source virtualization technology that is based on the Chromium Native Client (NaCl) project. ZeroVM creates a secure and isolated execution environment which can run a single thread or application
-</code></pre>
+<blockquote>
+<p>ZeroVM is an open source virtualization technology that is based on the Chromium Native Client (NaCl) project. ZeroVM creates a secure and isolated execution environment which can run a single thread or application</p>
+</blockquote>
 
 <p>Read that over a few times. What it is saying, is where Docker provides packaging, traditional virtualization provides full OS isolation, ZeroVM provides an environment specific to a single application or thread.</p>
 
 <p>Explained another way, ZeroVM provides isolation at the thread or application level. It provides a &ldquo;sandbox&rdquo; environment for you to run arbitrary &ldquo;untrusted&rdquo; code. Some examples of how this could be useful can be found <a href="http://play.golang.org/">here</a> and <a href="https://www.python.org/shell/">here</a>.</p>
 
-<p>ZeroVM does this by using the <a href="http://en.wikipedia.org/wiki/Google_Native_Client">NaCL from Google</a> to provide isolation and security. ZeroVM also has a number of other layers that provide additional services for things like a Posix filesystem, I/O, and channels.</p>
+<p>ZeroVM does this by using the <a href="http://en.wikipedia.org/wiki/Google_Native_Client">NaCL from Google</a> to provide isolation and security. ZeroVM also has a number of other layers to provide the additional services for things like a Posix filesystem, I/O, and channels.</p>
 
 <h3 id="toc_1">Use Cases</h3>
 
-<p>Due to the small size, speed, and isolation nature of ZeroVM, it is able to solve some problems that are very &ldquo;big data&rdquo; or cloud centric. Let&rsquo;s take a look at some:</p>
+<p>Due to the small size, speed, and isolation nature of ZeroVM, it is able to solve some problems which are very &ldquo;big data&rdquo; or cloud centric. Let&rsquo;s take a look at some:</p>
 
 <ul>
 <li><a href="http://incubator.apache.org/drill/">Apache Drill</a></li>
 <li><a href="http://docs.zerovm.org/en/latest/zerocloud/overview.html">ZeroCloud</a>
 
 <ul>
-<li>More on that <a href="http://openstack.prov12n.com/getting-started-with-zerovm/">here</a></li>
+<li>More <a href="http://openstack.prov12n.com/getting-started-with-zerovm/">here</a></li>
 </ul></li>
 </ul>
 
@@ -111,7 +112,7 @@
 <li>Very few <em>published</em> VM escapes</li>
 </ul>
 
-<p>A few clarifying points. I&rsquo;ve simplified the CPU bits for this discussion. That is, while hardware extensions provide native or near native execution, there is still quite a bit that happens in software for those instructions that don&rsquo;t translate. Additionally, the &ldquo;all resources isolated&rdquo; is a bit of a simplification as well. Most modern hypervisors will do some manner of memory sharing, compression, and consolidation. That said, one VMs memory still belongs only to that VM.</p>
+<p>A few clarifying points. I&rsquo;ve simplified the CPU conversation for this discussion. That is, while hardware extensions provide native or near native execution, there is still quite a bit happening in software for those instructions which do not translate. Additionally, the &ldquo;all resources isolated&rdquo; is a bit of a simplification as well. Most modern hypervisors will do some manner of memory sharing, compression, and consolidation. However, memory is still generally isolated to a specific VM.</p>
 
 <h3 id="toc_4">Containers (Docker / LXC)</h3>
 
@@ -125,11 +126,11 @@
 <li>Managed via namespaces and process isolation</li>
 </ul>
 
-<p>The important bits to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times and a potentially smaller attack surface.</p>
+<p>The important thing to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times and a potentially smaller attack surface.</p>
 
 <h3 id="toc_5">ZeroVM</h3>
 
-<p>Finally, and most important to what we&rsquo;re talking about are the ZeroVM bits. ZeroVM is somewhere a bit beyond containers. That is you still have:</p>
+<p>Finally, and most important to what we&rsquo;re talking about is ZeroVM. ZeroVM is somewhere a bit beyond containers. That is you still have:</p>
 
 <ul>
 <li>Shared hardware</li>
@@ -141,11 +142,11 @@
 
 <p>In addition, due to it&rsquo;s extremely small size one can spin up a new ZeroVM instance in miliseconds, vs seconds or minutes for the other technologies. This speed advantage lends itself well to one of ZeroVMs primary use cases in the data-pipeline / data-processing space. Indeed it is the magic that makes Zero Cloud work. It does, however, require a different way of thinking about and approaching the problem.</p>
 
-<p>That is, ZeroVM instances are designed to be extremely temporary in nature. Load your data in, handle the processing, push it back out to disk (if that&rsquo;s what you&rsquo;re after) and move on. Conceptually, it takes you a few steps further down the &lsquo;everything is disposable&rsquo; path, in that you will need to design and rewrite your apps to work with ZeroVM.</p>
+<p>That is, ZeroVM instances are designed to be extremely temporary in nature. Load your data in, handle the processing, push it back out to disk and move on. Conceptually, it takes you a few steps further down the &lsquo;everything is disposable&rsquo; path, insofar as you will need to design and rewrite your apps to work with ZeroVM.</p>
 
 <h2 id="toc_6">Summary</h2>
 
-<p>While a wall of words, I hope I have provided some clarity around the what of ZeroVM and the Where it fits.</p>
+<p>While a wall of words, I hope I have provided some clarity around the what of ZeroVM and where it fits.</p>
 
         </section>
     </div>
