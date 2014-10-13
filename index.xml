@@ -25,25 +25,26 @@
 
 &lt;p&gt;From the ZeroVM website:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;ZeroVM is an open source virtualization technology that is based on the Chromium Native Client (NaCl) project. ZeroVM creates a secure and isolated execution environment which can run a single thread or application
-&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ZeroVM is an open source virtualization technology that is based on the Chromium Native Client (NaCl) project. ZeroVM creates a secure and isolated execution environment which can run a single thread or application&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;Read that over a few times. What it is saying, is where Docker provides packaging, traditional virtualization provides full OS isolation, ZeroVM provides an environment specific to a single application or thread.&lt;/p&gt;
 
 &lt;p&gt;Explained another way, ZeroVM provides isolation at the thread or application level. It provides a &amp;ldquo;sandbox&amp;rdquo; environment for you to run arbitrary &amp;ldquo;untrusted&amp;rdquo; code. Some examples of how this could be useful can be found &lt;a href=&#34;http://play.golang.org/&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://www.python.org/shell/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;ZeroVM does this by using the &lt;a href=&#34;http://en.wikipedia.org/wiki/Google_Native_Client&#34;&gt;NaCL from Google&lt;/a&gt; to provide isolation and security. ZeroVM also has a number of other layers that provide additional services for things like a Posix filesystem, I/O, and channels.&lt;/p&gt;
+&lt;p&gt;ZeroVM does this by using the &lt;a href=&#34;http://en.wikipedia.org/wiki/Google_Native_Client&#34;&gt;NaCL from Google&lt;/a&gt; to provide isolation and security. ZeroVM also has a number of other layers to provide the additional services for things like a Posix filesystem, I/O, and channels.&lt;/p&gt;
 
 &lt;h3 id=&#34;toc_1&#34;&gt;Use Cases&lt;/h3&gt;
 
-&lt;p&gt;Due to the small size, speed, and isolation nature of ZeroVM, it is able to solve some problems that are very &amp;ldquo;big data&amp;rdquo; or cloud centric. Let&amp;rsquo;s take a look at some:&lt;/p&gt;
+&lt;p&gt;Due to the small size, speed, and isolation nature of ZeroVM, it is able to solve some problems which are very &amp;ldquo;big data&amp;rdquo; or cloud centric. Let&amp;rsquo;s take a look at some:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://incubator.apache.org/drill/&#34;&gt;Apache Drill&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://docs.zerovm.org/en/latest/zerocloud/overview.html&#34;&gt;ZeroCloud&lt;/a&gt;
 
 &lt;ul&gt;
-&lt;li&gt;More on that &lt;a href=&#34;http://openstack.prov12n.com/getting-started-with-zerovm/&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;More &lt;a href=&#34;http://openstack.prov12n.com/getting-started-with-zerovm/&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -69,7 +70,7 @@
 &lt;li&gt;Very few &lt;em&gt;published&lt;/em&gt; VM escapes&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;A few clarifying points. I&amp;rsquo;ve simplified the CPU bits for this discussion. That is, while hardware extensions provide native or near native execution, there is still quite a bit that happens in software for those instructions that don&amp;rsquo;t translate. Additionally, the &amp;ldquo;all resources isolated&amp;rdquo; is a bit of a simplification as well. Most modern hypervisors will do some manner of memory sharing, compression, and consolidation. That said, one VMs memory still belongs only to that VM.&lt;/p&gt;
+&lt;p&gt;A few clarifying points. I&amp;rsquo;ve simplified the CPU conversation for this discussion. That is, while hardware extensions provide native or near native execution, there is still quite a bit happening in software for those instructions which do not translate. Additionally, the &amp;ldquo;all resources isolated&amp;rdquo; is a bit of a simplification as well. Most modern hypervisors will do some manner of memory sharing, compression, and consolidation. However, memory is still generally isolated to a specific VM.&lt;/p&gt;
 
 &lt;h3 id=&#34;toc_4&#34;&gt;Containers (Docker / LXC)&lt;/h3&gt;
 
@@ -83,11 +84,11 @@
 &lt;li&gt;Managed via namespaces and process isolation&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;The important bits to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times and a potentially smaller attack surface.&lt;/p&gt;
+&lt;p&gt;The important thing to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times and a potentially smaller attack surface.&lt;/p&gt;
 
 &lt;h3 id=&#34;toc_5&#34;&gt;ZeroVM&lt;/h3&gt;
 
-&lt;p&gt;Finally, and most important to what we&amp;rsquo;re talking about are the ZeroVM bits. ZeroVM is somewhere a bit beyond containers. That is you still have:&lt;/p&gt;
+&lt;p&gt;Finally, and most important to what we&amp;rsquo;re talking about is ZeroVM. ZeroVM is somewhere a bit beyond containers. That is you still have:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Shared hardware&lt;/li&gt;
@@ -99,11 +100,11 @@
 
 &lt;p&gt;In addition, due to it&amp;rsquo;s extremely small size one can spin up a new ZeroVM instance in miliseconds, vs seconds or minutes for the other technologies. This speed advantage lends itself well to one of ZeroVMs primary use cases in the data-pipeline / data-processing space. Indeed it is the magic that makes Zero Cloud work. It does, however, require a different way of thinking about and approaching the problem.&lt;/p&gt;
 
-&lt;p&gt;That is, ZeroVM instances are designed to be extremely temporary in nature. Load your data in, handle the processing, push it back out to disk (if that&amp;rsquo;s what you&amp;rsquo;re after) and move on. Conceptually, it takes you a few steps further down the &amp;lsquo;everything is disposable&amp;rsquo; path, in that you will need to design and rewrite your apps to work with ZeroVM.&lt;/p&gt;
+&lt;p&gt;That is, ZeroVM instances are designed to be extremely temporary in nature. Load your data in, handle the processing, push it back out to disk and move on. Conceptually, it takes you a few steps further down the &amp;lsquo;everything is disposable&amp;rsquo; path, insofar as you will need to design and rewrite your apps to work with ZeroVM.&lt;/p&gt;
 
 &lt;h2 id=&#34;toc_6&#34;&gt;Summary&lt;/h2&gt;
 
-&lt;p&gt;While a wall of words, I hope I have provided some clarity around the what of ZeroVM and the Where it fits.&lt;/p&gt;
+&lt;p&gt;While a wall of words, I hope I have provided some clarity around the what of ZeroVM and where it fits.&lt;/p&gt;
 </description>
     </item>
     
