@@ -17,7 +17,7 @@ Read that over a few times. What it is saying, is where Docker provides packagin
 
 Explained another way, ZeroVM provides isolation at the thread or application level. It provides a "sandbox" environment for you to run arbitrary "untrusted" code. Some examples of how this could be useful can be found [here](http://play.golang.org/) and [here](https://www.python.org/shell/).
 
-ZeroVM does this by using the [NaCL from Google](http://en.wikipedia.org/wiki/Google_Native_Client) to provide isolation and security. ZeroVM also has a number of other layers to provide the additional services for things like a Posix filesystem, I/O, and channels.
+ZeroVM does this by using the [NaCL from Google](http://en.wikipedia.org/wiki/Google_Native_Client) to provide isolation and security. ZeroVM also has a number of other layers to provide the additional services for things like a Posix file system, I/O, and channels.
 
 ### Use Cases
 
@@ -58,7 +58,7 @@ Containers are all the rage these days. Docker has popularized and simplified th
 - 'secure'
 - Managed via namespaces and process isolation
 
-The important thing to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times and a potentially smaller attack surface.
+The important thing to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times.
 
 ### ZeroVM
 
@@ -70,7 +70,7 @@ Finally, and most important to what we're talking about is ZeroVM. ZeroVM is som
 
 However, you are no longer carrying an OS or Kernel around. In turn, this further minimizes the attack surface. That is, there are a total of 6 system calls available from within ZeroVM.
 
-In addition, due to it's extremely small size one can spin up a new ZeroVM instance in miliseconds, vs seconds or minutes for the other technologies. This speed advantage lends itself well to one of ZeroVMs primary use cases in the data-pipeline / data-processing space. Indeed it is the magic that makes Zero Cloud work. It does, however, require a different way of thinking about and approaching the problem. 
+In addition, due to it's extremely small size one can spin up a new ZeroVM instance in miliseconds, vs seconds or minutes for the other technologies. This speed advantage lends itself well to one of ZeroVMs primary use cases in the data-pipeline / data-processing space. Indeed it is the magic that makes ZeroCloud work. It does, however, require a different way of thinking about and approaching the problem. 
 
 That is, ZeroVM instances are designed to be extremely temporary in nature. Load your data in, handle the processing, push it back out to disk and move on. Conceptually, it takes you a few steps further down the 'everything is disposable' path, insofar as you will need to design and rewrite your apps to work with ZeroVM.
 
