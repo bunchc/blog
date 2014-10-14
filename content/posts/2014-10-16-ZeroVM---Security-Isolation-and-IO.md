@@ -4,7 +4,7 @@ date: 2014-10-16
 categories: 
 ---
 
-Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post [here](http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/), or the ZeroVM docs [here](http://docs.zerovm.org/zerovm).
+Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post [here](http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/), or the ZeroVM docs [here](http://docs.zerovm.org).
 
 ## Isolation
 
@@ -83,7 +83,7 @@ Working from the outside in, the grey area represents everything that is ZeroVM,
 
 Next, in the pink area is where end-user code gets loaded up, from there a call will progress down the stack. In the last white layer you can see the individual sys-calls as implemented in ZeroVM as well as their corresponding trappings.
 
-One last thing to note is the two sys-calls for zvm_pread and zvm_pwrite, their traps, handlers, and this thing called a trampoline. The trampolines are a mechanisim that facilitates the switch from untrusted to trusted execution. A syscall will start in the 'untrusted' context, if it is an allowed call, the ZRT or ZeroVM Run Time traps the call, and uses the trampoline to perform the context switch needed to allow the syscall to execute in trusted space.
+One last thing to note is the two sys-calls for zvm_pread and zvm_pwrite, their traps, handlers, and this thing called a trampoline. The trampolines are a mechanisim that facilitates the switch from untrusted to trusted execution. A syscall will start in the 'untrusted' context, if it is an allowed call, the ZRT or ZeroVM Run Time via it's hooks into the ZVM Syscall API and passes the call to a "trampoline" to perform the context switch needed to allow the syscall to execute in trusted space.
 
 ### ZeroVM Guest Memory Footprint
 

@@ -59,7 +59,7 @@
           <h5 id="date"> Thu Oct 16, 2014 </h5>
           
 
-<p>Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post <a href="http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/">here</a>, or the ZeroVM docs <a href="http://docs.zerovm.org/zerovm">here</a>.</p>
+<p>Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post <a href="http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/">here</a>, or the ZeroVM docs <a href="http://docs.zerovm.org">here</a>.</p>
 
 <h2 id="toc_0">Isolation</h2>
 
@@ -141,7 +141,7 @@ ERROR: ZeroVM return code is 8
 
 <p>Next, in the pink area is where end-user code gets loaded up, from there a call will progress down the stack. In the last white layer you can see the individual sys-calls as implemented in ZeroVM as well as their corresponding trappings.</p>
 
-<p>One last thing to note is the two sys-calls for zvm_pread and zvm_pwrite, their traps, handlers, and this thing called a trampoline. The trampolines are a mechanisim that facilitates the switch from untrusted to trusted execution. A syscall will start in the &lsquo;untrusted&rsquo; context, if it is an allowed call, the ZRT or ZeroVM Run Time traps the call, and uses the trampoline to perform the context switch needed to allow the syscall to execute in trusted space.</p>
+<p>One last thing to note is the two sys-calls for zvm_pread and zvm_pwrite, their traps, handlers, and this thing called a trampoline. The trampolines are a mechanisim that facilitates the switch from untrusted to trusted execution. A syscall will start in the &lsquo;untrusted&rsquo; context, if it is an allowed call, the ZRT or ZeroVM Run Time via it&rsquo;s hooks into the ZVM Syscall API and passes the call to a &ldquo;trampoline&rdquo; to perform the context switch needed to allow the syscall to execute in trusted space.</p>
 
 <h3 id="toc_3">ZeroVM Guest Memory Footprint</h3>
 
