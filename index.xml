@@ -161,7 +161,7 @@ zvsh --zvm-image python.tar python @hello.py
       <guid>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO</guid>
       <description>
 
-&lt;p&gt;Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/&#34;&gt;here&lt;/a&gt;, or the ZeroVM docs &lt;a href=&#34;http://docs.zerovm.org/zerovm&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/&#34;&gt;here&lt;/a&gt;, or the ZeroVM docs &lt;a href=&#34;http://docs.zerovm.org&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&#34;toc_0&#34;&gt;Isolation&lt;/h2&gt;
 
@@ -243,7 +243,7 @@ ERROR: ZeroVM return code is 8
 
 &lt;p&gt;Next, in the pink area is where end-user code gets loaded up, from there a call will progress down the stack. In the last white layer you can see the individual sys-calls as implemented in ZeroVM as well as their corresponding trappings.&lt;/p&gt;
 
-&lt;p&gt;One last thing to note is the two sys-calls for zvm_pread and zvm_pwrite, their traps, handlers, and this thing called a trampoline. The trampolines are a mechanisim that facilitates the switch from untrusted to trusted execution. A syscall will start in the &amp;lsquo;untrusted&amp;rsquo; context, if it is an allowed call, the ZRT or ZeroVM Run Time traps the call, and uses the trampoline to perform the context switch needed to allow the syscall to execute in trusted space.&lt;/p&gt;
+&lt;p&gt;One last thing to note is the two sys-calls for zvm_pread and zvm_pwrite, their traps, handlers, and this thing called a trampoline. The trampolines are a mechanisim that facilitates the switch from untrusted to trusted execution. A syscall will start in the &amp;lsquo;untrusted&amp;rsquo; context, if it is an allowed call, the ZRT or ZeroVM Run Time via it&amp;rsquo;s hooks into the ZVM Syscall API and passes the call to a &amp;ldquo;trampoline&amp;rdquo; to perform the context switch needed to allow the syscall to execute in trusted space.&lt;/p&gt;
 
 &lt;h3 id=&#34;toc_3&#34;&gt;ZeroVM Guest Memory Footprint&lt;/h3&gt;
 
