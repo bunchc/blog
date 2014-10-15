@@ -4,8 +4,11 @@ date: 2014-10-20
 categories: 
 ---
 
-Instead of curating my own links this time, my friend and colleague [Carina](http://twitter.com/cczona) has gathered these as they relate to ZeroVM:
+Instead of curating my own links this time, my friend and colleague [Carina C. Zona, ZeroVM's community manager](http://cczona.com) has gathered these as they relate to ZeroVM:
 
+## Posts by Lars
+- [https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm](https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm)
+- [https://www.packtpub.com/books/content/zerovm-virtualization-designed-cloud](https://www.packtpub.com/books/content/zerovm-virtualization-designed-cloud)
 
 ## "ZeroVM Architecture and ZVM Runtime (ZRT)"
 Ryan McKinney at University of Texas San Antonio Cloud & Big Data Laboratory [2014-08-05]
