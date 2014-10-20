@@ -54,12 +54,18 @@ IOError: [Errno -122] Unknown error 4294967174
 ```
 
 What is happening in that example is this:
-1. Create a 100MB file full of random bits
-2. Create 'example.py' to read the first 5 characters in the file
-3. Use zvsh to run example.py inside ZeroVM... this should dump some garbage characters to the console.
-4. Change the quota from 'huge' to 3
-5. Adjust the manifest file to allow stderr and stdout to work properly
-6. Run ZeroVM with the updated manifest & receive IO error
+
+**1.** Create a 100MB file full of random bits
+
+**2.** Create 'example.py' to read the first 5 characters in the file
+
+**3.** Use zvsh to run example.py inside ZeroVM... this should dump some garbage characters to the console.
+
+**4.** Change the quota from 'huge' to 3
+
+**5.** Adjust the manifest file to allow stderr and stdout to work properly
+
+**6.** Run ZeroVM with the updated manifest & receive IO error
 
 ### Specifying Channels in a Manifest File
 
@@ -94,12 +100,18 @@ Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,
 ```
 
 Taken line by line:
-1. **Node** an optional parameter specifying the node number.
-2. **Version** mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.
-3. **Timeout** in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs.
-4. **Memory** Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM
-5. **Program** Specifies the ZeroVM cross compiled binary that we will run
-6. **Channel** The channel definitions, these follow the format:
+
+**1.** **Node** an optional parameter specifying the node number.
+
+**2.** **Version** mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.
+
+**3.** **Timeout** in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs from consuming excess resources.
+
+**4.** **Memory** Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM
+
+**5.** **Program** Specifies the ZeroVM cross compiled binary that we will run
+
+**6.** **Channel** The channel definitions, these follow the format:
 
 ```
 Channel = <uri>,<alias>,<type>,<etag>,<gets>,<get_size>,<puts>,<put_size>
