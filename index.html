@@ -121,13 +121,19 @@ Traceback (most recent call last):
 IOError: [Errno -122] Unknown error 4294967174
 </code></pre>
 
-<p>What is happening in that example is this:
-1. Create a 100MB file full of random bits
-2. Create &lsquo;example.py&rsquo; to read the first 5 characters in the file
-3. Use zvsh to run example.py inside ZeroVM&hellip; this should dump some garbage characters to the console.
-4. Change the quota from &lsquo;huge&rsquo; to 3
-5. Adjust the manifest file to allow stderr and stdout to work properly
-6. Run ZeroVM with the updated manifest &amp; receive IO error</p>
+<p>What is happening in that example is this:</p>
+
+<p><strong>1.</strong> Create a 100MB file full of random bits</p>
+
+<p><strong>2.</strong> Create &lsquo;example.py&rsquo; to read the first 5 characters in the file</p>
+
+<p><strong>3.</strong> Use zvsh to run example.py inside ZeroVM&hellip; this should dump some garbage characters to the console.</p>
+
+<p><strong>4.</strong> Change the quota from &lsquo;huge&rsquo; to 3</p>
+
+<p><strong>5.</strong> Adjust the manifest file to allow stderr and stdout to work properly</p>
+
+<p><strong>6.</strong> Run ZeroVM with the updated manifest &amp; receive IO error</p>
 
 <h3 id="toc_3">Specifying Channels in a Manifest File</h3>
 
@@ -159,13 +165,19 @@ Channel = /home/vagrant/boot.1,/dev/self,3,0,4294967296,4294967296,0,0
 Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,4294967296
 </code></pre>
 
-<p>Taken line by line:
-1. <strong>Node</strong> an optional parameter specifying the node number.
-2. <strong>Version</strong> mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.
-3. <strong>Timeout</strong> in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs.
-4. <strong>Memory</strong> Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM
-5. <strong>Program</strong> Specifies the ZeroVM cross compiled binary that we will run
-6. <strong>Channel</strong> The channel definitions, these follow the format:</p>
+<p>Taken line by line:</p>
+
+<p><strong>1.</strong> <strong>Node</strong> an optional parameter specifying the node number.</p>
+
+<p><strong>2.</strong> <strong>Version</strong> mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.</p>
+
+<p><strong>3.</strong> <strong>Timeout</strong> in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs from consuming excess resources.</p>
+
+<p><strong>4.</strong> <strong>Memory</strong> Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM</p>
+
+<p><strong>5.</strong> <strong>Program</strong> Specifies the ZeroVM cross compiled binary that we will run</p>
+
+<p><strong>6.</strong> <strong>Channel</strong> The channel definitions, these follow the format:</p>
 
 <pre><code>Channel = &lt;uri&gt;,&lt;alias&gt;,&lt;type&gt;,&lt;etag&gt;,&lt;gets&gt;,&lt;get_size&gt;,&lt;puts&gt;,&lt;put_size&gt;
 </code></pre>

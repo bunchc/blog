@@ -67,13 +67,19 @@ Traceback (most recent call last):
 IOError: [Errno -122] Unknown error 4294967174
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;What is happening in that example is this:
-1. Create a 100MB file full of random bits
-2. Create &amp;lsquo;example.py&amp;rsquo; to read the first 5 characters in the file
-3. Use zvsh to run example.py inside ZeroVM&amp;hellip; this should dump some garbage characters to the console.
-4. Change the quota from &amp;lsquo;huge&amp;rsquo; to 3
-5. Adjust the manifest file to allow stderr and stdout to work properly
-6. Run ZeroVM with the updated manifest &amp;amp; receive IO error&lt;/p&gt;
+&lt;p&gt;What is happening in that example is this:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Create a 100MB file full of random bits&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Create &amp;lsquo;example.py&amp;rsquo; to read the first 5 characters in the file&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Use zvsh to run example.py inside ZeroVM&amp;hellip; this should dump some garbage characters to the console.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; Change the quota from &amp;lsquo;huge&amp;rsquo; to 3&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; Adjust the manifest file to allow stderr and stdout to work properly&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6.&lt;/strong&gt; Run ZeroVM with the updated manifest &amp;amp; receive IO error&lt;/p&gt;
 
 &lt;h3 id=&#34;toc_3&#34;&gt;Specifying Channels in a Manifest File&lt;/h3&gt;
 
@@ -105,13 +111,19 @@ Channel = /home/vagrant/boot.1,/dev/self,3,0,4294967296,4294967296,0,0
 Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,4294967296
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Taken line by line:
-1. &lt;strong&gt;Node&lt;/strong&gt; an optional parameter specifying the node number.
-2. &lt;strong&gt;Version&lt;/strong&gt; mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.
-3. &lt;strong&gt;Timeout&lt;/strong&gt; in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs.
-4. &lt;strong&gt;Memory&lt;/strong&gt; Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM
-5. &lt;strong&gt;Program&lt;/strong&gt; Specifies the ZeroVM cross compiled binary that we will run
-6. &lt;strong&gt;Channel&lt;/strong&gt; The channel definitions, these follow the format:&lt;/p&gt;
+&lt;p&gt;Taken line by line:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; &lt;strong&gt;Node&lt;/strong&gt; an optional parameter specifying the node number.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; &lt;strong&gt;Version&lt;/strong&gt; mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; &lt;strong&gt;Timeout&lt;/strong&gt; in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs from consuming excess resources.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; &lt;strong&gt;Memory&lt;/strong&gt; Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5.&lt;/strong&gt; &lt;strong&gt;Program&lt;/strong&gt; Specifies the ZeroVM cross compiled binary that we will run&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6.&lt;/strong&gt; &lt;strong&gt;Channel&lt;/strong&gt; The channel definitions, these follow the format:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;Channel = &amp;lt;uri&amp;gt;,&amp;lt;alias&amp;gt;,&amp;lt;type&amp;gt;,&amp;lt;etag&amp;gt;,&amp;lt;gets&amp;gt;,&amp;lt;get_size&amp;gt;,&amp;lt;puts&amp;gt;,&amp;lt;put_size&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -1017,6 +1029,100 @@ hanlon image
     </item>
     
     <item>
+      <title>Updated Blog / Markdown workflow</title>
+      <link>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</link>
+      <pubDate>Thu, 14 Aug 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</guid>
+      <description>
+
+&lt;p&gt;A while ago I posted about my markdown &lt;a href=&#34;http://openstack.prov12n.com/my-markdown-workflow-for-now/&#34;&gt;workflow&lt;/a&gt;. While that workflow was decent and worked for a goodly little while, it left quite a bit to be desired. Specifically, I the posting process into Wordpress was cumbersome at best.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;A New Blog Engine&lt;/h2&gt;
+
+&lt;p&gt;Like I said above, working with Wordpress and markdown was cumbersome and then some. So it was time for something new. At first I was going to use similar to &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/&#34;&gt;this&lt;/a&gt;, which is actually what is in use on the &lt;a href=&#34;http://openstackcookbook.com/&#34;&gt;openstackcookbook.com&lt;/a&gt; site. It has the following benefits:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Posts are written in Markdown&lt;/li&gt;
+&lt;li&gt;Integrated with gh-pages&lt;/li&gt;
+&lt;li&gt;Straighforward publishing process &lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It was &lt;em&gt;almost&lt;/em&gt; what I needed. In the end I went with &lt;a href=&#34;http://hugo.spf13.com/&#34;&gt;Hugo&lt;/a&gt;. What Hugo added was some pluggable themes and templates. Also the ability to run locally before pushing to github.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To setup Hugo on github, use &lt;a href=&#34;http://hugo.spf13.com/tutorials/github_pages_blog&#34;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Current Workflow&lt;/h2&gt;
+
+&lt;p&gt;My current workflow needed some help then. I kept the same sublime text plugins, that is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;MarkdownEditing
+
+&lt;ul&gt;
+&lt;li&gt;This has a number of really handy keyboard bindings. It also has some decent highlighting and what not.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Markdown Preview
+
+&lt;ul&gt;
+&lt;li&gt;This one allows me to go from Markdown into what it’ll look like on the web.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Markdown TOC
+
+&lt;ul&gt;
+&lt;li&gt;This lets me go from a basic set of sections and files into a more full fledged table of contents.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Additionally, to create a new post, I modified the Rakefile found &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/blob/master/_posts/Rakefile&#34;&gt;here&lt;/a&gt;, to look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &#39;fileutils&#39;
+task :post do
+    title = ENV[&#39;title&#39;] || &amp;quot;new-post&amp;quot;
+    tags = ENV[&#39;tags&#39;] || &#39;&#39;
+    make_img_dir = ENV[&#39;imgdir&#39;] || false
+    date = (ENV[&#39;date&#39;] ? Time.parse(ENV[&#39;date&#39;]) : Time.now).strftime(&#39;%Y-%m-%d&#39;)
+    filename = File.join(&#39;.&#39;, &amp;quot;#{Time.now.strftime(&#39;%Y-%m-%d&#39;)}-#{title.strip.gsub(&#39; &#39;, &#39;-&#39;).gsub(/[^\w-]/, &#39;&#39;)}.md&amp;quot;)
+    open(filename, &#39;w&#39;) do |post|
+        post.puts &amp;quot;---&amp;quot;
+        post.puts &amp;quot;title: \&amp;quot;#{title}\&amp;quot;&amp;quot;
+        post.puts &amp;quot;date: #{Time.now.strftime(&#39;%Y-%m-%d&#39;)}&amp;quot;
+        post.puts &amp;quot;categories: &amp;quot;
+        post.puts &amp;quot;---&amp;quot;
+        post.puts &amp;quot;\nYour content here.&amp;quot;
+        if make_img_dir
+            img_dir = File.basename(filename.chomp(File.extname(filename)))
+            FileUtils.mkdir_p(&amp;quot;../images/posts/#{img_dir}&amp;quot;)
+            post.puts &amp;quot;\n&amp;quot; * 5
+            post.puts &amp;quot;[imgdir]: /images/posts/#{img_dir}/&amp;quot;
+        end
+    end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So creating a new post goes like this:
+bunchc: blog/content/posts$ rake post title=&amp;ldquo;Title Here&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;In turn, that creates a YYYY-MM-DD-Title-Here.md file for editing in sublime. It also adds the metadata section at the top of the file for me:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+title: &amp;quot;Updated Blog / Markdown workflow&amp;quot;
+date: 2014-08-14
+categories: 
+---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From there, I write the file, save the file, and run &lt;code&gt;./deploy.sh&lt;/code&gt; from the Hugo installer linked earlier. That handles all the pushing and bits to git.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;The gist of it is, Wordpress was a bit much and a bit heavy for what I needed. Hugo, Markdown, and GitHub Pages gave me a streamlined process that looks decent for posting.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Multi-Node Devstack with Neutron and Cells</title>
       <link>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells</link>
       <pubDate>Thu, 14 Aug 2014 00:00:00 UTC</pubDate>
@@ -1233,100 +1339,6 @@ cell_type=comput
 &lt;li&gt;&lt;a href=&#34;http://openlystacking.blogspot.com/2013/07/creating-cell-environment-using-devstack.html&#34;&gt;http://openlystacking.blogspot.com/&lt;sup&gt;2013&lt;/sup&gt;&amp;frasl;&lt;sub&gt;07&lt;/sub&gt;/creating-cell-environment-using-devstack.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.xlcloud.org/bin/view/Blog/Devstack+with+Quantum+in+a+multi-node+configuration?language=en&#34;&gt;http://www.xlcloud.org/bin/view/Blog/Devstack+with+Quantum+in+a+multi-node+configuration?language=en&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Updated Blog / Markdown workflow</title>
-      <link>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</link>
-      <pubDate>Thu, 14 Aug 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</guid>
-      <description>
-
-&lt;p&gt;A while ago I posted about my markdown &lt;a href=&#34;http://openstack.prov12n.com/my-markdown-workflow-for-now/&#34;&gt;workflow&lt;/a&gt;. While that workflow was decent and worked for a goodly little while, it left quite a bit to be desired. Specifically, I the posting process into Wordpress was cumbersome at best.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;A New Blog Engine&lt;/h2&gt;
-
-&lt;p&gt;Like I said above, working with Wordpress and markdown was cumbersome and then some. So it was time for something new. At first I was going to use similar to &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/&#34;&gt;this&lt;/a&gt;, which is actually what is in use on the &lt;a href=&#34;http://openstackcookbook.com/&#34;&gt;openstackcookbook.com&lt;/a&gt; site. It has the following benefits:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Posts are written in Markdown&lt;/li&gt;
-&lt;li&gt;Integrated with gh-pages&lt;/li&gt;
-&lt;li&gt;Straighforward publishing process &lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It was &lt;em&gt;almost&lt;/em&gt; what I needed. In the end I went with &lt;a href=&#34;http://hugo.spf13.com/&#34;&gt;Hugo&lt;/a&gt;. What Hugo added was some pluggable themes and templates. Also the ability to run locally before pushing to github.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;To setup Hugo on github, use &lt;a href=&#34;http://hugo.spf13.com/tutorials/github_pages_blog&#34;&gt;this&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;Current Workflow&lt;/h2&gt;
-
-&lt;p&gt;My current workflow needed some help then. I kept the same sublime text plugins, that is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;MarkdownEditing
-
-&lt;ul&gt;
-&lt;li&gt;This has a number of really handy keyboard bindings. It also has some decent highlighting and what not.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Markdown Preview
-
-&lt;ul&gt;
-&lt;li&gt;This one allows me to go from Markdown into what it’ll look like on the web.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Markdown TOC
-
-&lt;ul&gt;
-&lt;li&gt;This lets me go from a basic set of sections and files into a more full fledged table of contents.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Additionally, to create a new post, I modified the Rakefile found &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/blob/master/_posts/Rakefile&#34;&gt;here&lt;/a&gt;, to look like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;require &#39;fileutils&#39;
-task :post do
-    title = ENV[&#39;title&#39;] || &amp;quot;new-post&amp;quot;
-    tags = ENV[&#39;tags&#39;] || &#39;&#39;
-    make_img_dir = ENV[&#39;imgdir&#39;] || false
-    date = (ENV[&#39;date&#39;] ? Time.parse(ENV[&#39;date&#39;]) : Time.now).strftime(&#39;%Y-%m-%d&#39;)
-    filename = File.join(&#39;.&#39;, &amp;quot;#{Time.now.strftime(&#39;%Y-%m-%d&#39;)}-#{title.strip.gsub(&#39; &#39;, &#39;-&#39;).gsub(/[^\w-]/, &#39;&#39;)}.md&amp;quot;)
-    open(filename, &#39;w&#39;) do |post|
-        post.puts &amp;quot;---&amp;quot;
-        post.puts &amp;quot;title: \&amp;quot;#{title}\&amp;quot;&amp;quot;
-        post.puts &amp;quot;date: #{Time.now.strftime(&#39;%Y-%m-%d&#39;)}&amp;quot;
-        post.puts &amp;quot;categories: &amp;quot;
-        post.puts &amp;quot;---&amp;quot;
-        post.puts &amp;quot;\nYour content here.&amp;quot;
-        if make_img_dir
-            img_dir = File.basename(filename.chomp(File.extname(filename)))
-            FileUtils.mkdir_p(&amp;quot;../images/posts/#{img_dir}&amp;quot;)
-            post.puts &amp;quot;\n&amp;quot; * 5
-            post.puts &amp;quot;[imgdir]: /images/posts/#{img_dir}/&amp;quot;
-        end
-    end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So creating a new post goes like this:
-bunchc: blog/content/posts$ rake post title=&amp;ldquo;Title Here&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;In turn, that creates a YYYY-MM-DD-Title-Here.md file for editing in sublime. It also adds the metadata section at the top of the file for me:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;---
-title: &amp;quot;Updated Blog / Markdown workflow&amp;quot;
-date: 2014-08-14
-categories: 
----
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;From there, I write the file, save the file, and run &lt;code&gt;./deploy.sh&lt;/code&gt; from the Hugo installer linked earlier. That handles all the pushing and bits to git.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;The gist of it is, Wordpress was a bit much and a bit heavy for what I needed. Hugo, Markdown, and GitHub Pages gave me a streamlined process that looks decent for posting.&lt;/p&gt;
 </description>
     </item>
     
