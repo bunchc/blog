@@ -7,7 +7,120 @@
     
     
     
-    <updated>Mon, 20 Oct 2014 00:00:00 UTC</updated>
+    <updated>Tue, 21 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>ZeroVM - IO Operations in ZeroVM</title>
+      <link>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels</link>
+      <pubDate>Tue, 21 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels</guid>
+      <description>
+
+&lt;p&gt;If you are just joining these posts, you might want to take a few minutes and review these other posts on ZeroVM:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background&#34;&gt;Background&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO&#34;&gt;Isolation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/&#34;&gt;Getting Started with ZeroVM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump&#34;&gt;Lots of ZeroVM Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;IO Operations in ZeroVM&lt;/h2&gt;
+
+&lt;p&gt;IO in ZeroVM is an odd sort of beast. As you are not working in a container or a VM you do not inherit the unlimited read/write to arbirtrary places as you would have otherwise. Instead the abstraction unit for ZeroVM is the &lt;em&gt;channel&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;Channels&lt;/h3&gt;
+
+&lt;p&gt;As the intro said, a &lt;em&gt;channel&lt;/em&gt; is the unit of IO abstraction within ZeroVM. That means any network communication, any file write, any input from a pipe, or output to swift, each is an individual channel.&lt;/p&gt;
+
+&lt;p&gt;Additionally, channels have to be explicitly defined prior to launching a ZeroVM instance. In some ways, this is like specifying the VMDK for a traditional VM to boot from. The requirement to specify all channels before hand does provide a powerful security mechanism in that all IO is effectively sandboxed. An erroneous process can not cause damage outside of the narrow constraints defined within said channel.&lt;/p&gt;
+
+&lt;p&gt;Channels in ZeroVM are unique in other ways. Each channel, regardless of type, is presented to the instance as a file handle.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;Channel Quotas&lt;/h3&gt;
+
+&lt;p&gt;To keep with the security and isolation provided within ZeroVM, along with the explicit channel definition, one must also specify a quota for IO. You specify said quota with four bits of information: (1) Total reads; (2) Total writes; (3) Total Read Size; and (4) Total Write Size.&lt;/p&gt;
+
+&lt;p&gt;Quotas are handled on a &amp;lsquo;first one hit&amp;rsquo; basis. So, if you have 10,000 reads to do, but said number of reads exceeds the total read size in bytes at read number 3,500, well, that&amp;rsquo;s it. No more reads for you. The inverse of this is also true, when you run out of the number of allowed reads or writes before you hit the size quota, you will also get a failure returned.&lt;/p&gt;
+
+&lt;p&gt;When you do hit this limit, however, ZeroVM tries to fail gracefully, in that you will still have all the data read or written up to that point. Below is an example of what happens when you exceed the number of available reads:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ dd if=/dev/urandom of=/home/vagrant/file.txt bs=1048576 count=100
+
+$ cat &amp;gt; /home/vagrant/example.py &amp;lt;&amp;lt;EOF
+file = open(&#39;/dev/3.file.txt&#39;, &#39;r&#39;)
+print file.read(5)
+EOF
+
+$ su - vagrant -c &amp;quot;zvsh --zvm-save-dir ~/ --zvm-image python.tar --zvm-image ~/file.txt python @example.py&amp;quot;
+
+$ sudo sed -i &amp;quot;s|Channel = /home/vagrant/file.txt,/dev/3.file.txt,3,0,4294967296,4294967296,0,0|Channel = /home/vagrant/file.txt,/dev/3.file.txt,3,0,3,3,3,3|g&amp;quot; /home/vagrant/manifest.1
+$ sudo sed -i &amp;quot;s|/home/vagrant/stdout.1|/dev/stdout|g&amp;quot; /home/vagrant/manifest.1
+$ sudo sed -i &amp;quot;s|/home/vagrant/stderr.1|/dev/stderr|g&amp;quot; /home/vagrant/manifest.1
+
+$ zerovm -t 2 manifest.1
+
+Traceback (most recent call last):
+  File &amp;quot;/dev/1.example.py&amp;quot;, line 2, in &amp;lt;module&amp;gt;
+    print file.read(5)
+IOError: [Errno -122] Unknown error 4294967174
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What is happening in that example is this:
+1. Create a 100MB file full of random bits
+2. Create &amp;lsquo;example.py&amp;rsquo; to read the first 5 characters in the file
+3. Use zvsh to run example.py inside ZeroVM&amp;hellip; this should dump some garbage characters to the console.
+4. Change the quota from &amp;lsquo;huge&amp;rsquo; to 3
+5. Adjust the manifest file to allow stderr and stdout to work properly
+6. Run ZeroVM with the updated manifest &amp;amp; receive IO error&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;Specifying Channels in a Manifest File&lt;/h3&gt;
+
+&lt;p&gt;So that example took me way too long to figure out. Mostly due to a few small things and one big one: Creating the manifest file properly. What follows is a quick way to create a manifest file as well as our example manifest and a breakdown thereof.&lt;/p&gt;
+
+&lt;h4 id=&#34;toc_4&#34;&gt;Creating a Manifest File&lt;/h4&gt;
+
+&lt;p&gt;It turns out that the zvsh utility that is bundled with ZeroVM has the ability to save the manifest (and other runtime files) when you launch it. To generate the template manifest that is used and modified in this example, run the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;zvsh --zvm-save-dir ~/ --zvm-image python.tar --zvm-image ~/file.txt python @example.py
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;toc_5&#34;&gt;Breakdown of the Manifest File&lt;/h4&gt;
+
+&lt;p&gt;The example file that follows was for the specific bits used in our example. It can, however, make for a good starting point for your own manifest files.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Node = 1
+Version = 20130611
+Timeout = 50
+Memory = 4294967296,0
+Program = /home/vagrant/boot.1
+Channel = /dev/stdin,/dev/stdin,0,0,4294967296,4294967296,0,0
+Channel = /dev/stdout,/dev/stdout,0,0,0,0,4294967296,4294967296
+Channel = /dev/stderr,/dev/stderr,0,0,0,0,4294967296,4294967296
+Channel = /home/vagrant/example.py,/dev/1.example.py,3,0,4294967296,4294967296,0,0
+Channel = /home/vagrant/python.tar,/dev/2.python.tar,3,0,4294967296,4294967296,0,0
+Channel = /home/vagrant/file.txt,/dev/3.file.txt,3,0,3,3,3,3
+Channel = /home/vagrant/boot.1,/dev/self,3,0,4294967296,4294967296,0,0
+Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,4294967296
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Taken line by line:
+1. &lt;strong&gt;Node&lt;/strong&gt; an optional parameter specifying the node number.
+2. &lt;strong&gt;Version&lt;/strong&gt; mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.
+3. &lt;strong&gt;Timeout&lt;/strong&gt; in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs.
+4. &lt;strong&gt;Memory&lt;/strong&gt; Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM
+5. &lt;strong&gt;Program&lt;/strong&gt; Specifies the ZeroVM cross compiled binary that we will run
+6. &lt;strong&gt;Channel&lt;/strong&gt; The channel definitions, these follow the format:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Channel = &amp;lt;uri&amp;gt;,&amp;lt;alias&amp;gt;,&amp;lt;type&amp;gt;,&amp;lt;etag&amp;gt;,&amp;lt;gets&amp;gt;,&amp;lt;get_size&amp;gt;,&amp;lt;puts&amp;gt;,&amp;lt;put_size&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_6&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post we covered how IO is handled in ZeroVM. We first explained the Channel concept, how quotas are handled within channels, and finally, how to add a channel or channels at ZeroVM runtime using a manifest.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>ZeroVM Link Dump</title>
@@ -904,100 +1017,6 @@ hanlon image
     </item>
     
     <item>
-      <title>Updated Blog / Markdown workflow</title>
-      <link>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</link>
-      <pubDate>Thu, 14 Aug 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</guid>
-      <description>
-
-&lt;p&gt;A while ago I posted about my markdown &lt;a href=&#34;http://openstack.prov12n.com/my-markdown-workflow-for-now/&#34;&gt;workflow&lt;/a&gt;. While that workflow was decent and worked for a goodly little while, it left quite a bit to be desired. Specifically, I the posting process into Wordpress was cumbersome at best.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;A New Blog Engine&lt;/h2&gt;
-
-&lt;p&gt;Like I said above, working with Wordpress and markdown was cumbersome and then some. So it was time for something new. At first I was going to use similar to &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/&#34;&gt;this&lt;/a&gt;, which is actually what is in use on the &lt;a href=&#34;http://openstackcookbook.com/&#34;&gt;openstackcookbook.com&lt;/a&gt; site. It has the following benefits:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Posts are written in Markdown&lt;/li&gt;
-&lt;li&gt;Integrated with gh-pages&lt;/li&gt;
-&lt;li&gt;Straighforward publishing process &lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;It was &lt;em&gt;almost&lt;/em&gt; what I needed. In the end I went with &lt;a href=&#34;http://hugo.spf13.com/&#34;&gt;Hugo&lt;/a&gt;. What Hugo added was some pluggable themes and templates. Also the ability to run locally before pushing to github.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;To setup Hugo on github, use &lt;a href=&#34;http://hugo.spf13.com/tutorials/github_pages_blog&#34;&gt;this&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;Current Workflow&lt;/h2&gt;
-
-&lt;p&gt;My current workflow needed some help then. I kept the same sublime text plugins, that is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;MarkdownEditing
-
-&lt;ul&gt;
-&lt;li&gt;This has a number of really handy keyboard bindings. It also has some decent highlighting and what not.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Markdown Preview
-
-&lt;ul&gt;
-&lt;li&gt;This one allows me to go from Markdown into what it’ll look like on the web.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;Markdown TOC
-
-&lt;ul&gt;
-&lt;li&gt;This lets me go from a basic set of sections and files into a more full fledged table of contents.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Additionally, to create a new post, I modified the Rakefile found &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/blob/master/_posts/Rakefile&#34;&gt;here&lt;/a&gt;, to look like this:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;require &#39;fileutils&#39;
-task :post do
-    title = ENV[&#39;title&#39;] || &amp;quot;new-post&amp;quot;
-    tags = ENV[&#39;tags&#39;] || &#39;&#39;
-    make_img_dir = ENV[&#39;imgdir&#39;] || false
-    date = (ENV[&#39;date&#39;] ? Time.parse(ENV[&#39;date&#39;]) : Time.now).strftime(&#39;%Y-%m-%d&#39;)
-    filename = File.join(&#39;.&#39;, &amp;quot;#{Time.now.strftime(&#39;%Y-%m-%d&#39;)}-#{title.strip.gsub(&#39; &#39;, &#39;-&#39;).gsub(/[^\w-]/, &#39;&#39;)}.md&amp;quot;)
-    open(filename, &#39;w&#39;) do |post|
-        post.puts &amp;quot;---&amp;quot;
-        post.puts &amp;quot;title: \&amp;quot;#{title}\&amp;quot;&amp;quot;
-        post.puts &amp;quot;date: #{Time.now.strftime(&#39;%Y-%m-%d&#39;)}&amp;quot;
-        post.puts &amp;quot;categories: &amp;quot;
-        post.puts &amp;quot;---&amp;quot;
-        post.puts &amp;quot;\nYour content here.&amp;quot;
-        if make_img_dir
-            img_dir = File.basename(filename.chomp(File.extname(filename)))
-            FileUtils.mkdir_p(&amp;quot;../images/posts/#{img_dir}&amp;quot;)
-            post.puts &amp;quot;\n&amp;quot; * 5
-            post.puts &amp;quot;[imgdir]: /images/posts/#{img_dir}/&amp;quot;
-        end
-    end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So creating a new post goes like this:
-bunchc: blog/content/posts$ rake post title=&amp;ldquo;Title Here&amp;rdquo;&lt;/p&gt;
-
-&lt;p&gt;In turn, that creates a YYYY-MM-DD-Title-Here.md file for editing in sublime. It also adds the metadata section at the top of the file for me:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;---
-title: &amp;quot;Updated Blog / Markdown workflow&amp;quot;
-date: 2014-08-14
-categories: 
----
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;From there, I write the file, save the file, and run &lt;code&gt;./deploy.sh&lt;/code&gt; from the Hugo installer linked earlier. That handles all the pushing and bits to git.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;The gist of it is, Wordpress was a bit much and a bit heavy for what I needed. Hugo, Markdown, and GitHub Pages gave me a streamlined process that looks decent for posting.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Multi-Node Devstack with Neutron and Cells</title>
       <link>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells</link>
       <pubDate>Thu, 14 Aug 2014 00:00:00 UTC</pubDate>
@@ -1218,19 +1237,96 @@ cell_type=comput
     </item>
     
     <item>
-      <title>Linkdump Bare-Metal Edition</title>
-      <link>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+      <title>Updated Blog / Markdown workflow</title>
+      <link>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</link>
+      <pubDate>Thu, 14 Aug 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition</guid>
-      <description>&lt;p&gt;Here goes the first post on the Hugo platform on the github blog. Some links I had to close out as I consolidated memory to fire up a multi-devstack.&lt;/p&gt;
+      <guid>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</guid>
+      <description>
+
+&lt;p&gt;A while ago I posted about my markdown &lt;a href=&#34;http://openstack.prov12n.com/my-markdown-workflow-for-now/&#34;&gt;workflow&lt;/a&gt;. While that workflow was decent and worked for a goodly little while, it left quite a bit to be desired. Specifically, I the posting process into Wordpress was cumbersome at best.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;A New Blog Engine&lt;/h2&gt;
+
+&lt;p&gt;Like I said above, working with Wordpress and markdown was cumbersome and then some. So it was time for something new. At first I was going to use similar to &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/&#34;&gt;this&lt;/a&gt;, which is actually what is in use on the &lt;a href=&#34;http://openstackcookbook.com/&#34;&gt;openstackcookbook.com&lt;/a&gt; site. It has the following benefits:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://theforeman.org/manuals/1.5/quickstart_guide.html&#34;&gt;http://theforeman.org/manuals/1.5/quickstart_guide.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/theforeman/foreman_discovery&#34;&gt;https://github.com/theforeman/foreman_discovery&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.cobblerd.org/&#34;&gt;http://www.cobblerd.org/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://ma.ttwagner.com/bare-metal-deploys-with-devstack-and-ironic/&#34;&gt;http://ma.ttwagner.com/bare-metal-deploys-with-devstack-and-ironic/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Posts are written in Markdown&lt;/li&gt;
+&lt;li&gt;Integrated with gh-pages&lt;/li&gt;
+&lt;li&gt;Straighforward publishing process &lt;code&gt;git push origin master&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;It was &lt;em&gt;almost&lt;/em&gt; what I needed. In the end I went with &lt;a href=&#34;http://hugo.spf13.com/&#34;&gt;Hugo&lt;/a&gt;. What Hugo added was some pluggable themes and templates. Also the ability to run locally before pushing to github.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;To setup Hugo on github, use &lt;a href=&#34;http://hugo.spf13.com/tutorials/github_pages_blog&#34;&gt;this&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Current Workflow&lt;/h2&gt;
+
+&lt;p&gt;My current workflow needed some help then. I kept the same sublime text plugins, that is:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;MarkdownEditing
+
+&lt;ul&gt;
+&lt;li&gt;This has a number of really handy keyboard bindings. It also has some decent highlighting and what not.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Markdown Preview
+
+&lt;ul&gt;
+&lt;li&gt;This one allows me to go from Markdown into what it’ll look like on the web.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Markdown TOC
+
+&lt;ul&gt;
+&lt;li&gt;This lets me go from a basic set of sections and files into a more full fledged table of contents.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Additionally, to create a new post, I modified the Rakefile found &lt;a href=&#34;https://github.com/chalupaul/chalupaul.github.io/blob/master/_posts/Rakefile&#34;&gt;here&lt;/a&gt;, to look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require &#39;fileutils&#39;
+task :post do
+    title = ENV[&#39;title&#39;] || &amp;quot;new-post&amp;quot;
+    tags = ENV[&#39;tags&#39;] || &#39;&#39;
+    make_img_dir = ENV[&#39;imgdir&#39;] || false
+    date = (ENV[&#39;date&#39;] ? Time.parse(ENV[&#39;date&#39;]) : Time.now).strftime(&#39;%Y-%m-%d&#39;)
+    filename = File.join(&#39;.&#39;, &amp;quot;#{Time.now.strftime(&#39;%Y-%m-%d&#39;)}-#{title.strip.gsub(&#39; &#39;, &#39;-&#39;).gsub(/[^\w-]/, &#39;&#39;)}.md&amp;quot;)
+    open(filename, &#39;w&#39;) do |post|
+        post.puts &amp;quot;---&amp;quot;
+        post.puts &amp;quot;title: \&amp;quot;#{title}\&amp;quot;&amp;quot;
+        post.puts &amp;quot;date: #{Time.now.strftime(&#39;%Y-%m-%d&#39;)}&amp;quot;
+        post.puts &amp;quot;categories: &amp;quot;
+        post.puts &amp;quot;---&amp;quot;
+        post.puts &amp;quot;\nYour content here.&amp;quot;
+        if make_img_dir
+            img_dir = File.basename(filename.chomp(File.extname(filename)))
+            FileUtils.mkdir_p(&amp;quot;../images/posts/#{img_dir}&amp;quot;)
+            post.puts &amp;quot;\n&amp;quot; * 5
+            post.puts &amp;quot;[imgdir]: /images/posts/#{img_dir}/&amp;quot;
+        end
+    end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So creating a new post goes like this:
+bunchc: blog/content/posts$ rake post title=&amp;ldquo;Title Here&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;In turn, that creates a YYYY-MM-DD-Title-Here.md file for editing in sublime. It also adds the metadata section at the top of the file for me:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;---
+title: &amp;quot;Updated Blog / Markdown workflow&amp;quot;
+date: 2014-08-14
+categories: 
+---
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From there, I write the file, save the file, and run &lt;code&gt;./deploy.sh&lt;/code&gt; from the Hugo installer linked earlier. That handles all the pushing and bits to git.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;The gist of it is, Wordpress was a bit much and a bit heavy for what I needed. Hugo, Markdown, and GitHub Pages gave me a streamlined process that looks decent for posting.&lt;/p&gt;
 </description>
     </item>
     

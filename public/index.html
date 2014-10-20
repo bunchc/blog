@@ -65,6 +65,125 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels'> ZeroVM - IO Operations in ZeroVM</a> </h2>
+      <div class="meta">Tue, Oct 21, 2014</div>
+    </header>
+
+    
+
+<p>If you are just joining these posts, you might want to take a few minutes and review these other posts on ZeroVM:</p>
+
+<ul>
+<li><a href="http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background">Background</a></li>
+<li><a href="http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO">Isolation</a></li>
+<li><a href="http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/">Getting Started with ZeroVM</a></li>
+<li><a href="http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump">Lots of ZeroVM Resources</a></li>
+</ul>
+
+<h2 id="toc_0">IO Operations in ZeroVM</h2>
+
+<p>IO in ZeroVM is an odd sort of beast. As you are not working in a container or a VM you do not inherit the unlimited read/write to arbirtrary places as you would have otherwise. Instead the abstraction unit for ZeroVM is the <em>channel</em>.</p>
+
+<h3 id="toc_1">Channels</h3>
+
+<p>As the intro said, a <em>channel</em> is the unit of IO abstraction within ZeroVM. That means any network communication, any file write, any input from a pipe, or output to swift, each is an individual channel.</p>
+
+<p>Additionally, channels have to be explicitly defined prior to launching a ZeroVM instance. In some ways, this is like specifying the VMDK for a traditional VM to boot from. The requirement to specify all channels before hand does provide a powerful security mechanism in that all IO is effectively sandboxed. An erroneous process can not cause damage outside of the narrow constraints defined within said channel.</p>
+
+<p>Channels in ZeroVM are unique in other ways. Each channel, regardless of type, is presented to the instance as a file handle.</p>
+
+<h3 id="toc_2">Channel Quotas</h3>
+
+<p>To keep with the security and isolation provided within ZeroVM, along with the explicit channel definition, one must also specify a quota for IO. You specify said quota with four bits of information: (1) Total reads; (2) Total writes; (3) Total Read Size; and (4) Total Write Size.</p>
+
+<p>Quotas are handled on a &lsquo;first one hit&rsquo; basis. So, if you have 10,000 reads to do, but said number of reads exceeds the total read size in bytes at read number 3,500, well, that&rsquo;s it. No more reads for you. The inverse of this is also true, when you run out of the number of allowed reads or writes before you hit the size quota, you will also get a failure returned.</p>
+
+<p>When you do hit this limit, however, ZeroVM tries to fail gracefully, in that you will still have all the data read or written up to that point. Below is an example of what happens when you exceed the number of available reads:</p>
+
+<pre><code>$ dd if=/dev/urandom of=/home/vagrant/file.txt bs=1048576 count=100
+
+$ cat &gt; /home/vagrant/example.py &lt;&lt;EOF
+file = open('/dev/3.file.txt', 'r')
+print file.read(5)
+EOF
+
+$ su - vagrant -c &quot;zvsh --zvm-save-dir ~/ --zvm-image python.tar --zvm-image ~/file.txt python @example.py&quot;
+
+$ sudo sed -i &quot;s|Channel = /home/vagrant/file.txt,/dev/3.file.txt,3,0,4294967296,4294967296,0,0|Channel = /home/vagrant/file.txt,/dev/3.file.txt,3,0,3,3,3,3|g&quot; /home/vagrant/manifest.1
+$ sudo sed -i &quot;s|/home/vagrant/stdout.1|/dev/stdout|g&quot; /home/vagrant/manifest.1
+$ sudo sed -i &quot;s|/home/vagrant/stderr.1|/dev/stderr|g&quot; /home/vagrant/manifest.1
+
+$ zerovm -t 2 manifest.1
+
+Traceback (most recent call last):
+  File &quot;/dev/1.example.py&quot;, line 2, in &lt;module&gt;
+    print file.read(5)
+IOError: [Errno -122] Unknown error 4294967174
+</code></pre>
+
+<p>What is happening in that example is this:
+1. Create a 100MB file full of random bits
+2. Create &lsquo;example.py&rsquo; to read the first 5 characters in the file
+3. Use zvsh to run example.py inside ZeroVM&hellip; this should dump some garbage characters to the console.
+4. Change the quota from &lsquo;huge&rsquo; to 3
+5. Adjust the manifest file to allow stderr and stdout to work properly
+6. Run ZeroVM with the updated manifest &amp; receive IO error</p>
+
+<h3 id="toc_3">Specifying Channels in a Manifest File</h3>
+
+<p>So that example took me way too long to figure out. Mostly due to a few small things and one big one: Creating the manifest file properly. What follows is a quick way to create a manifest file as well as our example manifest and a breakdown thereof.</p>
+
+<h4 id="toc_4">Creating a Manifest File</h4>
+
+<p>It turns out that the zvsh utility that is bundled with ZeroVM has the ability to save the manifest (and other runtime files) when you launch it. To generate the template manifest that is used and modified in this example, run the following command:</p>
+
+<pre><code>zvsh --zvm-save-dir ~/ --zvm-image python.tar --zvm-image ~/file.txt python @example.py
+</code></pre>
+
+<h4 id="toc_5">Breakdown of the Manifest File</h4>
+
+<p>The example file that follows was for the specific bits used in our example. It can, however, make for a good starting point for your own manifest files.</p>
+
+<pre><code>Node = 1
+Version = 20130611
+Timeout = 50
+Memory = 4294967296,0
+Program = /home/vagrant/boot.1
+Channel = /dev/stdin,/dev/stdin,0,0,4294967296,4294967296,0,0
+Channel = /dev/stdout,/dev/stdout,0,0,0,0,4294967296,4294967296
+Channel = /dev/stderr,/dev/stderr,0,0,0,0,4294967296,4294967296
+Channel = /home/vagrant/example.py,/dev/1.example.py,3,0,4294967296,4294967296,0,0
+Channel = /home/vagrant/python.tar,/dev/2.python.tar,3,0,4294967296,4294967296,0,0
+Channel = /home/vagrant/file.txt,/dev/3.file.txt,3,0,3,3,3,3
+Channel = /home/vagrant/boot.1,/dev/self,3,0,4294967296,4294967296,0,0
+Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,4294967296
+</code></pre>
+
+<p>Taken line by line:
+1. <strong>Node</strong> an optional parameter specifying the node number.
+2. <strong>Version</strong> mandatory. As manifest versions are incompatible. This tells both ZeroVM and you which version of the manifest you are using.
+3. <strong>Timeout</strong> in seconds, is a mandatory parameter. This prevents long running ZeroVM jobs.
+4. <strong>Memory</strong> Also mandatory, This is a comma separated value, where the first position is the 32-bit value representing memory. In our case, the max 4GB. The second number can be either 0 or 1 specifying the eTag used to checksum all data passing through ZeroVM
+5. <strong>Program</strong> Specifies the ZeroVM cross compiled binary that we will run
+6. <strong>Channel</strong> The channel definitions, these follow the format:</p>
+
+<pre><code>Channel = &lt;uri&gt;,&lt;alias&gt;,&lt;type&gt;,&lt;etag&gt;,&lt;gets&gt;,&lt;get_size&gt;,&lt;puts&gt;,&lt;put_size&gt;
+</code></pre>
+
+<h2 id="toc_6">Summary</h2>
+
+<p>In this post we covered how IO is handled in ZeroVM. We first explained the Channel concept, how quotas are handled within channels, and finally, how to add a channel or channels at ZeroVM runtime using a manifest.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump'> ZeroVM Link Dump</a> </h2>
       <div class="meta">Mon, Oct 20, 2014</div>
     </header>
@@ -730,48 +849,6 @@ heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-09-12-Currently-Reading---Sept-2014'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-09-10-MariaDB-With-Galera-on-Vagrant'> MariaDB With Galera on Vagrant</a> </h2>
-      <div class="meta">Wed, Sep 10, 2014</div>
-    </header>
-
-    
-
-<p>Found myself in some training this last week using MariaDB, and being that I like to get a bit more hands on than most, using the class provided lab environment wasn&rsquo;t going to cut it. This meant wrapping some scripting into a Vagrant environment so I could reliably reporduce the three node lab.</p>
-
-<h2 id="toc_0">Getting Started</h2>
-
-<p>You&rsquo;ll need Vagrant and Git. It&rsquo;s also preferred that you have vagrant-cachier installed. You should have vagrant-cachier anyways, but alas, that is not for right now. Once you have these out of the way, do the following:</p>
-
-<ol>
-<li><code>git clone https://github.com/bunchc/mariadb-galera-vagrant.git</code></li>
-<li><code>cd mariadb-galera-vagrant</code></li>
-<li><code>vagrant up</code></li>
-</ol>
-
-<h2 id="toc_1">Validating the Cluster</h2>
-
-<p>After a few minutes, you should be able to log into any of the nodes. Specifically, node-01 will be used to &lsquo;bootstrap&rsquo; the cluster, the other two nodes will join from there.</p>
-
-<p>To validate the cluster:</p>
-
-<pre><code>vagrant ssh mariadb-02
-sudo su -
-mysql -uroot
-SHOW GLOBAL STATUS LIKE 'wsrep%';
-</code></pre>
-
-<p>You should be able to do the above from any of the nodes in the cluster.</p>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-09-10-MariaDB-With-Galera-on-Vagrant'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
