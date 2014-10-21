@@ -65,6 +65,82 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud'> ZeroVM - Getting Started with ZeroCloud</a> </h2>
+      <div class="meta">Wed, Oct 22, 2014</div>
+    </header>
+
+    
+
+<p>If you are getting up to speed on ZeroVM as I am, you will find the following useful:</p>
+
+<ul>
+<li><a href="http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background">Background</a></li>
+<li><a href="http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO">Isolation</a></li>
+<li><a href="http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/">IO Operations</a></li>
+<li><a href="http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/">Getting Started with ZeroVM</a></li>
+<li><a href="http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump">Lots of ZeroVM Resources</a></li>
+</ul>
+
+<p>Additionally, this <a href="https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm">post</a> does a great job of explaining how ZeroVM fits when you start to approach middling to large (Read: <em>Big Data</em>) problems. Go read it now.</p>
+
+<h2 id="toc_0">Getting Started with ZeroCloud</h2>
+
+<p>Now that you&rsquo;ve read the <a href="https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm">introduction by Lars</a>, and I trust that you have, we can start looking into the &lsquo;what&rsquo; of ZeroCloud. In this post we&rsquo;ll touch on it&rsquo;s architecture and use case or two. In a subsequent post we&rsquo;ll show you how to build your own small-scale lab for such an environment.</p>
+
+<p><strong>Note:</strong> Also go here, watch <a href="https://www.youtube.com/watch?v=VYZU_4w_dCA">this</a>, around the 16:30 mark, pay attention to the &rsquo;t = data / Rate&rsquo; bits.</p>
+
+<p><strong>Note:</strong> This is where things in ZeroVM start to get really cool.</p>
+
+<h3 id="toc_1">ZeroCloud Architecture</h3>
+
+<p>The best way to describe the what and how of ZeroCloud is with a few diagrams which we will then dive into. These are borrowed form slides in past presentations.</p>
+
+<p><img src="http://openstack.prov12n.com/screens/1e1bd9b12a3230982c98-e2a0e10379dcd0e09ec354fba3ca6600.r72.cf1.rackcdn.comZeroCloud.pdf_2014-10-21_13-09-08.jpg" alt="Highlevel ZeroCloud Architecture" />
+</p>
+
+<p>This first diagram is a <em>hugely</em> simplified view of a swift environment, that is, if you have worked with OpenStack Swift it should look familiar enough. The &ldquo;Proxy&rdquo; nodes at the top are Swift Proxies, the Storage Nodes below are well, object storage nodes.</p>
+
+<p>What changes for ZeroCloud is the addition of a few ZVM parts made available via Swift Middleware. In this case ZVM represents job brokers, some messaging, ZeroVM itself, as well as an &lsquo;executor&rsquo; that handles the connecting of channels and the reading / writing of objects in Swift. This next diagram breaks that down further:</p>
+
+<p><img src="http://openstack.prov12n.com/screens/1e1bd9b12a3230982c98-e2a0e10379dcd0e09ec354fba3ca6600.r72.cf1.rackcdn.comZeroCloud.pdf_2014-10-21_13-10-12.jpg" alt="ZeroCloud Dataflow Architecture" />
+</p>
+
+<p>In this diagram, which admittedly is an eyechart, each step in the ZeroVM Swift Middleware is shown. Working left to right:</p>
+
+<p><strong>1.</strong> The user initiates a job request via the Swift REST API by sending a post request with the code to be executed.</p>
+
+<p><strong>2.</strong> This hits the Swift Proxy node and is handed to the ZeroVM middleware, which, via a job scheduler finds where the closest replica of your data is, and sends the request along.</p>
+
+<p><strong>3.</strong> The job arrives at the executor who then fires up a net-new ZeroVM session for the job, opens the required IO Channels to your file* and if needed other ZeroVM sessions.</p>
+
+<p><strong>4.</strong> The ZeroVM job, finished with it&rsquo;s work, sends the response back up to the Proxy Server who then serves the response back to the user.</p>
+
+<blockquote>
+<p><em>Note:</em> re: file in #3, in the default configuration this is a net new copy of the file rather than the actual object itself. This prevents accidental damage to the file.</p>
+</blockquote>
+
+<h3 id="toc_2">ZeroCloud Use Cases</h3>
+
+<p>So what do you do with a deterministic, computable, distributed data store? Some things that jump to mind are things like &ldquo;A Giant MapReduce Cluster&rdquo;, similar to the one described <a href="https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm">here</a>. As Lars describes, ZeroCloud can address one of the biggest MapReduce computational issues, that is data locality.</p>
+
+<p>In addition to MapReduce type workloads, what else can one do? One could couple ElasticSeach and Log Stash, and indeed serve Kibana directly from Zero Cloud. Video trans-coding is another use case that I&rsquo;ve seen.</p>
+
+<p>ZeroVM/ZeroCloud then, works well when you have a data heavy workload that would benefit being attacked in a distributed fashion.</p>
+
+<h2 id="toc_3">Summary</h2>
+
+<p>In this post we introduced you to ZeroCloud, the amalgamation of ZeroVM and OpenStack Swift. We dove into the architecture of ZeroCloud and introduced some use cases where having programmable distributed storage system is insanely useful.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels'> ZeroVM - IO Operations in ZeroVM</a> </h2>
       <div class="meta">Tue, Oct 21, 2014</div>
     </header>
@@ -824,43 +900,6 @@ heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-09-12-Currently-Reading---Sept-2014'> Currently Reading - Sept 2014</a> </h2>
-      <div class="meta">Fri, Sep 12, 2014</div>
-    </header>
-
-    <p>I&rsquo;ve found overtime my reading habbits have changed from mostly tech books to a fair mix of things, with some things that suprised even me&hellip; business books. o.O? Here&rsquo;s what&rsquo;s currently on my list and in progress, first the boring ones:</p>
-
-<ul>
-<li><a href="http://www.amazon.com/Curve-Freeloaders-Superfans-Future-Business-ebook/dp/B00C5R7B6W/ref=sr_1_1_bnp_1_kin?ie=UTF8&amp;qid=1410211612&amp;sr=8-1&amp;keywords=the+curve+how+smart+companies+find+high+value">The Curve: How Smart Companies Find High-Value Customers</a></li>
-<li><a href="http://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman-ebook/dp/B00555X8OA/ref=sr_1_1_bnp_1_kin?ie=UTF8&amp;qid=1410211622&amp;sr=8-1&amp;keywords=thinking+fast+and+slow">Thinking, Fast and Slow</a></li>
-<li><a href="http://www.amazon.com/Vagrant-Up-Running-Mitchell-Hashimoto-ebook/dp/B00D3VH4IO">Vagrant: Up and Running</a></li>
-<li><a href="http://www.amazon.com/Art-Learning-Journey-Pursuit-Excellence-ebook/dp/B000QCQ970/ref=sr_1_1?s=digital-text&amp;ie=UTF8&amp;qid=1410546893&amp;sr=1-1&amp;keywords=the+art+of+learning">The Art of Learning</a></li>
-<li><a href="http://www.amazon.com/SYSTEMANTICS-SYSTEMS-BIBLE-John-Gall-ebook/dp/B00AK1BIDM/ref=sr_1_1?s=digital-text&amp;ie=UTF8&amp;qid=1410546946&amp;sr=1-1&amp;keywords=systemantics">Systemantics. The Systems Bible</a></li>
-<li><a href="http://www.amazon.com/Essential-Drucker-Collins-Business-Essentials-ebook/dp/B000FC11LK/ref=sr_1_1?s=digital-text&amp;ie=UTF8&amp;qid=1410546958&amp;sr=1-1&amp;keywords=essential+drucker">The Essential Drucker</a></li>
-<li><a href="http://www.amazon.com/Pragmatism-Other-Writings-Penguin-Classics/dp/0140437355/ref=sr_1_1?ie=UTF8&amp;qid=undefined&amp;sr=8-1&amp;keywords=pragmatism+and+other+essays">Pragmatism and Other Writings</a></li>
-<li><a href="http://markburgess.org/BookOfPromises.pdf">Book of Promises</a> Promise Theory!</li>
-<li><a href="http://arxiv.org/pdf/0810.3294v5.pdf">A static Theory of Promises</a></li>
-</ul>
-
-<p>Then on the more fun side:</p>
-
-<ul>
-<li><a href="http://www.amazon.com/Brightness-Reef-Uplift-Trilogy-Book/dp/0553573306/ref=la_B000APAXV6_1_7?s=books&amp;ie=UTF8&amp;qid=1410547103&amp;sr=1-7">Brightness Reef</a> and the rest of said series.</li>
-<li><a href="http://www.amazon.com/Gardens-Moon-Book-Malazan-Fallen-ebook/dp/B002KYHZLQ/ref=tmm_kin_swatch_0?_encoding=UTF8&amp;sr=1-3-fkmr0&amp;qid=1410547192">Gardens of the Moon: Book 1 of The Malazan Book of the Fallen</a> and the rest of that series.</li>
-<li><a href="http://www.amazon.com/Geek-Dads-Guide-Weekend-Fun-ebook/dp/B004RKXO16/ref=sr_1_2?s=digital-text&amp;ie=UTF8&amp;qid=1410547255&amp;sr=1-2&amp;keywords=geek+dad">Geek Dad&rsquo;s Weekend Fun</a>, Doing a project every weekend or so.</li>
-<li><a href="http://www.amazon.com/Echopraxia-Peter-Watts-ebook/dp/B00IHCBDJ0/ref=tmm_kin_swatch_0?_encoding=UTF8&amp;sr=&amp;qid=">Echopraxia</a></li>
-</ul>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-09-12-Currently-Reading---Sept-2014'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 

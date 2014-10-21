@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://blog.codybunch.com/</loc>
-    <lastmod>2014-10-21T00:00:00+00:00</lastmod>
+    <lastmod>2014-10-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</loc>
+    <lastmod>2014-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -73,12 +78,12 @@
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</loc>
+    <loc>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells</loc>
     <lastmod>2014-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells</loc>
+    <loc>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</loc>
     <lastmod>2014-08-14T00:00:00+00:00</lastmod>
   </url>
   
