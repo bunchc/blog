@@ -7,7 +7,205 @@
     
     
     
-    <updated>Mon, 27 Oct 2014 00:00:00 UTC</updated>
+    <updated>Tue, 28 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Using Packer to Make Vagrant Boxes</title>
+      <link>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes</link>
+      <pubDate>Tue, 28 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes</guid>
+      <description>
+
+&lt;p&gt;Part of working on the 3rd edition of the OpenStack Cookbook required, among other things, a new release of Ubuntu that came pre-loaded with the Juno OpenStack packages. Not a problem! Excepting that there were no ready made images on &lt;a href=&#34;http://vagrantcloud.com&#34;&gt;Vagrant Cloud&lt;/a&gt;. Enter Packer.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Packer?&lt;/h2&gt;
+
+&lt;p&gt;What the deuce is packer? From the &lt;a href=&#34;https://packer.io/&#34;&gt;packer.io&lt;/a&gt; site:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Packer is a tool for creating identical machine images for multiple platforms from a single source configuration.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Said another way, it takes the &amp;lsquo;configuration is code&amp;rsquo; and pushes it back to the golden images, to a degree. The idea is one can shrink the time to deploy if instead of starting with the most generic box and adding, you start somewhere in the middle, adding common things to a &amp;lsquo;golden&amp;rsquo; image, and then deploying on top of that.&lt;/p&gt;
+
+&lt;p&gt;In the use-case for the OpenStack Cookbook? Well, we just needed a manila Ubuntu 14.10 box for Fusion and Virtualbox. As there are three of us on the project now, having a common starting ground is ideal.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Our Packer Setup&lt;/h2&gt;
+
+&lt;p&gt;I&amp;rsquo;ll leave installing Packer as an exercise for the reader. The &lt;a href=&#34;https://packer.io/docs&#34;&gt;docs&lt;/a&gt; are pretty good in the regard.&lt;/p&gt;
+
+&lt;p&gt;For our build, we use the following packer.json:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;builders&amp;quot;: [
+    {&amp;quot;type&amp;quot;: &amp;quot;virtualbox-iso&amp;quot;,
+    &amp;quot;guest_os_type&amp;quot;: &amp;quot;Ubuntu_64&amp;quot;,
+    &amp;quot;iso_url&amp;quot;: &amp;quot;http://mirror.anl.gov/pub/ubuntu-iso/CDs/utopic/ubuntu-14.10-server-amd64.iso&amp;quot;,
+    &amp;quot;iso_checksum&amp;quot;: &amp;quot;91bd1cfba65417bfa04567e4f64b5c55&amp;quot;,
+    &amp;quot;iso_checksum_type&amp;quot;:&amp;quot;md5&amp;quot;,
+    &amp;quot;http_directory&amp;quot;: &amp;quot;preseed&amp;quot;,
+    &amp;quot;ssh_username&amp;quot;: &amp;quot;vagrant&amp;quot;,
+    &amp;quot;ssh_password&amp;quot;: &amp;quot;vagrant&amp;quot;,
+    &amp;quot;boot_wait&amp;quot;:&amp;quot;5s&amp;quot;,
+    &amp;quot;output_directory&amp;quot;: &amp;quot;ubuntu64_basebox_virtualbox&amp;quot;,
+    &amp;quot;shutdown_command&amp;quot;: &amp;quot;echo &#39;shutdown -P now&#39; &amp;gt; shutdown.sh; echo &#39;vagrant&#39;|sudo -S sh &#39;shutdown.sh&#39;&amp;quot;,
+    &amp;quot;boot_command&amp;quot;: [
+      &amp;quot;&amp;lt;esc&amp;gt;&amp;lt;esc&amp;gt;&amp;lt;enter&amp;gt;&amp;lt;wait&amp;gt;&amp;quot;,
+      &amp;quot;/install/vmlinuz noapic &amp;quot;,
+      &amp;quot;ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg &amp;quot;,
+      &amp;quot;debian-installer=en_US auto locale=en_US kbd-chooser/method=us &amp;quot;,
+      &amp;quot;hostname={{ .Name }} &amp;quot;,
+      &amp;quot;fb=false debconf/frontend=noninteractive &amp;quot;,
+      &amp;quot;keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA &amp;quot;,
+      &amp;quot;keyboard-configuration/variant=USA console-setup/ask_detect=false &amp;quot;,
+      &amp;quot;initrd=/install/initrd.gz -- &amp;quot;,
+      &amp;quot;&amp;lt;enter&amp;gt;&amp;quot;]
+    },
+    {&amp;quot;type&amp;quot;: &amp;quot;vmware-iso&amp;quot;,
+    &amp;quot;guest_os_type&amp;quot;: &amp;quot;ubuntu-64&amp;quot;,
+    &amp;quot;iso_url&amp;quot;: &amp;quot;http://mirror.anl.gov/pub/ubuntu-iso/CDs/utopic/ubuntu-14.10-server-amd64.iso&amp;quot;,
+    &amp;quot;iso_checksum&amp;quot;: &amp;quot;91bd1cfba65417bfa04567e4f64b5c55&amp;quot;,
+    &amp;quot;iso_checksum_type&amp;quot;:&amp;quot;md5&amp;quot;,
+    &amp;quot;http_directory&amp;quot;: &amp;quot;preseed&amp;quot;,
+    &amp;quot;ssh_username&amp;quot;: &amp;quot;vagrant&amp;quot;,
+    &amp;quot;ssh_password&amp;quot;: &amp;quot;vagrant&amp;quot;,
+    &amp;quot;boot_wait&amp;quot;:&amp;quot;5s&amp;quot;,
+    &amp;quot;output_directory&amp;quot;: &amp;quot;ubuntu64_basebox_vmware&amp;quot;,
+    &amp;quot;shutdown_command&amp;quot;: &amp;quot;echo &#39;shutdown -P now&#39; &amp;gt; shutdown.sh; echo &#39;vagrant&#39;|sudo -S sh &#39;shutdown.sh&#39;&amp;quot;,
+    &amp;quot;boot_command&amp;quot;: [
+      &amp;quot;&amp;lt;esc&amp;gt;&amp;lt;esc&amp;gt;&amp;lt;enter&amp;gt;&amp;lt;wait&amp;gt;&amp;quot;,
+      &amp;quot;/install/vmlinuz noapic &amp;quot;,
+      &amp;quot;ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg &amp;quot;,
+      &amp;quot;debian-installer=en_US auto locale=en_US kbd-chooser/method=us &amp;quot;,
+      &amp;quot;hostname={{ .Name }} &amp;quot;,
+      &amp;quot;fb=false debconf/frontend=noninteractive &amp;quot;,
+      &amp;quot;keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA &amp;quot;,
+      &amp;quot;keyboard-configuration/variant=USA console-setup/ask_detect=false &amp;quot;,
+      &amp;quot;initrd=/install/initrd.gz -- &amp;quot;,
+      &amp;quot;&amp;lt;enter&amp;gt;&amp;quot;]
+    }],
+  &amp;quot;provisioners&amp;quot;: [{
+    &amp;quot;type&amp;quot;: &amp;quot;shell&amp;quot;,
+    &amp;quot;execute_command&amp;quot;: &amp;quot;echo &#39;vagrant&#39; | sudo -S sh &#39;{{ .Path }}&#39;&amp;quot;,
+    &amp;quot;inline&amp;quot;: [
+      &amp;quot;apt-get update -y&amp;quot;,
+      &amp;quot;apt-get install -y linux-headers-$(uname -r) build-essential dkms&amp;quot;,
+      &amp;quot;apt-get clean&amp;quot;,
+      &amp;quot;mount -o loop VBoxGuestAdditions.iso /media/cdrom&amp;quot;,
+      &amp;quot;sh /media/cdrom/VBoxLinuxAdditions.run&amp;quot;,
+      &amp;quot;umount /media/cdrom&amp;quot;,
+      &amp;quot;mkdir /home/vagrant/.ssh&amp;quot;,
+      &amp;quot;mkdir /root/.ssh&amp;quot;,
+      &amp;quot;wget -qO- https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;quot;,
+      &amp;quot;echo &#39;vagrant ALL=NOPASSWD:ALL&#39; &amp;gt; /tmp/vagrant&amp;quot;,
+      &amp;quot;chmod 0440 /tmp/vagrant&amp;quot;,
+      &amp;quot;mv /tmp/vagrant /etc/sudoers.d/&amp;quot;
+    ]}],
+  &amp;quot;post-processors&amp;quot;: [
+  {
+      &amp;quot;type&amp;quot;: &amp;quot;vagrant&amp;quot;,
+      &amp;quot;override&amp;quot;: {
+        &amp;quot;virtualbox&amp;quot;: {
+          &amp;quot;output&amp;quot;: &amp;quot;utopic-x64-virtualbox.box&amp;quot;
+        },
+        &amp;quot;vmware&amp;quot;: {
+          &amp;quot;output&amp;quot;: &amp;quot;utopic-x64-vmware.box&amp;quot;
+        }
+      }
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This in turn calls a kickstart (yes kickstart on Ubuntu) file stored in the preseed folder. This looks like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;install
+text
+
+cdrom
+
+lang en_US.UTF-8
+keyboard us
+
+network --device eth0 --bootproto dhcp
+
+timezone --utc America/Chicago
+
+zerombr
+clearpart --all --initlabel
+bootloader --location=mbr
+
+part /boot --fstype=ext3 --size=256 --asprimary
+part pv.01 --size=1024 --grow --asprimary
+volgroup vg_root pv.01
+logvol swap --fstype swap --name=lv_swap --vgname=vg_root --size=1024
+logvol / --fstype=ext4 --name=lv_root --vgname=vg_root --size=1024 --grow
+
+auth --enableshadow --enablemd5
+
+# rootpw is vagrant
+rootpw --iscrypted $1$dUDXSoA9$/bEOTiK9rmsVgccsYir8W0
+user --disabled
+
+firewall --disabled
+
+skipx
+
+reboot
+
+%packages
+ubuntu-minimal
+openssh-server
+openssh-client
+wget
+curl
+git
+man
+vim
+ntp
+
+%post
+apt-get update
+
+apt-get upgrade -y linux-generic
+
+update-grub
+
+useradd -m -s /bin/bash vagrant
+echo vagrant:vagrant | chpasswd
+
+mkdir -m 0700 -p /home/vagrant/.ssh
+
+curl https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub &amp;gt;&amp;gt; /home/vagrant/.ssh/authorized_keys
+
+chmod 600 /home/vagrant/.ssh/authorized_keys
+chown -R vagrant:vagrant /home/vagrant/.ssh
+
+echo &amp;quot;vagrant ALL=(ALL) NOPASSWD: ALL&amp;quot; &amp;gt;&amp;gt; /etc/sudoers
+
+sed -i &#39;s/^PermitRootLogin without-password/PermitRootLogin yes/&#39; /etc/ssh/sshd_config
+
+apt-get clean
+
+rm -rf /tmp/*
+
+rm -f /var/log/wtmp /var/log/btmp
+
+history -c
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Once both files are in place and packer is installed, building the images is as simple as:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;packer build packer.json&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;This will take a &lt;em&gt;long&lt;/em&gt; time, but it does eventually get there, and will produce two .box files in the output folders you specified in the packer.json. From there, you can upload them somewhere and have vagrantcloud make them available, as we have under &lt;code&gt;bunchc/utopic-x64&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post we looked at how to use packer.io to build Vagrant boxes for both VMware Workstation / Fusion and Virtualbox.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Changing Jenkins Home Folder</title>
@@ -990,193 +1188,6 @@ SHOW GLOBAL STATUS LIKE &#39;wsrep%&#39;;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;You should be able to do the above from any of the nodes in the cluster.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Raspberry Pi as PXE Server</title>
-      <link>http://blog.codybunch.com/posts/2014-08-19-Raspberry-Pi-as-PXE-Server</link>
-      <pubDate>Tue, 19 Aug 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-08-19-Raspberry-Pi-as-PXE-Server</guid>
-      <description>
-
-&lt;p&gt;As I start to move from OpenStack Compute Cells in Devstack to OpenStack Compute Cells physicall, I needed to re-think my homelab some. It had been running some variation of vsphere and the OpenStack Cookbook work from various projects prior. Basically, it was a Hodor of a home lab.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Hodor!&lt;/h2&gt;
-
-&lt;p&gt;Rather than lose a bit of hardware to foreman, or one of the new razor forks (I may still go this route later), I decided instead to pound a Raspberry Pi into service. To turn the rPI into a usable provisioning server, I did the following:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Provision a 16gb card with Raspbian&lt;/li&gt;
-&lt;li&gt;Beat Networking Into Submission&lt;/li&gt;
-&lt;li&gt;Setup IP Tables for Nat&lt;/li&gt;
-&lt;li&gt;Configure DHCP, PXE, TFTP, etc&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;We&amp;rsquo;ll skip step 1 as the folks at &lt;a href=&#34;http://www.raspberrypi.org/&#34;&gt;raspberrypi.org&lt;/a&gt; cover that pretty well already.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;Beat Networking Into Submission&lt;/h2&gt;
-
-&lt;p&gt;So the rPI does some auto-hotplugging bits that can cause you some issues if you try to use both wifi and ethernet at the same time. If you&amp;rsquo;re not expecting them, well&amp;hellip; let&amp;rsquo;s just say I spent too long trying to solve before googling the problem. Here&amp;rsquo;s what my networking config files look like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# cat /etc/network/interfaces
-auto lo
-iface lo inet loopback
-
-auth eth0
-allow-hotplug eth0
-iface eth0 inet static
-    address 172.16.0.1
-    netmask 255.255.255.0
-
-auto wlan0
-allow-hotplug wlan0
-iface wlan0 inet static
-wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-    address 10.0.1.15
-    netmask 255.255.255.0
-    broadcast 10.0.1.255
-    gateway 10.0.1.1
-
-iface default inet dhcp
-
-# cat /etc/default/ifplugd
-INTERFACES=&amp;quot;eth0&amp;quot;
-HOTPLUG_INTERFACES=&amp;quot;eth0&amp;quot;
-ARGS=&amp;quot;-q -f -u0 -d10 -w -I&amp;quot;
-SUSPEND_ACTION=&amp;quot;stop&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Once you have that, reboot the rPI and you should be good to go.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;Setup IP Tables for NAT&lt;/h2&gt;
-
-&lt;p&gt;This is also pretty well straight forward, but for some reason I end up googling it each time. Here it is for reference:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# NAT
-iptables --table nat --append POSTROUTING --out-interface wlan0 -j MASQUERADE
-iptables --append FORWARD --in-interface eth0 -j ACCEPT
-iptables-save | sudo tee /etc/iptables.conf
-iptables-restore &amp;lt; /etc/iptables.conf
-sh -c &amp;quot;echo 1 &amp;gt; /proc/sys/net/ipv4/ip_forward&amp;quot;
-sed -i &amp;quot;s/exit 0/iptables-restore &amp;lt; \/etc\/\iptables.conf \nexit 0/g&amp;quot; /etc/rc.local
-sed -i &amp;quot;s/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g&amp;quot; /etc/sysctl.conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;toc_3&#34;&gt;Configure DHCP, PXE, TFTP, etc&lt;/h2&gt;
-
-&lt;p&gt;This one is a bit more involved, but is all done via the following bash commands:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;MY_IP=$(ifconfig eth0 | awk &#39;/inet addr/ {split ($2,A,&amp;quot;:&amp;quot;); print A[2]}&#39;)
-
-# Install the things
-sudo apt-get install -y dnsmasq nfs-kernel-server syslinux-common
-
-# Setup some shell folders
-sudo mkdir -p /tftpboot/images/ubuntu/14.04/amd64
-sudo cp -r /usr/lib/syslinux/* /tftpboot/
-sudo mkdir -p /tftpboot/pxelinux.cfg/Ubuntu
-sudo cp /usr/lib/syslinux/vesamenu.c32 /tftpboot/
-
-# Create a pxe.conf file
-sudo cat &amp;gt; /tftpboot/pxelinux.cfg/pxe.conf &amp;lt;&amp;lt;EOF
-MENU TITLE  PXE Server 
-NOESCAPE 1
-ALLOWOPTIONS 1
-PROMPT 0
-MENU WIDTH 80
-MENU ROWS 14
-MENU TABMSGROW 24
-MENU MARGIN 10
-MENU COLOR border               30;44      #ffffffff #00000000 std
-EOF
-
-# Create our PXE Menu
-sudo cat &amp;gt; /tftpboot/pxelinux.cfg/default &amp;lt;&amp;lt;EOF
-DEFAULT vesamenu.c32 
-TIMEOUT 600
-ONTIMEOUT BootLocal
-PROMPT 0
-MENU INCLUDE pxelinux.cfg/pxe.conf
-NOESCAPE 1
-LABEL BootLocal
-        localboot 0
-        TEXT HELP
-        Boot to local hard disk
-        ENDTEXT
-MENU BEGIN Ubuntu
-MENU TITLE Ubuntu 
-        LABEL Previous
-        MENU LABEL Previous Menu
-        TEXT HELP
-        Return to previous menu
-        ENDTEXT
-        MENU EXIT
-        MENU SEPARATOR
-        MENU INCLUDE Ubuntu/Ubuntu.menu
-MENU END
-EOF
-
-sudo cat &amp;gt; /tftpboot/pxelinux.cfg/Ubuntu/Ubuntu.menu &amp;lt;&amp;lt;EOF
-LABEL 2
-        MENU LABEL Ubuntu 14.04 (64-bit)
-        kernel tftp://$MY_IP/images/ubuntu/14.04/amd64/install/netboot/ubuntu-installer/amd64/linux
-        append auto=true priority=critical vga=788 initrd=tftp://$MY_IP/images/ubuntu/14.04/amd64/install/netboot/ubuntu-installer/amd64/initrd.gz locale=en_US.UTF-8 kbd-chooser/method=us netcfg/choose_interface=auto url=tftp://172.16.11.250/preseed.cfg
-        TEXT HELP
-        Boot the Ubuntu 14.04 64-bit DVD
-        ENDTEXT
-EOF
-
-# Configure dnsmasq for tftp &amp;amp; dhcp
-sudo cat &amp;gt;&amp;gt; /etc/dnsmasq.conf &amp;lt;&amp;lt;EOF
-server=$MY_IP@eth0
-interface=eth0
-no-dhcp-interface=wlan0
-dhcp-range=172.16.0.10,172.16.0.253,12h
-dhcp-boot=pxelinux.0
-pxe-service=x86PC,&amp;quot;Booting from Network...&amp;quot;,pxelinux
-enable-tftp
-tftp-root=/tftpboot
-dhcp-boot=pxelinux.0,servername,$MY_IP
-EOF
-sudo service dnsmasq restart
-
-# Get 14.04 and extract the needful
-wget -O ~/ubuntu-14.04-server-amd64.iso http://mirror.anl.gov/pub/ubuntu-iso/CDs/trusty/ubuntu-14.04.1-server-amd64.iso
-
-sudo mkdir /mnt/loop
-sudo mount -o loop -t iso9660 ~/ubuntu-14.04-server-amd64.iso /mnt/loop
-sudo cp -R /mnt/loop/* /tftpboot/images/ubuntu/14.04/amd64
-sudo cp -R /mnt/loop/.disk /tftpboot/images/ubuntu/14.04/amd64
-sudo umount /mnt/loop
-
-# Get a generic preseed
-wget -O /tftpboot/preseed.cfg https://help.ubuntu.com/lts/installation-guide/example-preseed.txt
-
-# Setup NFS mounts
-echo &amp;quot;
-/tftpboot/images/ubuntu/    *(ro,sync,no_subtree_check)&amp;quot; | sudo tee -a /etc/exports
-
-# Enable RPCBind, NFS, and restart them
-update-rc.d rpcbind enable &amp;amp;&amp;amp; update-rc.d nfs-common enable
-service rpcbind start
-service nfs-kernel-server restart
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The commands themselves are commented pretty well. Generically what they do is install dnsmasq for dhcp &amp;amp; tftp. From there we download and extract all the things from the ISO that we&amp;rsquo;ll need, configure some menus, download a basic preseed, and restart some services.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_4&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;In this post, we took a lowly Raspberry Pi and indentured it into some network servitude as a pxe / tftp server. We did this by installing and configuring dnsmasq for tftp and dhcp. Additionally we set up some fancy pxeboot menus and configured them to boot locally as a priority and to the network in times of need. Finally, we pulled down an Ubuntu 14.04 image and generic preseed file to use for automatic installs.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_5&#34;&gt;Resources&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://raspberrypi.stackexchange.com/questions/8851/setting-up-wifi-and-ethernet&#34;&gt;http://raspberrypi.stackexchange.com/questions/8851/setting-up-wifi-and-ethernet&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://it-joe.com/howtos/pxe.php&#34;&gt;http://it-joe.com/howtos/pxe.php&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://wernerstrydom.com/2014/05/25/automatically-installing-ubuntu-server-14-04-tftp/&#34;&gt;http://wernerstrydom.com/&lt;sup&gt;2014&lt;/sup&gt;&amp;frasl;&lt;sub&gt;05&lt;/sub&gt;/25/automatically-installing-ubuntu-server-14-04-tftp/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
