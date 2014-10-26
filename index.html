@@ -65,6 +65,62 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder'> Changing Jenkins Home Folder</a> </h2>
+      <div class="meta">Mon, Oct 27, 2014</div>
+    </header>
+
+    
+
+<p>Everything Jenkins does happens in the context of the jenkins user by default. While that sounds obvious, it has some interesting implications if you aren&rsquo;t careful.</p>
+
+<h2 id="toc_0">The Problem</h2>
+
+<p>In my homelab, I&rsquo;ve installed 14.04 onto a 16gb usb key. This is a hold over from the days when it was an ESXi lab, but, it works for the most part. However, for things like downloading vagrant boxes and the like, one needs to mount external storage. Enter the problem: Jenkins sets itself up in /var/lib/jenkins by default, which lives on my very limited usb stick.</p>
+
+<p>This in turn means anytime Jenkins tried to &lsquo;vagrant up&rsquo; a thing, it would fill my root partition trying to store all the temporary files vagrant used. Whoops.</p>
+
+<h2 id="toc_1">Changing the Jenkins Home Directory</h2>
+
+<p>There are a number of posts out there on how to do this. None of them, however, addressed the vagrant issue in particular. To do that, one has to hit it with a larger bat.</p>
+
+<h3 id="toc_2">First Change /etc/defaults</h3>
+
+<p>The first thing to do, is change how Jenkins thinks of itself. The most straight forward way I found was to change that in /etc/defaults/jenkins. This will be around line 23 or 25:</p>
+
+<pre><code># jenkins home location
+JENKINS_HOME=/new/location
+</code></pre>
+
+<h3 id="toc_3">Then Change /etc/passwd</h3>
+
+<p>This is the step that was needed to fix the problem of Jenkins running vagrant and vagrant subsequently filling /:</p>
+
+<p>Change:
+<code>jenkins:x:105:114:Jenkins,,,:/var/lib/jenkins:/bin/bash</code></p>
+
+<p>To this:
+<code>jenkins:x:105:114:Jenkins,,,:/new/location:/bin/bash</code></p>
+
+<h3 id="toc_4">Finally Restart Jenkins</h3>
+
+<p>Now to make sure all the things stick:</p>
+
+<p><code>sudo /etc/init.d/jenkins restart</code></p>
+
+<h2 id="toc_5">Summary</h2>
+
+<p>In this post we showed you how to change the Jenkins home directory, and why it&rsquo;s also important to change it in /etc/passwd.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab'> ZeroVM - A ZeroCloud Lab</a> </h2>
       <div class="meta">Thu, Oct 23, 2014</div>
     </header>
@@ -937,41 +993,6 @@ heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition'> OpenStack Cookbook 3rd Edition</a> </h2>
-      <div class="meta">Fri, Oct 10, 2014</div>
-    </header>
-
-    
-
-<p>Oh Oh Oh! The lesson in book writing is that it is both terrible and addictive. That is, right as we wrapped the second edition of the OpenStack Cookbook, I promised myself &ldquo;Never again!&rdquo;.</p>
-
-<p>Now, some number of months later, <a href="https://twitter.com/itarchitectkev">Kevin</a> and myself, we&rsquo;ve chatted a bit, and have decided to go down that road to update the book again. Indeed, we&rsquo;re also looking at bringing <a href="https://twitter.com/eglute">Egle</a> along for the ride this time.</p>
-
-<h2 id="toc_0">3rd Edition Highlights</h2>
-
-<p>The third edition will target either a late Juno or early Kilo release (Hooray Relevancy!). In addition to general updates, were adding or overhauling the following:</p>
-
-<ul>
-<li>OpenStack Datacenter Automation</li>
-<li>OpenStack Scaling</li>
-<li>Image Management &amp; Conversion</li>
-<li>More Operations Recipes</li>
-<li>HTTPS!</li>
-<li>OpenStack Heat</li>
-<li>Additional Neutron Services (LBaaS, VPNaaS)</li>
-<li>Using 3rd Party drivers</li>
-</ul>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
