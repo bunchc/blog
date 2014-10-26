@@ -65,6 +65,210 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes'> Using Packer to Make Vagrant Boxes</a> </h2>
+      <div class="meta">Tue, Oct 28, 2014</div>
+    </header>
+
+    
+
+<p>Part of working on the 3rd edition of the OpenStack Cookbook required, among other things, a new release of Ubuntu that came pre-loaded with the Juno OpenStack packages. Not a problem! Excepting that there were no ready made images on <a href="http://vagrantcloud.com">Vagrant Cloud</a>. Enter Packer.</p>
+
+<h2 id="toc_0">Packer?</h2>
+
+<p>What the deuce is packer? From the <a href="https://packer.io/">packer.io</a> site:</p>
+
+<blockquote>
+<p>Packer is a tool for creating identical machine images for multiple platforms from a single source configuration.</p>
+</blockquote>
+
+<p>Said another way, it takes the &lsquo;configuration is code&rsquo; and pushes it back to the golden images, to a degree. The idea is one can shrink the time to deploy if instead of starting with the most generic box and adding, you start somewhere in the middle, adding common things to a &lsquo;golden&rsquo; image, and then deploying on top of that.</p>
+
+<p>In the use-case for the OpenStack Cookbook? Well, we just needed a manila Ubuntu 14.10 box for Fusion and Virtualbox. As there are three of us on the project now, having a common starting ground is ideal.</p>
+
+<h2 id="toc_1">Our Packer Setup</h2>
+
+<p>I&rsquo;ll leave installing Packer as an exercise for the reader. The <a href="https://packer.io/docs">docs</a> are pretty good in the regard.</p>
+
+<p>For our build, we use the following packer.json:</p>
+
+<pre><code>{
+  &quot;builders&quot;: [
+    {&quot;type&quot;: &quot;virtualbox-iso&quot;,
+    &quot;guest_os_type&quot;: &quot;Ubuntu_64&quot;,
+    &quot;iso_url&quot;: &quot;http://mirror.anl.gov/pub/ubuntu-iso/CDs/utopic/ubuntu-14.10-server-amd64.iso&quot;,
+    &quot;iso_checksum&quot;: &quot;91bd1cfba65417bfa04567e4f64b5c55&quot;,
+    &quot;iso_checksum_type&quot;:&quot;md5&quot;,
+    &quot;http_directory&quot;: &quot;preseed&quot;,
+    &quot;ssh_username&quot;: &quot;vagrant&quot;,
+    &quot;ssh_password&quot;: &quot;vagrant&quot;,
+    &quot;boot_wait&quot;:&quot;5s&quot;,
+    &quot;output_directory&quot;: &quot;ubuntu64_basebox_virtualbox&quot;,
+    &quot;shutdown_command&quot;: &quot;echo 'shutdown -P now' &gt; shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'&quot;,
+    &quot;boot_command&quot;: [
+      &quot;&lt;esc&gt;&lt;esc&gt;&lt;enter&gt;&lt;wait&gt;&quot;,
+      &quot;/install/vmlinuz noapic &quot;,
+      &quot;ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg &quot;,
+      &quot;debian-installer=en_US auto locale=en_US kbd-chooser/method=us &quot;,
+      &quot;hostname={{ .Name }} &quot;,
+      &quot;fb=false debconf/frontend=noninteractive &quot;,
+      &quot;keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA &quot;,
+      &quot;keyboard-configuration/variant=USA console-setup/ask_detect=false &quot;,
+      &quot;initrd=/install/initrd.gz -- &quot;,
+      &quot;&lt;enter&gt;&quot;]
+    },
+    {&quot;type&quot;: &quot;vmware-iso&quot;,
+    &quot;guest_os_type&quot;: &quot;ubuntu-64&quot;,
+    &quot;iso_url&quot;: &quot;http://mirror.anl.gov/pub/ubuntu-iso/CDs/utopic/ubuntu-14.10-server-amd64.iso&quot;,
+    &quot;iso_checksum&quot;: &quot;91bd1cfba65417bfa04567e4f64b5c55&quot;,
+    &quot;iso_checksum_type&quot;:&quot;md5&quot;,
+    &quot;http_directory&quot;: &quot;preseed&quot;,
+    &quot;ssh_username&quot;: &quot;vagrant&quot;,
+    &quot;ssh_password&quot;: &quot;vagrant&quot;,
+    &quot;boot_wait&quot;:&quot;5s&quot;,
+    &quot;output_directory&quot;: &quot;ubuntu64_basebox_vmware&quot;,
+    &quot;shutdown_command&quot;: &quot;echo 'shutdown -P now' &gt; shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'&quot;,
+    &quot;boot_command&quot;: [
+      &quot;&lt;esc&gt;&lt;esc&gt;&lt;enter&gt;&lt;wait&gt;&quot;,
+      &quot;/install/vmlinuz noapic &quot;,
+      &quot;ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg &quot;,
+      &quot;debian-installer=en_US auto locale=en_US kbd-chooser/method=us &quot;,
+      &quot;hostname={{ .Name }} &quot;,
+      &quot;fb=false debconf/frontend=noninteractive &quot;,
+      &quot;keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA &quot;,
+      &quot;keyboard-configuration/variant=USA console-setup/ask_detect=false &quot;,
+      &quot;initrd=/install/initrd.gz -- &quot;,
+      &quot;&lt;enter&gt;&quot;]
+    }],
+  &quot;provisioners&quot;: [{
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;execute_command&quot;: &quot;echo 'vagrant' | sudo -S sh '{{ .Path }}'&quot;,
+    &quot;inline&quot;: [
+      &quot;apt-get update -y&quot;,
+      &quot;apt-get install -y linux-headers-$(uname -r) build-essential dkms&quot;,
+      &quot;apt-get clean&quot;,
+      &quot;mount -o loop VBoxGuestAdditions.iso /media/cdrom&quot;,
+      &quot;sh /media/cdrom/VBoxLinuxAdditions.run&quot;,
+      &quot;umount /media/cdrom&quot;,
+      &quot;mkdir /home/vagrant/.ssh&quot;,
+      &quot;mkdir /root/.ssh&quot;,
+      &quot;wget -qO- https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub &gt;&gt; ~/.ssh/authorized_keys&quot;,
+      &quot;echo 'vagrant ALL=NOPASSWD:ALL' &gt; /tmp/vagrant&quot;,
+      &quot;chmod 0440 /tmp/vagrant&quot;,
+      &quot;mv /tmp/vagrant /etc/sudoers.d/&quot;
+    ]}],
+  &quot;post-processors&quot;: [
+  {
+      &quot;type&quot;: &quot;vagrant&quot;,
+      &quot;override&quot;: {
+        &quot;virtualbox&quot;: {
+          &quot;output&quot;: &quot;utopic-x64-virtualbox.box&quot;
+        },
+        &quot;vmware&quot;: {
+          &quot;output&quot;: &quot;utopic-x64-vmware.box&quot;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+
+<p>This in turn calls a kickstart (yes kickstart on Ubuntu) file stored in the preseed folder. This looks like:</p>
+
+<pre><code>install
+text
+
+cdrom
+
+lang en_US.UTF-8
+keyboard us
+
+network --device eth0 --bootproto dhcp
+
+timezone --utc America/Chicago
+
+zerombr
+clearpart --all --initlabel
+bootloader --location=mbr
+
+part /boot --fstype=ext3 --size=256 --asprimary
+part pv.01 --size=1024 --grow --asprimary
+volgroup vg_root pv.01
+logvol swap --fstype swap --name=lv_swap --vgname=vg_root --size=1024
+logvol / --fstype=ext4 --name=lv_root --vgname=vg_root --size=1024 --grow
+
+auth --enableshadow --enablemd5
+
+# rootpw is vagrant
+rootpw --iscrypted $1$dUDXSoA9$/bEOTiK9rmsVgccsYir8W0
+user --disabled
+
+firewall --disabled
+
+skipx
+
+reboot
+
+%packages
+ubuntu-minimal
+openssh-server
+openssh-client
+wget
+curl
+git
+man
+vim
+ntp
+
+%post
+apt-get update
+
+apt-get upgrade -y linux-generic
+
+update-grub
+
+useradd -m -s /bin/bash vagrant
+echo vagrant:vagrant | chpasswd
+
+mkdir -m 0700 -p /home/vagrant/.ssh
+
+curl https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub &gt;&gt; /home/vagrant/.ssh/authorized_keys
+
+chmod 600 /home/vagrant/.ssh/authorized_keys
+chown -R vagrant:vagrant /home/vagrant/.ssh
+
+echo &quot;vagrant ALL=(ALL) NOPASSWD: ALL&quot; &gt;&gt; /etc/sudoers
+
+sed -i 's/^PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+apt-get clean
+
+rm -rf /tmp/*
+
+rm -f /var/log/wtmp /var/log/btmp
+
+history -c
+</code></pre>
+
+<p>Once both files are in place and packer is installed, building the images is as simple as:</p>
+
+<p><code>packer build packer.json</code></p>
+
+<p>This will take a <em>long</em> time, but it does eventually get there, and will produce two .box files in the output folders you specified in the packer.json. From there, you can upload them somewhere and have vagrantcloud make them available, as we have under <code>bunchc/utopic-x64</code>.</p>
+
+<h2 id="toc_2">Summary</h2>
+
+<p>In this post we looked at how to use packer.io to build Vagrant boxes for both VMware Workstation / Fusion and Virtualbox.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder'> Changing Jenkins Home Folder</a> </h2>
       <div class="meta">Mon, Oct 27, 2014</div>
     </header>
@@ -873,126 +1077,6 @@ ERROR: ZeroVM return code is 8
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud'> Running Rackspace Private Cloud on the Rackspace Public Cloud</a> </h2>
-      <div class="meta">Mon, Oct 13, 2014</div>
-    </header>
-
-    
-
-<p>Private Cloud on the Public Cloud? As odd as that sounds, or as inception as it makes you feel (Clouds in clouds?!), I&rsquo;ve found that since downsizing my homelab quite a bit, I&rsquo;ve needed to find other ways to work on and try out various things that exceed the capacity of my laptop. RPC 9 is one of them.</p>
-
-<p><strong>Disclaimer:</strong> I work for Rackspace, and while this post is largely focused around two of our products, I put it out here in the hopes that a) someone will find it useful, and b) it&rsquo;ll help me later.</p>
-
-<h2 id="toc_0">Rackspace Private Cloud (RPC)</h2>
-
-<p>Our docs will do it a lot more justice in terms of description than I can, so I encourage you to go <a href="http://docs.rackspace.com/rpc/api/v9/bk-rpc-installation/content/index.html">here</a> and take a few minutes to get familiar.</p>
-
-<p>A few things I want to point out are related to the architecture of RPC9, specifically:</p>
-
-<p><img src="http://docs.rackspace.com/rpc/api/v9/bk-rpc-installation/content/figures/1/a/a/a/rpc-common/figures/rpc9-environment-overview.png" alt="RPC Infrastructure" />
-</p>
-
-<p>Looking over the diagram, there are a <em>lot</em> of hosts involved now. 3x Infrastructure nodes, a logging host, n-Compute hosts, deployment hosts, and finally a set of load balancers. This thing is big. Bigger than my laptop that&rsquo;s for sure.</p>
-
-<h2 id="toc_1">Running Cloud on Cloud</h2>
-
-<p>Thankfully, however, while it&rsquo;s big, the folks who wrote this provided some OpenStack Heat templates that make setting it up externally much easier. Those can be found <a href="https://github.com/rcbops/ansible-lxc-rpc/tree/master/scripts">here.</a></p>
-
-<h3 id="toc_2">Getting Started</h3>
-
-<p>To build the cloud on the cloud you&rsquo;ll need the following info &amp; apps installed somewhere you have access to:</p>
-
-<ul>
-<li>An &ldquo;heatrc&rdquo; or similar file containing
-
-<ul>
-<li>Rackspace Username</li>
-<li>Rackspace API Key</li>
-<li>Endpoint(s) to deploy to</li>
-</ul></li>
-<li>Python-HeatClient</li>
-<li>An SSH Key</li>
-</ul>
-
-<p>To create the &ldquo;heatrc&rdquo; file, start with the below template and then edit as needed:</p>
-
-<pre><code>export OS_USERNAME=rackspace_cloud_username
-export OS_PASSWORD=rackspace_cloud_password
-export OS_TENANT_ID=rackspace_cloud_account_number
-export OS_AUTH_URL=https://identity.api.rackspacecloud.com/v2.0/
-export HEAT_URL=https://ord.orchestration.api.rackspacecloud.com/v1/${OS_TENANT_ID}
-</code></pre>
-
-<p><strong>Note:</strong> OS_TENANT_ID is your cloud account number. You can get to this by logging into mycloud.rackspace.com and clicking your account name in the upper right.</p>
-
-<p>Once you&rsquo;ve created the file and replaced said values, install the Heat client: <code>pip install python-heatclient</code></p>
-
-<h3 id="toc_3">Installing RPC 9 on the Rackspace Public Cloud</h3>
-
-<p>To kick off the installation, follow these commands:</p>
-
-<pre><code>curl https://raw.githubusercontent.com/rcbops/ansible-lxc-rpc/master/scripts/rpc9.0.0-aio-rax-heat-template.yml &gt; rpc9-rax-heat.yaml
-
-source ./heatrc
-
-heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
-  -P image_name=&quot;Ubuntu 14.04 LTS (Trusty Tahr)&quot; \
-  -P ssh_key_name=&quot;lol_ssh_key&quot; \
-  -P flavor_name=&quot;8 GB Performance&quot;
-
-+--------------------------------------+------------+--------------------+----------------------+
-| id                                   | stack_name | stack_status       | creation_time        |
-+--------------------------------------+------------+--------------------+----------------------+
-| c2b6c1b0-0098-441d-9999-c778b108a181 | RPC9-Stack | CREATE_IN_PROGRESS | 2014-10-13T15:13:58Z |
-+--------------------------------------+------------+--------------------+----------------------+
-
-</code></pre>
-
-<p>This next part takes quite a bit of time to complete and is why we used a performance instance, to make the provision happen just a bit faster. You can keep an eye on it&rsquo;s build status with <code>watch -n 15 heat stack-list</code></p>
-
-<p>Once it completes, you will need to find out what IP address it has been assigned, to do that, use these commands:</p>
-
-<p>List the stacks:</p>
-
-<pre><code>$ heat stack-list
-+--------------------------------------+------------+-----------------+----------------------+
-| id                                   | stack_name | stack_status    | creation_time        |
-+--------------------------------------+------------+-----------------+----------------------+
-| c2b6c1b0-0098-441d-9999-c778b108a181 | RPC9-Stack | CREATE_COMPLETE | 2014-10-13T15:13:58Z |
-+--------------------------------------+------------+-----------------+----------------------+
-</code></pre>
-
-<p>List the available outputs:</p>
-
-<pre><code>$ heat output-list RPC9-Stack
-+------------------+-------------------------------------------------------+
-| output_key       | description                                           |
-+------------------+-------------------------------------------------------+
-| RPCAIO_password  | The password for all the things.                      |
-| RPCAIO_public_ip | The public IP address of the newly configured Server. |
-+------------------+-------------------------------------------------------+
-</code></pre>
-
-<p>Finally show the IP:</p>
-
-<pre><code>$ heat output-show RPC9-Stack RPCAIO_public_ip
-&quot;127.0.0.100&quot;
-</code></pre>
-
-<h2 id="toc_4">Summary</h2>
-
-<p>In this post we showed you how to nest the Rackspace Private Cloud installation on the Rackspace Public Cloud. A useful trick for testing it out without having to use <em>ALL</em> your local resources up.</p>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
