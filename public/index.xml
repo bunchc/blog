@@ -7,7 +7,57 @@
     
     
     
-    <updated>Thu, 23 Oct 2014 00:00:00 UTC</updated>
+    <updated>Mon, 27 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Changing Jenkins Home Folder</title>
+      <link>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder</link>
+      <pubDate>Mon, 27 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder</guid>
+      <description>
+
+&lt;p&gt;Everything Jenkins does happens in the context of the jenkins user by default. While that sounds obvious, it has some interesting implications if you aren&amp;rsquo;t careful.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;The Problem&lt;/h2&gt;
+
+&lt;p&gt;In my homelab, I&amp;rsquo;ve installed 14.04 onto a 16gb usb key. This is a hold over from the days when it was an ESXi lab, but, it works for the most part. However, for things like downloading vagrant boxes and the like, one needs to mount external storage. Enter the problem: Jenkins sets itself up in /var/lib/jenkins by default, which lives on my very limited usb stick.&lt;/p&gt;
+
+&lt;p&gt;This in turn means anytime Jenkins tried to &amp;lsquo;vagrant up&amp;rsquo; a thing, it would fill my root partition trying to store all the temporary files vagrant used. Whoops.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Changing the Jenkins Home Directory&lt;/h2&gt;
+
+&lt;p&gt;There are a number of posts out there on how to do this. None of them, however, addressed the vagrant issue in particular. To do that, one has to hit it with a larger bat.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;First Change /etc/defaults&lt;/h3&gt;
+
+&lt;p&gt;The first thing to do, is change how Jenkins thinks of itself. The most straight forward way I found was to change that in /etc/defaults/jenkins. This will be around line 23 or 25:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# jenkins home location
+JENKINS_HOME=/new/location
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;Then Change /etc/passwd&lt;/h3&gt;
+
+&lt;p&gt;This is the step that was needed to fix the problem of Jenkins running vagrant and vagrant subsequently filling /:&lt;/p&gt;
+
+&lt;p&gt;Change:
+&lt;code&gt;jenkins:x:105:114:Jenkins,,,:/var/lib/jenkins:/bin/bash&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;To this:
+&lt;code&gt;jenkins:x:105:114:Jenkins,,,:/new/location:/bin/bash&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_4&#34;&gt;Finally Restart Jenkins&lt;/h3&gt;
+
+&lt;p&gt;Now to make sure all the things stick:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;sudo /etc/init.d/jenkins restart&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_5&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post we showed you how to change the Jenkins home directory, and why it&amp;rsquo;s also important to change it in /etc/passwd.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>ZeroVM - A ZeroCloud Lab</title>
@@ -1127,58 +1177,6 @@ service nfs-kernel-server restart
 &lt;li&gt;&lt;a href=&#34;http://it-joe.com/howtos/pxe.php&#34;&gt;http://it-joe.com/howtos/pxe.php&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://wernerstrydom.com/2014/05/25/automatically-installing-ubuntu-server-14-04-tftp/&#34;&gt;http://wernerstrydom.com/&lt;sup&gt;2014&lt;/sup&gt;&amp;frasl;&lt;sub&gt;05&lt;/sub&gt;/25/automatically-installing-ubuntu-server-14-04-tftp/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vagrant and Hanlon (The other Razor Fork)</title>
-      <link>http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork</link>
-      <pubDate>Fri, 15 Aug 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork</guid>
-      <description>
-
-&lt;p&gt;You may or may not know that Razor, the bare-metal lifecycle tool, has forked from its original bits. This is a good thing, but it&amp;rsquo;s still really early days on the new forks, so we&amp;rsquo;ll see ultimately what plays out.&lt;/p&gt;
-
-&lt;p&gt;The Puppet-Labs &amp;ldquo;Razor-Server&amp;rdquo; fork can be found &lt;a href=&#34;https://github.com/puppetlabs/razor-server&#34;&gt;here&lt;/a&gt;. If you want to work with it, or test it locally, you can use the bits written by Egle &lt;a href=&#34;http://anystacker.com/2014/01/vagrant-up-razor-server/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Hanlon, the CSC fork &lt;a href=&#34;https://github.com/csc/Hanlon&#34;&gt;here&lt;/a&gt;, is being perused by Tom McSweeney who helped get the original razor off the ground.&lt;/p&gt;
-
-&lt;p&gt;To help me work with it and contribute some, I&amp;rsquo;ve built a small Vagrant environment (largely basd on the Vagrant environment for &amp;lsquo;the other&amp;rsquo; razor.).&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Vagrant Up Hanlon&lt;/h2&gt;
-
-&lt;p&gt;To get started, clone the repo and vagrant up, like so:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/bunchc/vagrant-hanlon.git
-cd vagrant-hanlon
-vagrant up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;What this does during the vagrant up process is:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Install dnsmasq&lt;/li&gt;
-&lt;li&gt;Configure IPtables for NAT&lt;/li&gt;
-&lt;li&gt;Installs Mongodb&lt;/li&gt;
-&lt;li&gt;Installs Java&lt;/li&gt;
-&lt;li&gt;Installs RBENV&lt;/li&gt;
-&lt;li&gt;Installs both jruby and ruby 1.9.3&lt;/li&gt;
-&lt;li&gt;Downloads Hanlon&lt;/li&gt;
-&lt;li&gt;Starts Puma (to run Hanlon)&lt;/li&gt;
-&lt;li&gt;Pulls down a few images to add to Hanlon&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Once you have Hanlon running, command wise it works very similar to the old Razor. That is:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hanlon node
-hanlon policy
-hanlon image
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;In this post, you cloned and started to work with Hanlon, one of the derivatives of the Razor bare-metal provisioning framework.&lt;/p&gt;
 </description>
     </item>
     
