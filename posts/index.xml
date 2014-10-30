@@ -7,7 +7,28 @@
     
     
     
-    <updated>Tue, 28 Oct 2014 00:00:00 UTC</updated>
+    <updated>Wed, 29 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Paris Summit Preparation</title>
+      <link>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation</link>
+      <pubDate>Wed, 29 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation</guid>
+      <description>&lt;p&gt;As you might have guessed from the large number of ZeroVM posts recently, that something was up. If you are going to be at the OpenStack Summit in Paris, there will be a ZeroVM workshop given by my coworkers &lt;a href=&#34;https://twitter.com/eglute&#34;&gt;Egle&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/larsbutler&#34;&gt;Lars&lt;/a&gt;, and I.&lt;/p&gt;
+
+&lt;p&gt;This session will be a 90-minute, into the deep end, building applications to work with ZeroVM.&lt;/p&gt;
+
+&lt;p&gt;The materials, if you want to play along at home, can be found here:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://805307d411430e0fa5b9-4608d97094d356bea3bc29cde85dcf5b.r47.cf1.rackcdn.com/ZeroCloud_Demo-02.ova&#34;&gt;The ZeroCloud Appliance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.zerovm.org/zerocloud/snakebin/snakebin.html&#34;&gt;The Online copy of the workshop&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Still missing are the slides and video which I will update the post with after the show. See you in Paris.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Using Packer to Make Vagrant Boxes</title>
@@ -1152,42 +1173,6 @@ heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
 &lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Geek-Dads-Guide-Weekend-Fun-ebook/dp/B004RKXO16/ref=sr_1_2?s=digital-text&amp;amp;ie=UTF8&amp;amp;qid=1410547255&amp;amp;sr=1-2&amp;amp;keywords=geek+dad&#34;&gt;Geek Dad&amp;rsquo;s Weekend Fun&lt;/a&gt;, Doing a project every weekend or so.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Echopraxia-Peter-Watts-ebook/dp/B00IHCBDJ0/ref=tmm_kin_swatch_0?_encoding=UTF8&amp;amp;sr=&amp;amp;qid=&#34;&gt;Echopraxia&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>MariaDB With Galera on Vagrant</title>
-      <link>http://blog.codybunch.com/posts/2014-09-10-MariaDB-With-Galera-on-Vagrant</link>
-      <pubDate>Wed, 10 Sep 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-09-10-MariaDB-With-Galera-on-Vagrant</guid>
-      <description>
-
-&lt;p&gt;Found myself in some training this last week using MariaDB, and being that I like to get a bit more hands on than most, using the class provided lab environment wasn&amp;rsquo;t going to cut it. This meant wrapping some scripting into a Vagrant environment so I could reliably reporduce the three node lab.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Getting Started&lt;/h2&gt;
-
-&lt;p&gt;You&amp;rsquo;ll need Vagrant and Git. It&amp;rsquo;s also preferred that you have vagrant-cachier installed. You should have vagrant-cachier anyways, but alas, that is not for right now. Once you have these out of the way, do the following:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;git clone https://github.com/bunchc/mariadb-galera-vagrant.git&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;cd mariadb-galera-vagrant&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;vagrant up&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;Validating the Cluster&lt;/h2&gt;
-
-&lt;p&gt;After a few minutes, you should be able to log into any of the nodes. Specifically, node-01 will be used to &amp;lsquo;bootstrap&amp;rsquo; the cluster, the other two nodes will join from there.&lt;/p&gt;
-
-&lt;p&gt;To validate the cluster:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vagrant ssh mariadb-02
-sudo su -
-mysql -uroot
-SHOW GLOBAL STATUS LIKE &#39;wsrep%&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You should be able to do the above from any of the nodes in the cluster.&lt;/p&gt;
 </description>
     </item>
     
