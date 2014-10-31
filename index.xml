@@ -3,18 +3,42 @@
   <channel>
       <title>Recent Content on blog.codybunch.com - The random msuings of an IT guy </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://blog.codybunch.com/index.xml</link>
+    <link>http://blog.codybunch.com/index.xml/</link>
     
     
     
-    <updated>Wed, 29 Oct 2014 00:00:00 UTC</updated>
+    <updated>Fri, 31 Oct 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>OpenStack Book Discounts During Summit</title>
+      <link>http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit/</link>
+      <pubDate>Fri, 31 Oct 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit/</guid>
+      <description>
+
+&lt;p&gt;Starting now and running the week of the summit, the two best selling OpenStack books will be on super sale:&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;OpenStack Cookbook&lt;/h2&gt;
+
+&lt;p&gt;Book : nieX72Mn7U&lt;/p&gt;
+
+&lt;p&gt;eBook: k1QxrwyMvD&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Learning OpenStack Networking (Neutron)&lt;/h2&gt;
+
+&lt;p&gt;Book : luyLRpSQ&lt;/p&gt;
+
+&lt;p&gt;eBook: IXQ1swn2&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Paris Summit Preparation</title>
-      <link>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation</link>
+      <link>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation/</link>
       <pubDate>Wed, 29 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation/</guid>
       <description>&lt;p&gt;As you might have guessed from the large number of ZeroVM posts recently, that something was up. If you are going to be at the OpenStack Summit in Paris, there will be a ZeroVM workshop given by my coworkers &lt;a href=&#34;https://twitter.com/eglute&#34;&gt;Egle&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/larsbutler&#34;&gt;Lars&lt;/a&gt;, and I.&lt;/p&gt;
 
 &lt;p&gt;This session will be a 90-minute, into the deep end, building applications to work with ZeroVM.&lt;/p&gt;
@@ -32,10 +56,10 @@
     
     <item>
       <title>Using Packer to Make Vagrant Boxes</title>
-      <link>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes</link>
+      <link>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes/</link>
       <pubDate>Tue, 28 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes/</guid>
       <description>
 
 &lt;p&gt;Part of working on the 3rd edition of the OpenStack Cookbook required, among other things, a new release of Ubuntu that came pre-loaded with the Juno OpenStack packages. Not a problem! Excepting that there were no ready made images on &lt;a href=&#34;http://vagrantcloud.com&#34;&gt;Vagrant Cloud&lt;/a&gt;. Enter Packer.&lt;/p&gt;
@@ -230,10 +254,10 @@ history -c
     
     <item>
       <title>Changing Jenkins Home Folder</title>
-      <link>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder</link>
+      <link>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder/</link>
       <pubDate>Mon, 27 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder/</guid>
       <description>
 
 &lt;p&gt;Everything Jenkins does happens in the context of the jenkins user by default. While that sounds obvious, it has some interesting implications if you aren&amp;rsquo;t careful.&lt;/p&gt;
@@ -280,10 +304,10 @@ JENKINS_HOME=/new/location
     
     <item>
       <title>ZeroVM - A ZeroCloud Lab</title>
-      <link>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab</link>
+      <link>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab/</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab/</guid>
       <description>
 
 &lt;p&gt;At this point we&amp;rsquo;re pretty far down the ZeroVM rabbit hole. We&amp;rsquo;ve covered quite a bit of ground to get to this stage as well. Specific to this post, you will want to know more about ZeroCloud. You can do that &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-13-ZeroVM---Getting-Started-with-ZeroCloud&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -364,10 +388,10 @@ EOF
     
     <item>
       <title>ZeroVM - Getting Started with ZeroCloud</title>
-      <link>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</link>
+      <link>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud/</link>
       <pubDate>Wed, 22 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud/</guid>
       <description>
 
 &lt;p&gt;If you are getting up to speed on ZeroVM as I am, you will find the following useful:&lt;/p&gt;
@@ -434,10 +458,10 @@ EOF
     
     <item>
       <title>ZeroVM - IO Operations in ZeroVM</title>
-      <link>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels</link>
+      <link>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/</link>
       <pubDate>Tue, 21 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/</guid>
       <description>
 
 &lt;p&gt;If you are just joining these posts, you might want to take a few minutes and review these other posts on ZeroVM:&lt;/p&gt;
@@ -559,10 +583,10 @@ Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,
     
     <item>
       <title>ZeroVM Link Dump</title>
-      <link>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump</link>
+      <link>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump/</link>
       <pubDate>Mon, 20 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump/</guid>
       <description>
 
 &lt;p&gt;Instead of curating my own links this time, my friend and colleague &lt;a href=&#34;http://cczona.com&#34;&gt;Carina C. Zona, ZeroVM&amp;rsquo;s community manager&lt;/a&gt; has gathered these as they relate to ZeroVM:&lt;/p&gt;
@@ -654,10 +678,10 @@ Camuel Gilydov and Constantine Peresypkin at OpenStack Summit [2013-04]
     
     <item>
       <title>ZeroVM - Getting Started, Again</title>
-      <link>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again</link>
+      <link>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/</link>
       <pubDate>Fri, 17 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/</guid>
       <description>
 
 &lt;p&gt;Ok, so now that we&amp;rsquo;ve covered a LOT of ZeroVM background &amp;amp; isolation details, let&amp;rsquo;s actually start to get our hands dirty.&lt;/p&gt;
@@ -710,10 +734,10 @@ zvsh --zvm-image python.tar python @hello.py
     
     <item>
       <title>ZeroVM - Isolation</title>
-      <link>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO</link>
+      <link>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO/</link>
       <pubDate>Thu, 16 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO/</guid>
       <description>
 
 &lt;p&gt;Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/&#34;&gt;here&lt;/a&gt;, or the ZeroVM docs &lt;a href=&#34;http://docs.zerovm.org&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -822,10 +846,10 @@ ERROR: ZeroVM return code is 8
     
     <item>
       <title>ZeroVM - Some Background</title>
-      <link>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background</link>
+      <link>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/</link>
       <pubDate>Wed, 15 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/</guid>
       <description>
 
 &lt;p&gt;In a little over three weeks, at the &lt;a href=&#34;https://www.openstack.org/summit/openstack-paris-summit-2014/&#34;&gt;Paris Summit&lt;/a&gt;, I&amp;rsquo;ll be helping give a 90 minute workshop on &lt;a href=&#34;http://zerovm.org/&#34;&gt;ZeroVM&lt;/a&gt;. 90 minutes is not actually a lot of time to get a good grasp on what ZeroVM is, how it operates, and most importantly, &lt;em&gt;why&lt;/em&gt; it is important.&lt;/p&gt;
@@ -921,10 +945,10 @@ ERROR: ZeroVM return code is 8
     
     <item>
       <title>Instance Shelving</title>
-      <link>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving</link>
+      <link>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving/</link>
       <pubDate>Tue, 14 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving/</guid>
       <description>
 
 &lt;p&gt;Shelving? No no no, not that kind of shelving. Similar however. Image Shelving in Nova allows you to power off instances without experiencing the resource penalty in keeping them around.&lt;/p&gt;
@@ -992,10 +1016,10 @@ ERROR: ZeroVM return code is 8
     
     <item>
       <title>Running Rackspace Private Cloud on the Rackspace Public Cloud</title>
-      <link>http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud</link>
+      <link>http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud/</link>
       <pubDate>Mon, 13 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud/</guid>
       <description>
 
 &lt;p&gt;Private Cloud on the Public Cloud? As odd as that sounds, or as inception as it makes you feel (Clouds in clouds?!), I&amp;rsquo;ve found that since downsizing my homelab quite a bit, I&amp;rsquo;ve needed to find other ways to work on and try out various things that exceed the capacity of my laptop. RPC 9 is one of them.&lt;/p&gt;
@@ -1106,10 +1130,10 @@ heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
     
     <item>
       <title>OpenStack Cookbook 3rd Edition</title>
-      <link>http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition</link>
+      <link>http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition/</link>
       <pubDate>Fri, 10 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition/</guid>
       <description>
 
 &lt;p&gt;Oh Oh Oh! The lesson in book writing is that it is both terrible and addictive. That is, right as we wrapped the second edition of the OpenStack Cookbook, I promised myself &amp;ldquo;Never again!&amp;rdquo;.&lt;/p&gt;
@@ -1135,44 +1159,13 @@ heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
     
     <item>
       <title>30 Posts in 30 Days</title>
-      <link>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days</link>
+      <link>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days/</link>
       <pubDate>Thu, 09 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days/</guid>
       <description>&lt;p&gt;I found this morning I was in a bit of a blogging slump. That is, I&amp;rsquo;d not posted anything in quite a while, even though I have plenty of exciting things going on at the moment. So, with that said, happening across &lt;a href=&#34;http://etherealmind.com/challenge-30-blogs-30-days/&#34;&gt;this post&lt;/a&gt; by Greg Ferro (&lt;a href=&#34;http://twitter.com/@etherealmind&#34;&gt;@etherealmind&lt;/a&gt;), I thought I&amp;rsquo;d jump into the fray.&lt;/p&gt;
 
 &lt;p&gt;I encourage you to do the same.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Currently Reading - Sept 2014</title>
-      <link>http://blog.codybunch.com/posts/2014-09-12-Currently-Reading---Sept-2014</link>
-      <pubDate>Fri, 12 Sep 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-09-12-Currently-Reading---Sept-2014</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve found overtime my reading habbits have changed from mostly tech books to a fair mix of things, with some things that suprised even me&amp;hellip; business books. o.O? Here&amp;rsquo;s what&amp;rsquo;s currently on my list and in progress, first the boring ones:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Curve-Freeloaders-Superfans-Future-Business-ebook/dp/B00C5R7B6W/ref=sr_1_1_bnp_1_kin?ie=UTF8&amp;amp;qid=1410211612&amp;amp;sr=8-1&amp;amp;keywords=the+curve+how+smart+companies+find+high+value&#34;&gt;The Curve: How Smart Companies Find High-Value Customers&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Thinking-Fast-Slow-Daniel-Kahneman-ebook/dp/B00555X8OA/ref=sr_1_1_bnp_1_kin?ie=UTF8&amp;amp;qid=1410211622&amp;amp;sr=8-1&amp;amp;keywords=thinking+fast+and+slow&#34;&gt;Thinking, Fast and Slow&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Vagrant-Up-Running-Mitchell-Hashimoto-ebook/dp/B00D3VH4IO&#34;&gt;Vagrant: Up and Running&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Art-Learning-Journey-Pursuit-Excellence-ebook/dp/B000QCQ970/ref=sr_1_1?s=digital-text&amp;amp;ie=UTF8&amp;amp;qid=1410546893&amp;amp;sr=1-1&amp;amp;keywords=the+art+of+learning&#34;&gt;The Art of Learning&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/SYSTEMANTICS-SYSTEMS-BIBLE-John-Gall-ebook/dp/B00AK1BIDM/ref=sr_1_1?s=digital-text&amp;amp;ie=UTF8&amp;amp;qid=1410546946&amp;amp;sr=1-1&amp;amp;keywords=systemantics&#34;&gt;Systemantics. The Systems Bible&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Essential-Drucker-Collins-Business-Essentials-ebook/dp/B000FC11LK/ref=sr_1_1?s=digital-text&amp;amp;ie=UTF8&amp;amp;qid=1410546958&amp;amp;sr=1-1&amp;amp;keywords=essential+drucker&#34;&gt;The Essential Drucker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Pragmatism-Other-Writings-Penguin-Classics/dp/0140437355/ref=sr_1_1?ie=UTF8&amp;amp;qid=undefined&amp;amp;sr=8-1&amp;amp;keywords=pragmatism+and+other+essays&#34;&gt;Pragmatism and Other Writings&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://markburgess.org/BookOfPromises.pdf&#34;&gt;Book of Promises&lt;/a&gt; Promise Theory!&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://arxiv.org/pdf/0810.3294v5.pdf&#34;&gt;A static Theory of Promises&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Then on the more fun side:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Brightness-Reef-Uplift-Trilogy-Book/dp/0553573306/ref=la_B000APAXV6_1_7?s=books&amp;amp;ie=UTF8&amp;amp;qid=1410547103&amp;amp;sr=1-7&#34;&gt;Brightness Reef&lt;/a&gt; and the rest of said series.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Gardens-Moon-Book-Malazan-Fallen-ebook/dp/B002KYHZLQ/ref=tmm_kin_swatch_0?_encoding=UTF8&amp;amp;sr=1-3-fkmr0&amp;amp;qid=1410547192&#34;&gt;Gardens of the Moon: Book 1 of The Malazan Book of the Fallen&lt;/a&gt; and the rest of that series.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Geek-Dads-Guide-Weekend-Fun-ebook/dp/B004RKXO16/ref=sr_1_2?s=digital-text&amp;amp;ie=UTF8&amp;amp;qid=1410547255&amp;amp;sr=1-2&amp;amp;keywords=geek+dad&#34;&gt;Geek Dad&amp;rsquo;s Weekend Fun&lt;/a&gt;, Doing a project every weekend or so.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Echopraxia-Peter-Watts-ebook/dp/B00IHCBDJ0/ref=tmm_kin_swatch_0?_encoding=UTF8&amp;amp;sr=&amp;amp;qid=&#34;&gt;Echopraxia&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

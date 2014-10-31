@@ -3,112 +3,117 @@
   
   <url>
     <loc>http://blog.codybunch.com/</loc>
-    <lastmod>2014-10-29T00:00:00+00:00</lastmod>
+    <lastmod>2014-10-31T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit/</loc>
+    <lastmod>2014-10-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation/</loc>
     <lastmod>2014-10-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes/</loc>
     <lastmod>2014-10-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder/</loc>
     <lastmod>2014-10-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab/</loc>
     <lastmod>2014-10-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud/</loc>
     <lastmod>2014-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/</loc>
     <lastmod>2014-10-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump/</loc>
     <lastmod>2014-10-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/</loc>
     <lastmod>2014-10-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO/</loc>
     <lastmod>2014-10-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/</loc>
     <lastmod>2014-10-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving/</loc>
     <lastmod>2014-10-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-13-Running-Rackspace-Private-Cloud-on-the-Rackspace-Public-Cloud/</loc>
     <lastmod>2014-10-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-10-OpenStack-Cookbook-3rd-Edition/</loc>
     <lastmod>2014-10-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days</loc>
+    <loc>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days/</loc>
     <lastmod>2014-10-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-09-12-Currently-Reading---Sept-2014</loc>
+    <loc>http://blog.codybunch.com/posts/2014-09-12-Currently-Reading---Sept-2014/</loc>
     <lastmod>2014-09-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-09-10-MariaDB-With-Galera-on-Vagrant</loc>
+    <loc>http://blog.codybunch.com/posts/2014-09-10-MariaDB-With-Galera-on-Vagrant/</loc>
     <lastmod>2014-09-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-08-19-Raspberry-Pi-as-PXE-Server</loc>
+    <loc>http://blog.codybunch.com/posts/2014-08-19-Raspberry-Pi-as-PXE-Server/</loc>
     <lastmod>2014-08-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork</loc>
+    <loc>http://blog.codybunch.com/posts/2014-08-15-Vagrant-and-Hanlon-The-other-Razor-Fork/</loc>
     <lastmod>2014-08-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow</loc>
+    <loc>http://blog.codybunch.com/posts/2014-08-14-Updated-Blog--Markdown-workflow/</loc>
     <lastmod>2014-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells</loc>
+    <loc>http://blog.codybunch.com/posts/2014-08-14-Multi-Node-Devstack-with-Neutron-and-Cells/</loc>
     <lastmod>2014-08-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition</loc>
+    <loc>http://blog.codybunch.com/posts/2014-08-13-Linkdump-Bare-Metal-Edition/</loc>
     <lastmod>0001-01-01T00:00:00+00:00</lastmod>
   </url>
   
