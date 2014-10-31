@@ -65,6 +65,33 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation'> Paris Summit Preparation</a> </h2>
+      <div class="meta">Wed, Oct 29, 2014</div>
+    </header>
+
+    <p>As you might have guessed from the large number of ZeroVM posts recently, that something was up. If you are going to be at the OpenStack Summit in Paris, there will be a ZeroVM workshop given by my coworkers <a href="https://twitter.com/eglute">Egle</a>, <a href="https://twitter.com/larsbutler">Lars</a>, and I.</p>
+
+<p>This session will be a 90-minute, into the deep end, building applications to work with ZeroVM.</p>
+
+<p>The materials, if you want to play along at home, can be found here:</p>
+
+<ul>
+<li><a href="http://805307d411430e0fa5b9-4608d97094d356bea3bc29cde85dcf5b.r47.cf1.rackcdn.com/ZeroCloud_Demo-02.ova">The ZeroCloud Appliance</a></li>
+<li><a href="http://docs.zerovm.org/zerocloud/snakebin/snakebin.html">The Online copy of the workshop</a></li>
+</ul>
+
+<p>Still missing are the slides and video which I will update the post with after the show. See you in Paris.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes'> Using Packer to Make Vagrant Boxes</a> </h2>
       <div class="meta">Tue, Oct 28, 2014</div>
     </header>
@@ -1000,83 +1027,6 @@ ERROR: ZeroVM return code is 8
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving'> Instance Shelving</a> </h2>
-      <div class="meta">Tue, Oct 14, 2014</div>
-    </header>
-
-    
-
-<p>Shelving? No no no, not that kind of shelving. Similar however. Image Shelving in Nova allows you to power off instances without experiencing the resource penalty in keeping them around.</p>
-
-<h2 id="toc_0">Instance Shelving</h2>
-
-<p>Before instance shelving in OpenStack, if a user powered down an instance, the resources would still be in use on the compute node that housed said instance. Quite wasteful, no? Say an instance is powered off for 72+ hours. Shelving allows you to keep all the various bits associated with the VM while moving it to somewhere that is not the hypervisor to conserve resources.</p>
-
-<h2 id="toc_1">Working with Shelving</h2>
-
-<p>The assumption here is that you have either devstack or some other flavor of OpenStack running. There isn&rsquo;t anything additional you need to configure to make this work.</p>
-
-<p>First, let&rsquo;s log into our controller and look around at what&rsquo;s running:</p>
-
-<pre><code># nova list
-+--------------------------------------+-------+--------+------------+-------------+-----------------------------------------------+
-| ID                                   | Name  | Status | Task State | Power State | Networks                                      |
-+--------------------------------------+-------+--------+------------+-------------+-----------------------------------------------+
-| 05617907-3931-414f-88f3-fd180f69fde6 | test1 | ACTIVE | -          | Running     | cookbook_network_1=10.200.0.2, 192.168.100.11 |
-+--------------------------------------+-------+--------+------------+-------------+-----------------------------------------------+
-</code></pre>
-
-<p>Next, let&rsquo;s shelve an instance:</p>
-
-<pre><code># nova shelve test1
-</code></pre>
-
-<p>Did it get shelved?</p>
-
-<pre><code># nova list
-+--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
-| ID                                   | Name  | Status            | Task State | Power State | Networks                                      |
-+--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
-| 05617907-3931-414f-88f3-fd180f69fde6 | test1 | SHELVED_OFFLOADED | -          | Shutdown    | cookbook_network_1=10.200.0.2, 192.168.100.11 |
-+--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
-</code></pre>
-
-<p><strong>Note:</strong> The change in status to &ldquo;SHELVED_OFFLOADED&rdquo;</p>
-
-<p>Now let&rsquo;s unshelve it &amp; check status:</p>
-
-<pre><code># nova unshelve test1
-# nova list
-+--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
-| ID                                   | Name  | Status            | Task State | Power State | Networks                                      |
-+--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
-| 05617907-3931-414f-88f3-fd180f69fde6 | test1 | SHELVED_OFFLOADED | spawning   | Shutdown    | cookbook_network_1=10.200.0.2, 192.168.100.11 |
-+--------------------------------------+-------+-------------------+------------+-------------+-----------------------------------------------+
-</code></pre>
-
-<p>There we go!</p>
-
-<h2 id="toc_2">Summary</h2>
-
-<p>In this post, we worked with one of the new-ish features in Nova, instance shelving. Good for when you need to stop instances for a long time in a non-impactful way.</p>
-
-<h2 id="toc_3">References</h2>
-
-<ul>
-<li><a href="https://blueprints.launchpad.net/nova/+spec/shelve-instance">Blueprint</a></li>
-<li><a href="http://docs.openstack.org/user-guide/content/shelve_server.html">OpenStack Docs</a></li>
-</ul>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-10-14-Instance-Shelving'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
