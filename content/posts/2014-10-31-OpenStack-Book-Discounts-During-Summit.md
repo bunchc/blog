@@ -9,10 +9,11 @@ Starting now and running the week of the summit, the two best selling OpenStack 
 ## OpenStack Cookbook
 
 Book : nieX72Mn7U
+
 eBook: k1QxrwyMvD
 
 ## Learning OpenStack Networking (Neutron)
 
 Book : luyLRpSQ
-eBook: IXQ1swn2
 
+eBook: IXQ1swn2
