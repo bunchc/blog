@@ -7,7 +7,21 @@
     
     
     
-    <updated>Fri, 31 Oct 2014 00:00:00 UTC</updated>
+    <updated>Mon, 03 Nov 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Paris Summit - Day 1</title>
+      <link>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</link>
+      <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</guid>
+      <description>&lt;p&gt;Hooray Paris!&lt;/p&gt;
+
+&lt;p&gt;Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&amp;rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.&lt;/p&gt;
+
+&lt;p&gt;I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a &lt;a href=&#34;http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/&#34;&gt;full schedule&lt;/a&gt; of 100-ish more this week.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>OpenStack Book Discounts During Summit</title>
@@ -1154,18 +1168,6 @@ heat stack-create RPC9-Stack -f ./rpc9-rax-heat.yaml \
 &lt;li&gt;Additional Neutron Services (LBaaS, VPNaaS)&lt;/li&gt;
 &lt;li&gt;Using 3rd Party drivers&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>30 Posts in 30 Days</title>
-      <link>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days/</link>
-      <pubDate>Thu, 09 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-10-09-30-Posts-in-30-Days/</guid>
-      <description>&lt;p&gt;I found this morning I was in a bit of a blogging slump. That is, I&amp;rsquo;d not posted anything in quite a while, even though I have plenty of exciting things going on at the moment. So, with that said, happening across &lt;a href=&#34;http://etherealmind.com/challenge-30-blogs-30-days/&#34;&gt;this post&lt;/a&gt; by Greg Ferro (&lt;a href=&#34;http://twitter.com/@etherealmind&#34;&gt;@etherealmind&lt;/a&gt;), I thought I&amp;rsquo;d jump into the fray.&lt;/p&gt;
-
-&lt;p&gt;I encourage you to do the same.&lt;/p&gt;
 </description>
     </item>
     
