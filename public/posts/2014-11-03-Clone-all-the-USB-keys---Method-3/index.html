@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://blog.codybunch.com">
-    <title> Paris Summit - Day 1 </title>
-    <link rel="canonical" href="http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/">
+    <title> Clone all the USB keys! - Method 3 </title>
+    <link rel="canonical" href="http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/">
     
 
 <link rel="stylesheet" href="/css/poole.css">
@@ -54,14 +54,25 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Paris Summit - Day 1</h1>
+      <h1 class="post-title">Clone all the USB keys! - Method 3</h1>
         <section id="main">
           <h5 id="date"> Mon Nov 3, 2014 </h5>
-          <p>Hooray Paris!</p>
+          <p>Method 3 you ask? Wel, sure, I <a href="http://openstack.prov12n.com/usb-key-duplication-on-osx-on-the-cheap/">wrote on this around</a> the time of OSCON earlier this year. However, for the OpenStack in Paris, we needed a larger axe. Thanks to <a href="https://twitter.com/larsbutler">Lars</a> &amp; <a href="https://github.com/cloudnull">Mr. Cloud Null</a>, we managed to apply the appropriate amount of strategic violence:</p>
 
-<p>Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.</p>
+<pre><code>cat ~/fuckshitup.sh
+#!/bin/bash
+set -e -o -v
 
-<p>I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a <a href="http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/">full schedule</a> of 100-ish more this week.</p>
+for i in `jot 19 3`;
+    do sudo diskutil erasedisk FAT32 PARIS /dev/disk${i}
+done
+
+for i in `jot 19 3`;
+    do rsync --progress -az /Volumes/PARIS &quot;/Volumes/PARIS $i/&quot; &amp;
+done
+</code></pre>
+
+<p>First it formats all the disks, then it rsyncs all the things.</p>
 
         </section>
     </div>
@@ -75,14 +86,10 @@
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/">Clone all the USB keys! - Method 3</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit/"> &nbsp; OpenStack Book Discounts During Summit</a> &raquo;
+    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/"> &nbsp; Paris Summit - Day 1</a> &raquo;
     </span>
   
 </div>
