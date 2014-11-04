@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://blog.codybunch.com">
-    <title> Clone all the USB keys! - Method 3 </title>
-    <link rel="canonical" href="http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/">
+    <title> OpenStack Cookbook - Now on Juno </title>
+    <link rel="canonical" href="http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno/">
     
 
 <link rel="stylesheet" href="/css/poole.css">
@@ -54,25 +54,19 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Clone all the USB keys! - Method 3</h1>
+      <h1 class="post-title">OpenStack Cookbook - Now on Juno</h1>
         <section id="main">
-          <h5 id="date"> Mon Nov 3, 2014 </h5>
-          <p>Method 3 you ask? Wel, sure, I <a href="http://openstack.prov12n.com/usb-key-duplication-on-osx-on-the-cheap/">wrote on this around</a> the time of OSCON earlier this year. However, for the OpenStack in Paris, we needed a larger axe. Thanks to <a href="https://twitter.com/larsbutler">Lars</a> &amp; <a href="https://github.com/cloudnull">Mr. Cloud Null</a>, we managed to apply the appropriate amount of strategic violence:</p>
+          <h5 id="date"> Tue Nov 4, 2014 </h5>
+          <p>With the summit this week, I feel it&rsquo;s appropriate to announce that the <a href="https://github.com/openstackcookbook/openstackcookbook/tree/juno">scripts supporting the OpenStack Cookbook</a> have been updated (and are mostly functional) on OpenStack Juno.</p>
 
-<pre><code>cat ~/fuckshitup.sh
-#!/bin/bash
-set -e -o -v
+<p>To get started with them, you&rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.</p>
 
-for i in `jot 19 3`;
-    do sudo diskutil erasedisk FAT32 PARIS /dev/disk${i}
-done
-
-for i in `jot 19 3`;
-    do rsync --progress -az /Volumes/PARIS &quot;/Volumes/PARIS $i/&quot; &amp;
-done
+<pre><code>git clone https://github.com/openstackcookbook/openstackcookbook -b juno
+cd openstackcookbook
+vagrant up
 </code></pre>
 
-<p>First it formats all the disks, then it rsyncs all the things.</p>
+<p>These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.</p>
 
         </section>
     </div>
@@ -86,14 +80,10 @@ done
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno/">OpenStack Cookbook - Now on Juno</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/"> &nbsp; Paris Summit - Day 1</a> &raquo;
+    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/"> &nbsp; Clone all the USB keys! - Method 3</a> &raquo;
     </span>
   
 </div>
