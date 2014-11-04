@@ -16,6 +16,10 @@ for i in `jot 19 3`;
 done
 
 for i in `jot 19 3`;
+    do sudo diskutil partitionDisk /dev/disk${i} MBR MS-DOS PARIS 0b
+done
+
+for i in `jot 19 3`;
     do rsync --progress -az /Volumes/PARIS "/Volumes/PARIS $i/" &
 done
 ```

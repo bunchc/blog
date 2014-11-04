@@ -90,6 +90,26 @@ vagrant up
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'> Paris Summit - Day 1</a> </h2>
+      <div class="meta">Mon, Nov 3, 2014</div>
+    </header>
+
+    <p>Hooray Paris!</p>
+
+<p>Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.</p>
+
+<p>I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a <a href="http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/">full schedule</a> of 100-ish more this week.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/'> Clone all the USB keys! - Method 3</a> </h2>
       <div class="meta">Mon, Nov 3, 2014</div>
     </header>
@@ -105,6 +125,10 @@ for i in `jot 19 3`;
 done
 
 for i in `jot 19 3`;
+    do sudo diskutil partitionDisk /dev/disk${i} MBR MS-DOS PARIS 0b
+done
+
+for i in `jot 19 3`;
     do rsync --progress -az /Volumes/PARIS &quot;/Volumes/PARIS $i/&quot; &amp;
 done
 </code></pre>
@@ -113,26 +137,6 @@ done
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'> Paris Summit - Day 1</a> </h2>
-      <div class="meta">Mon, Nov 3, 2014</div>
-    </header>
-
-    <p>Hooray Paris!</p>
-
-<p>Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.</p>
-
-<p>I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a <a href="http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/">full schedule</a> of 100-ish more this week.</p>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
