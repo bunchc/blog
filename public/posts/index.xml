@@ -7,7 +7,52 @@
     
     
     
-    <updated>Tue, 04 Nov 2014 00:00:00 UTC</updated>
+    <updated>Wed, 05 Nov 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Live Blog - Cloud Security: Do you know where your workloads are running?</title>
+      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running/</link>
+      <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running/</guid>
+      <description>
+
+&lt;p&gt;Session background can be found &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/98e55a657e2e78e8beacaaacde714a0f&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Speaker: Raghu Yeluri, Intel Corporation&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As an Enterprise and/or a Cloud service provider, you would have to ensure that all regulatory requirements for workload and data sovereignty are met.   You have to answer the questions from your customers like:&lt;/p&gt;
+
+&lt;p&gt;where is my workload running? ,  Are my workloads running in a compliant location? ,  How can I trust the Integrity of the host servers on which my workloads are running , can you prove to me that my workloads and data have not violated policies? , How can I control via policy where my workload can and cannot migrate and run .&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Live Blog&lt;/h2&gt;
+
+&lt;p&gt;Geo Tag / Asset tags are set in a write once area. Can be almost anything, user provided names, gps coordinates, actual asset tags, and importantly, the certificate of attestation from the TPM.&lt;/p&gt;
+
+&lt;p&gt;Today we&amp;rsquo;re using Glance Image Registry to set the launch properties / policies: e.g. Only runs in France. The &amp;ldquo;Trust and Launch&amp;rdquo; scheduler filter runs last against the list of servers left. It then runs a variant of Open Attestation to say, &amp;ldquo;Which are trusted?&amp;rdquo;. From there, the scheduler will deploy. This is all automatic. Only setting the tags is manual. This same attestation happens during migrations as well.&lt;/p&gt;
+
+&lt;p&gt;This is how we enable boundary control. We added Horizon plugins to support launch policies. Extended Nova scheduler for location filtering, and glance for policies. Finally we provide a number of tools that work in conjunction (OAT, etc). The end-to-end bits can be done entirely in OSS however.&lt;/p&gt;
+
+&lt;p&gt;This should be upstream in Kilo, however, we (Intel) provide scripts to make this work in Icehouse &amp;amp; Juno.&lt;/p&gt;
+
+&lt;p&gt;Live Demo - Lol WiFi!&lt;/p&gt;
+
+&lt;p&gt;There is no maximum number of tags that can be set, things like GEO, PCI-DSS, etc can be set, these are then used to select the servers from there.&lt;/p&gt;
+
+&lt;p&gt;Magic number of policies: 5. This was in conversation with NIST and MSP&amp;rsquo;s&lt;/p&gt;
+
+&lt;p&gt;Looking forward:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Extend geo-tagging for volumes&lt;/li&gt;
+&lt;li&gt;Tenant-controlled encryption / decryption under controlled circumstances&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Extend geo-tagging for volumes - Basically the above but for Cinder. The scheduler is pluggable, so we should be able to make this happen. The assumption being x86 storage host. This will be more difficult with traditional SAN/NAS due to not being TXT enabled&amp;hellip; &lt;em&gt;yet&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>OpenStack Cookbook - Now on Juno</title>
@@ -932,105 +977,6 @@ ERROR: ZeroVM return code is 8
 &lt;li&gt;&lt;a href=&#34;https://docs.google.com/viewer?a=v&amp;amp;pid=forums&amp;amp;srcid=MDM5MTg3MTAwNDAwMTI4Njc5NzkBMTUyNDg3NTk2NDczMTE1MDYyMTIBcENUQTliQjJwSXNKATAuMQEBdjI&#34;&gt;Diagrams from ZeroVM G+ Group&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/sgt_mac/zero-vm-architecture&#34;&gt;ZeroVM Architecture Slideshare&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ZeroVM - Some Background</title>
-      <link>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/</link>
-      <pubDate>Wed, 15 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/</guid>
-      <description>
-
-&lt;p&gt;In a little over three weeks, at the &lt;a href=&#34;https://www.openstack.org/summit/openstack-paris-summit-2014/&#34;&gt;Paris Summit&lt;/a&gt;, I&amp;rsquo;ll be helping give a 90 minute workshop on &lt;a href=&#34;http://zerovm.org/&#34;&gt;ZeroVM&lt;/a&gt;. 90 minutes is not actually a lot of time to get a good grasp on what ZeroVM is, how it operates, and most importantly, &lt;em&gt;why&lt;/em&gt; it is important.&lt;/p&gt;
-
-&lt;p&gt;These next few posts however, I am hoping, will shed some light on that.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;What is ZeroVM?&lt;/h2&gt;
-
-&lt;p&gt;From the ZeroVM website:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;ZeroVM is an open source virtualization technology that is based on the Chromium Native Client (NaCl) project. ZeroVM creates a secure and isolated execution environment which can run a single thread or application&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Read that over a few times. What it is saying, is where Docker provides packaging, traditional virtualization provides full OS isolation, ZeroVM provides an environment specific to a single application or thread.&lt;/p&gt;
-
-&lt;p&gt;Explained another way, ZeroVM provides isolation at the thread or application level. It provides a &amp;ldquo;sandbox&amp;rdquo; environment for you to run arbitrary &amp;ldquo;untrusted&amp;rdquo; code. Some examples of how this could be useful can be found &lt;a href=&#34;http://play.golang.org/&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;https://www.python.org/shell/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;ZeroVM does this by using the &lt;a href=&#34;http://en.wikipedia.org/wiki/Google_Native_Client&#34;&gt;NaCL from Google&lt;/a&gt; to provide isolation and security. ZeroVM also has a number of other layers to provide the additional services for things like a Posix file system, I/O, and channels.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_1&#34;&gt;Use Cases&lt;/h3&gt;
-
-&lt;p&gt;Due to the small size, speed, and isolation nature of ZeroVM, it is able to solve some problems which are very &amp;ldquo;big data&amp;rdquo; or cloud centric. Let&amp;rsquo;s take a look at some:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://incubator.apache.org/drill/&#34;&gt;Apache Drill&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://docs.zerovm.org/en/latest/zerocloud/overview.html&#34;&gt;ZeroCloud&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;More &lt;a href=&#34;http://openstack.prov12n.com/getting-started-with-zerovm/&#34;&gt;here&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;Where Does ZeroVM Fit?&lt;/h2&gt;
-
-&lt;p&gt;This diagram from the Atlanta OpenStack Summit should help:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://openstack.prov12n.com/screens/Using_ZeroVM_and_Swift_to_Build_a_Compute_Enabled_Storage_Platform_-_YouTube_2014-10-13_14-00-42.jpg&#34; alt=&#34;ZeroVM vs Traditional Virt&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Additionally, &lt;a href=&#34;https://www.youtube.com/watch?v=oR1RUSdUQCs#t=424&#34;&gt;this&lt;/a&gt; OpenStack Summit presentation should help clarify some as well.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_3&#34;&gt;Traditional Virtualization&lt;/h3&gt;
-
-&lt;p&gt;Traditional Virtualization is perhaps the easiest to cover, it&amp;rsquo;s the most familiar way of isolating the things. I&amp;rsquo;ve been running VMware Workstation/Fusion, their enterprise products, etc for &lt;em&gt;ages&lt;/em&gt;. I imagine a lot of you have as well. To recap tho:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Type 1 or 2 hypervisor&lt;/li&gt;
-&lt;li&gt;Each VM is a set of processes&lt;/li&gt;
-&lt;li&gt;CPU instructions virtualized (it&amp;rsquo;s a bit more complicated now-a-days with Hardware extensions)&lt;/li&gt;
-&lt;li&gt;Carries around a full OS installation&lt;/li&gt;
-&lt;li&gt;All resources isolated&lt;/li&gt;
-&lt;li&gt;Very few &lt;em&gt;published&lt;/em&gt; VM escapes&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A few clarifying points. I&amp;rsquo;ve simplified the CPU conversation for this discussion. That is, while hardware extensions provide native or near native execution, there is still quite a bit happening in software for those instructions which do not translate. Additionally, the &amp;ldquo;all resources isolated&amp;rdquo; is a bit of a simplification as well. Most modern hypervisors will do some manner of memory sharing, compression, and consolidation. However, memory is still generally isolated to a specific VM.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_4&#34;&gt;Containers (Docker / LXC)&lt;/h3&gt;
-
-&lt;p&gt;Containers are all the rage these days. Docker has popularized and simplified the way we manage them. You get the same or better benefit from the shared hardware, however, containers strip quite a few of the layers:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Shared Kernel / OS&lt;/li&gt;
-&lt;li&gt;Super low overhead&lt;/li&gt;
-&lt;li&gt;Fast startup&lt;/li&gt;
-&lt;li&gt;&amp;lsquo;secure&amp;rsquo;&lt;/li&gt;
-&lt;li&gt;Managed via namespaces and process isolation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The important thing to note here, are the shared Kernel bits and the low overhead. The shared Kernel basically means everyone will run from the same Linux Kernel, and thus have the same features and limits therein. However, as an upside to that, you also shed having to carry around a full OS installation, networking stack, etc, and thus have much less overhead. This enables faster startup times.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_5&#34;&gt;ZeroVM&lt;/h3&gt;
-
-&lt;p&gt;Finally, and most important to what we&amp;rsquo;re talking about is ZeroVM. ZeroVM is somewhere a bit beyond containers. That is you still have:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Shared hardware&lt;/li&gt;
-&lt;li&gt;Low Overhead&lt;/li&gt;
-&lt;li&gt;Fast Startup&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;However, you are no longer carrying an OS or Kernel around. In turn, this further minimizes the attack surface. That is, there are a total of 6 system calls available from within ZeroVM.&lt;/p&gt;
-
-&lt;p&gt;In addition, due to it&amp;rsquo;s extremely small size one can spin up a new ZeroVM instance in miliseconds, vs seconds or minutes for the other technologies. This speed advantage lends itself well to one of ZeroVMs primary use cases in the data-pipeline / data-processing space. Indeed it is the magic that makes ZeroCloud work. It does, however, require a different way of thinking about and approaching the problem.&lt;/p&gt;
-
-&lt;p&gt;That is, ZeroVM instances are designed to be extremely temporary in nature. Load your data in, handle the processing, push it back out to disk and move on. Conceptually, it takes you a few steps further down the &amp;lsquo;everything is disposable&amp;rsquo; path, insofar as you will need to design and rewrite your apps to work with ZeroVM.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_6&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;While a wall of words, I hope I have provided some clarity around the what of ZeroVM and where it fits.&lt;/p&gt;
 </description>
     </item>
     

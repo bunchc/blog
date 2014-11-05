@@ -3,8 +3,13 @@
   
   <url>
     <loc>http://blog.codybunch.com/</loc>
-    <lastmod>2014-11-04T00:00:00+00:00</lastmod>
+    <lastmod>2014-11-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running/</loc>
+    <lastmod>2014-11-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -18,12 +23,12 @@
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</loc>
+    <loc>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/</loc>
     <lastmod>2014-11-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/</loc>
+    <loc>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</loc>
     <lastmod>2014-11-03T00:00:00+00:00</lastmod>
   </url>
   

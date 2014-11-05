@@ -65,6 +65,57 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running/'> Live Blog - Cloud Security: Do you know where your workloads are running?</a> </h2>
+      <div class="meta">Wed, Nov 5, 2014</div>
+    </header>
+
+    
+
+<p>Session background can be found <a href="https://openstacksummitnovember2014paris.sched.org/event/98e55a657e2e78e8beacaaacde714a0f">here</a>.</p>
+
+<p>Speaker: Raghu Yeluri, Intel Corporation</p>
+
+<blockquote>
+<p>As an Enterprise and/or a Cloud service provider, you would have to ensure that all regulatory requirements for workload and data sovereignty are met.   You have to answer the questions from your customers like:</p>
+
+<p>where is my workload running? ,  Are my workloads running in a compliant location? ,  How can I trust the Integrity of the host servers on which my workloads are running , can you prove to me that my workloads and data have not violated policies? , How can I control via policy where my workload can and cannot migrate and run .</p>
+</blockquote>
+
+<h2 id="toc_0">Live Blog</h2>
+
+<p>Geo Tag / Asset tags are set in a write once area. Can be almost anything, user provided names, gps coordinates, actual asset tags, and importantly, the certificate of attestation from the TPM.</p>
+
+<p>Today we&rsquo;re using Glance Image Registry to set the launch properties / policies: e.g. Only runs in France. The &ldquo;Trust and Launch&rdquo; scheduler filter runs last against the list of servers left. It then runs a variant of Open Attestation to say, &ldquo;Which are trusted?&rdquo;. From there, the scheduler will deploy. This is all automatic. Only setting the tags is manual. This same attestation happens during migrations as well.</p>
+
+<p>This is how we enable boundary control. We added Horizon plugins to support launch policies. Extended Nova scheduler for location filtering, and glance for policies. Finally we provide a number of tools that work in conjunction (OAT, etc). The end-to-end bits can be done entirely in OSS however.</p>
+
+<p>This should be upstream in Kilo, however, we (Intel) provide scripts to make this work in Icehouse &amp; Juno.</p>
+
+<p>Live Demo - Lol WiFi!</p>
+
+<p>There is no maximum number of tags that can be set, things like GEO, PCI-DSS, etc can be set, these are then used to select the servers from there.</p>
+
+<p>Magic number of policies: 5. This was in conversation with NIST and MSP&rsquo;s</p>
+
+<p>Looking forward:</p>
+
+<ul>
+<li>Extend geo-tagging for volumes</li>
+<li>Tenant-controlled encryption / decryption under controlled circumstances</li>
+</ul>
+
+<p>Extend geo-tagging for volumes - Basically the above but for Cinder. The scheduler is pluggable, so we should be able to make this happen. The assumption being x86 storage host. This will be more difficult with traditional SAN/NAS due to not being TXT enabled&hellip; <em>yet</em>.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running/'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno/'> OpenStack Cookbook - Now on Juno</a> </h2>
       <div class="meta">Tue, Nov 4, 2014</div>
     </header>
@@ -125,26 +176,6 @@ vagrant up
 
 <article class="post">
     <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'> Paris Summit - Day 1</a> </h2>
-      <div class="meta">Mon, Nov 3, 2014</div>
-    </header>
-
-    <p>Hooray Paris!</p>
-
-<p>Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.</p>
-
-<p>I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a <a href="http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/">full schedule</a> of 100-ish more this week.</p>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/'> Clone all the USB keys! - Method 3</a> </h2>
       <div class="meta">Mon, Nov 3, 2014</div>
     </header>
@@ -172,6 +203,26 @@ done
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'> Paris Summit - Day 1</a> </h2>
+      <div class="meta">Mon, Nov 3, 2014</div>
+    </header>
+
+    <p>Hooray Paris!</p>
+
+<p>Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.</p>
+
+<p>I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a <a href="http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/">full schedule</a> of 100-ish more this week.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
@@ -579,82 +630,6 @@ EOF
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab/'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud/'> ZeroVM - Getting Started with ZeroCloud</a> </h2>
-      <div class="meta">Wed, Oct 22, 2014</div>
-    </header>
-
-    
-
-<p>If you are getting up to speed on ZeroVM as I am, you will find the following useful:</p>
-
-<ul>
-<li><a href="http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background">Background</a></li>
-<li><a href="http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO">Isolation</a></li>
-<li><a href="http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/">IO Operations</a></li>
-<li><a href="http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/">Getting Started with ZeroVM</a></li>
-<li><a href="http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump">Lots of ZeroVM Resources</a></li>
-</ul>
-
-<p>Additionally, this <a href="https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm">post</a> does a great job of explaining how ZeroVM fits when you start to approach middling to large (Read: <em>Big Data</em>) problems. Go read it now.</p>
-
-<h2 id="toc_0">Getting Started with ZeroCloud</h2>
-
-<p>Now that you&rsquo;ve read the <a href="https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm">introduction by Lars</a>, and I trust that you have, we can start looking into the &lsquo;what&rsquo; of ZeroCloud. In this post we&rsquo;ll touch on it&rsquo;s architecture and use case or two. In a subsequent post we&rsquo;ll show you how to build your own small-scale lab for such an environment.</p>
-
-<p><strong>Note:</strong> Also go here, watch <a href="https://www.youtube.com/watch?v=VYZU_4w_dCA">this</a>, around the 16:30 mark, pay attention to the &rsquo;t = data / Rate&rsquo; bits.</p>
-
-<p><strong>Note:</strong> This is where things in ZeroVM start to get really cool.</p>
-
-<h3 id="toc_1">ZeroCloud Architecture</h3>
-
-<p>The best way to describe the what and how of ZeroCloud is with a few diagrams which we will then dive into. These are borrowed form slides in past presentations.</p>
-
-<p><img src="http://openstack.prov12n.com/screens/1e1bd9b12a3230982c98-e2a0e10379dcd0e09ec354fba3ca6600.r72.cf1.rackcdn.comZeroCloud.pdf_2014-10-21_13-09-08.jpg" alt="Highlevel ZeroCloud Architecture" />
-</p>
-
-<p>This first diagram is a <em>hugely</em> simplified view of a swift environment, that is, if you have worked with OpenStack Swift it should look familiar enough. The &ldquo;Proxy&rdquo; nodes at the top are Swift Proxies, the Storage Nodes below are well, object storage nodes.</p>
-
-<p>What changes for ZeroCloud is the addition of a few ZVM parts made available via Swift Middleware. In this case ZVM represents job brokers, some messaging, ZeroVM itself, as well as an &lsquo;executor&rsquo; that handles the connecting of channels and the reading / writing of objects in Swift. This next diagram breaks that down further:</p>
-
-<p><img src="http://openstack.prov12n.com/screens/1e1bd9b12a3230982c98-e2a0e10379dcd0e09ec354fba3ca6600.r72.cf1.rackcdn.comZeroCloud.pdf_2014-10-21_13-10-12.jpg" alt="ZeroCloud Dataflow Architecture" />
-</p>
-
-<p>In this diagram, which admittedly is an eyechart, each step in the ZeroVM Swift Middleware is shown. Working left to right:</p>
-
-<p><strong>1.</strong> The user initiates a job request via the Swift REST API by sending a post request with the code to be executed.</p>
-
-<p><strong>2.</strong> This hits the Swift Proxy node and is handed to the ZeroVM middleware, which, via a job scheduler finds where the closest replica of your data is, and sends the request along.</p>
-
-<p><strong>3.</strong> The job arrives at the executor who then fires up a net-new ZeroVM session for the job, opens the required IO Channels to your file* and if needed other ZeroVM sessions.</p>
-
-<p><strong>4.</strong> The ZeroVM job, finished with it&rsquo;s work, sends the response back up to the Proxy Server who then serves the response back to the user.</p>
-
-<blockquote>
-<p><em>Note:</em> re: file in #3, in the default configuration this is a net new copy of the file rather than the actual object itself. This prevents accidental damage to the file.</p>
-</blockquote>
-
-<h3 id="toc_2">ZeroCloud Use Cases</h3>
-
-<p>So what do you do with a deterministic, computable, distributed data store? Some things that jump to mind are things like &ldquo;A Giant MapReduce Cluster&rdquo;, similar to the one described <a href="https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm">here</a>. As Lars describes, ZeroCloud can address one of the biggest MapReduce computational issues, that is data locality.</p>
-
-<p>In addition to MapReduce type workloads, what else can one do? One could couple ElasticSeach and Log Stash, and indeed serve Kibana directly from Zero Cloud. Video trans-coding is another use case that I&rsquo;ve seen.</p>
-
-<p>ZeroVM/ZeroCloud then, works well when you have a data heavy workload that would benefit being attacked in a distributed fashion.</p>
-
-<h2 id="toc_3">Summary</h2>
-
-<p>In this post we introduced you to ZeroCloud, the amalgamation of ZeroVM and OpenStack Swift. We dove into the architecture of ZeroCloud and introduced some use cases where having programmable distributed storage system is insanely useful.</p>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud/'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
