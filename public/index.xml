@@ -55,6 +55,70 @@
     </item>
     
     <item>
+      <title>Live Blog - Keystone to Keystone Federation</title>
+      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Keystone-to-Keystone-Federation/</link>
+      <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Keystone-to-Keystone-Federation/</guid>
+      <description>
+
+&lt;p&gt;Session details &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/f7207fef7547319f322fa5cfee05cf49&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Speakers:
+- Marek Denis - Research Fellow, CERN
+- Steve Martinelli - Software Developer, IBM
+- Joe Savak Sr. - Product Manager, Rackspace
+- Brad Topol - Distinguished Engineer, IBM&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In this presentation, we describe the federated identity enhancements we have added to support Keystone to Keystone federation for enabling hybrid cloud functionality. We begin with an overview of key hybrid cloud use cases that have been identified by our stakeholders including those being encountered by OpenStack superuser CERN. We then discuss our SAML based approach for enabling Keystones to trust each other and provide authorization and  role support for resources in hybrid cloud environments.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Live Blog&lt;/h2&gt;
+
+&lt;p&gt;Lots of different folks interested in identity federtion, Academia, companies, lots and lots of folks.&lt;/p&gt;
+
+&lt;p&gt;Use cases? - Easy to confiture, cloud bursting, central policy point, federating out, federating in. Keep the client small. No new protocols.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Federate In&amp;rdquo; - You already have identity provider, SAML, etc Folks already have SSO / Identity. Federate allows for use of existing credentials to work with OpenStack MSP&amp;rsquo;s.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Federate Out&amp;rdquo; - That is, you setup a trust between on prem and off prem clouds.&lt;/p&gt;
+
+&lt;p&gt;Cern&amp;rsquo;s Use-Case&lt;/p&gt;
+
+&lt;p&gt;Cern has 70,000 cores, they need more to process ALL the data they produce. This requires federation out allows folks to use pay-as-you-go to hire out additional resources as needed.&lt;/p&gt;
+
+&lt;p&gt;Cern also needs to be able to allow folks to federate in from others in science community.&lt;/p&gt;
+
+&lt;p&gt;Now an interlude for Keystone classic Auth.&lt;/p&gt;
+
+&lt;p&gt;Federated identity in Incehouse - Integrate existing tools, SAML, etc. There is a diagram, it has lots of arrows, the gist is you send SAML to keystone, keystone gives you a token, and things are good. This worked, but not as well as it could. Mapping engine, that is, groups in one system are not the same as groups in others. Woo Mapping: &amp;ldquo;IBM Regular Employees&amp;rdquo; &amp;ndash;&amp;gt; &amp;ldquo;regular_canada&amp;rdquo; etc.&lt;/p&gt;
+
+&lt;p&gt;New diagram for Federation in Juno. A lot more arrows. This time around, Keystone is the provider, and will provide some level of attestation to the other Keystone in the trust relationship. Once the trust is in place, the user passes the token to either.&lt;/p&gt;
+
+&lt;p&gt;The SAML generator takes the token and goes backwards. Token &amp;ndash;&amp;gt; SAML Generator &amp;ndash;&amp;gt; SAML Assertion&lt;/p&gt;
+
+&lt;p&gt;Now we&amp;rsquo;re at a slide covering all manner of config data. Important bits: Mapping is still a thing. You also need to &amp;lsquo;prime&amp;rsquo; the SAML assertion pump.&lt;/p&gt;
+
+&lt;p&gt;keystone-manage now has a metadata generation thing.&lt;/p&gt;
+
+&lt;p&gt;Back to Cern: - 2 datacenters, OpenStack Cells, Cells not popular. 40k users in AD, and 12k more ADFS (Federation). Cern uses SAML2, and will be the first OpenStack in the world to allow federate-in to allow external entities to consume their resources.&lt;/p&gt;
+
+&lt;p&gt;Patches to the OpenStack and Keystone clients.&lt;/p&gt;
+
+&lt;p&gt;Looking forward:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Auth-N&lt;/li&gt;
+&lt;li&gt;Horizon Integration&lt;/li&gt;
+&lt;li&gt;More &amp;amp; Better Mapping&lt;/li&gt;
+&lt;li&gt;Fine Grained ACLs&lt;/li&gt;
+&lt;li&gt;More protocols&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>OpenStack Cookbook - Now on Juno</title>
       <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno/</link>
       <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
@@ -103,6 +167,20 @@ vagrant up
     </item>
     
     <item>
+      <title>Paris Summit - Day 1</title>
+      <link>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</link>
+      <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</guid>
+      <description>&lt;p&gt;Hooray Paris!&lt;/p&gt;
+
+&lt;p&gt;Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&amp;rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.&lt;/p&gt;
+
+&lt;p&gt;I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a &lt;a href=&#34;http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/&#34;&gt;full schedule&lt;/a&gt; of 100-ish more this week.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Clone all the USB keys! - Method 3</title>
       <link>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/</link>
       <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
@@ -128,20 +206,6 @@ done
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;First it formats all the disks, then it rsyncs all the things.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Paris Summit - Day 1</title>
-      <link>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</link>
-      <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</guid>
-      <description>&lt;p&gt;Hooray Paris!&lt;/p&gt;
-
-&lt;p&gt;Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&amp;rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.&lt;/p&gt;
-
-&lt;p&gt;I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a &lt;a href=&#34;http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/&#34;&gt;full schedule&lt;/a&gt; of 100-ish more this week.&lt;/p&gt;
 </description>
     </item>
     
@@ -865,118 +929,6 @@ zvsh --zvm-image python.tar python @hello.py
 &lt;h2 id=&#34;toc_2&#34;&gt;Summary&lt;/h2&gt;
 
 &lt;p&gt;In this post, you setup an Ubuntu 12.04 machine, installed the ZeroVM apt repositories, and installed ZeroVM. Finally, you created a Python of hello world and ran that within your newly installed ZeroVM.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ZeroVM - Isolation</title>
-      <link>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO/</link>
-      <pubDate>Thu, 16 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO/</guid>
-      <description>
-
-&lt;p&gt;Here we go with another post on ZeroVM. This time to help get you up to speed on how ZeroVM provides isolation. For a reminder of what ZeroVM is, how it is different than containers and other virtualization technologies, see my prior post &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background/&#34;&gt;here&lt;/a&gt;, or the ZeroVM docs &lt;a href=&#34;http://docs.zerovm.org&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Isolation&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&#34;http://docs.zerovm.org/zerovm/isolation_security.html&#34;&gt;ZeroVM site&lt;/a&gt; itself doesn&amp;rsquo;t say much on the isolation provided by ZeroVM. This is largely because it derives it&amp;rsquo;s isolation through the use of the &lt;a href=&#34;http://en.wikipedia.org/wiki/Google_Native_Client&#34;&gt;Google NaCL project&lt;/a&gt;. The tl;dr for NaCL, is that it requires applications be ported over to it&amp;rsquo;s sandboxing environment, in which a subset of processor instructions are made available.&lt;/p&gt;
-
-&lt;p&gt;The sandbox environment provided by NaCL is a limited subset of processor instructions that prevent various syscalls that could be destructive. Further, ZeroVM takes the 50 syscalls available in NaCL and reduces that to six. Meaning, if your code contains a syscall other than one of the six currently allowed, your code will fail when ZeroVM attempts to execute the specific syscall. The six syscalls allowed are currently:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;pread&lt;/li&gt;
-&lt;li&gt;pwrite&lt;/li&gt;
-&lt;li&gt;jail&lt;/li&gt;
-&lt;li&gt;unjail&lt;/li&gt;
-&lt;li&gt;fork&lt;/li&gt;
-&lt;li&gt;exit&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;We can test this by trying an invalid write instead of pwrite with the following C++&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
-#include &amp;lt;stdio.h&amp;gt;
-#include &amp;lt;sys/types.h&amp;gt;
-
-int main()
-{
-    char data[128];
-
-    if(read(0, data, 128) &amp;lt; 0)
-     write(2, &amp;quot;An error occurred in the read.\n&amp;quot;, 31);
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This is what it looks like when it implodes:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ zvsh syscalls
-----------/tmp/tmpl7Mi1v----------
-Node = 1
-Version = 20130611
-Timeout = 50
-Memory = 4294967296, 0
-Program = /home/vagrant/syscalls/syscalls
-Channel = /dev/stdin,/dev/stdin,0,0,4294967296,4294967296,0,0
-Channel = /tmp/tmpOfgnG6/stdout,/dev/stdout,0,0,0,0,4294967296,4294967296
-Channel = /tmp/tmpOfgnG6/stderr,/dev/stderr,0,0,0,0,4294967296,4294967296
-Channel = /tmp/tmpeNIzx4,/dev/nvram,3,0,4294967296,4294967296,4294967296,4294967296
--------------------------
-----------/tmp/tmpeNIzx4----------
-[args]
-args = syscalls
-[mapping]
-channel=/dev/stdin,mode=char
-channel=/dev/stdout,mode=char
-channel=/dev/stderr,mode=char
-
--------------------------
-2
-0
-0
-disable
-0.00 0.00 0 0 0 0 0 0 0 0
-src/loader/elf_util.c 178: Segment 0 is of unexpected type 0x6, flag 0x5
-
-ERROR: ZeroVM return code is 8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;What is important here, at least in terms of telling why it failed is: &lt;code&gt;ERROR: ZeroVM return code is 8&lt;/code&gt;. Error codes 1 - 17 indicate an issue in untrusted code. In our example, it was specifically the read / write bits that caused the issue.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;Down The Rabbit Hole&lt;/h2&gt;
-
-&lt;p&gt;Time to jump down the rabbit hole. Into what actually just happened. First some diagrams:&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_2&#34;&gt;ZeroVM Stack&lt;/h3&gt;
-
-&lt;p&gt;In this first diagram, you are looking at the internal structure of the ZeroVM process.
-&lt;img src=&#34;http://openstack.prov12n.com/screens/ZeroVM-Architecture-Design-Overview.pdf_2014-10-13_15-14-18.jpg&#34; alt=&#34;ZVM Trusted Code Base Architecture&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;Working from the outside in, the grey area represents everything that is ZeroVM, all of it&amp;rsquo;s runtime data, IO Channels, virtual file systems, and most importantly, the user code to be executed.&lt;/p&gt;
-
-&lt;p&gt;Next, in the pink area is where end-user code gets loaded up, from there a call will progress down the stack. In the last white layer you can see the individual sys-calls as implemented in ZeroVM as well as their corresponding trappings.&lt;/p&gt;
-
-&lt;p&gt;One last thing to note is the two sys-calls for zvm_pread and zvm_pwrite, their traps, handlers, and this thing called a trampoline. The trampolines are a mechanisim that facilitates the switch from untrusted to trusted execution. A syscall will start in the &amp;lsquo;untrusted&amp;rsquo; context, if it is an allowed call, the ZRT or ZeroVM Run Time via it&amp;rsquo;s hooks into the ZVM Syscall API and passes the call to a &amp;ldquo;trampoline&amp;rdquo; to perform the context switch needed to allow the syscall to execute in trusted space.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_3&#34;&gt;ZeroVM Guest Memory Footprint&lt;/h3&gt;
-
-&lt;p&gt;This next diagram offers a different view on the above ZeroVM guest. In the below diagram, you will see how the NaCL &amp;amp; ZeroVM &lt;em&gt;trampolines&lt;/em&gt; are implemented in memory, how that in turn gets passed down to the corresponding syscall, the trusted ELF binary, and where the rest of ZeroVM is contained.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://openstack.prov12n.com/screens/ZeroVM-Architecture-Design-Overview.pdf_2014-10-13_15-18-27.jpg&#34; alt=&#34;Anatomy of the ZeroVM Guest Memory footprint&#34; /&gt;
-&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_4&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;In this post, we took a deeper look into how isolation is handled within ZeorVM. We started with a high level discussion of NaCL and ZeroVM&amp;rsquo;s implementation of limited syscalls. We then attempted to execute an invalid syscall. Finally we got into the nitty gritty of how that syscall is trapped via the ZeroVM runtime and where in it&amp;rsquo;s memory stack context switches from trusted to untrusted code happen.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_5&#34;&gt;Resources&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://docs.google.com/viewer?a=v&amp;amp;pid=forums&amp;amp;srcid=MDM5MTg3MTAwNDAwMTI4Njc5NzkBMTUyNDg3NTk2NDczMTE1MDYyMTIBcENUQTliQjJwSXNKATAuMQEBdjI&#34;&gt;Diagrams from ZeroVM G+ Group&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.slideshare.net/sgt_mac/zero-vm-architecture&#34;&gt;ZeroVM Architecture Slideshare&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
