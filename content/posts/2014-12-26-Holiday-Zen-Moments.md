@@ -24,15 +24,15 @@ The story:
 > 
 >The teacher commended: “You have your eyes open and you see the world.” 
 > 
->The third disciple came up with yet a different answer: ”When I ride I am content to chant ‘nam myoho renge kyo’”>
+>The third disciple came up with yet a different answer: ”When I ride I am content to chant ‘nam myoho renge kyo’”
 
 >The master spoke words of appreciation: ”Your mind will roll with ease like a newly trued wheel.” >
 
 >The fourth disciple said: “Riding my bicycle I live in perfect harmony of things.” >
 
->The pleased master said: ”You are actually riding the golden path of non-harming or non violence.”>
+>The pleased master said: ”You are actually riding the golden path of non-harming or non violence.”
 
->The fifth student said: ”I ride my bicycle to ride my bicycle.” >
+>The fifth student said: ”I ride my bicycle to ride my bicycle.”
 
 >The master walked up to him and sat at his feet and said: “I am your disciple!”
 
