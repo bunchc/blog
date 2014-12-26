@@ -39,9 +39,9 @@
 
 &lt;p&gt;The third disciple came up with yet a different answer: ”When I ride I am content to chant ‘nam myoho renge kyo’”&lt;/p&gt;
 
-&lt;p&gt;The master spoke words of appreciation: ”Your mind will roll with ease like a newly trued wheel.” &amp;gt;&lt;/p&gt;
+&lt;p&gt;The master spoke words of appreciation: ”Your mind will roll with ease like a newly trued wheel.”&lt;/p&gt;
 
-&lt;p&gt;The fourth disciple said: “Riding my bicycle I live in perfect harmony of things.” &amp;gt;&lt;/p&gt;
+&lt;p&gt;The fourth disciple said: “Riding my bicycle I live in perfect harmony of things.”&lt;/p&gt;
 
 &lt;p&gt;The pleased master said: ”You are actually riding the golden path of non-harming or non violence.”&lt;/p&gt;
 
@@ -57,51 +57,6 @@
 &lt;p&gt;Regardless of how, what, or why you get together this season, try to take a moment, sit back and enjoy them as much as you can.&lt;/p&gt;
 
 &lt;p&gt;If you also ride because you ride, and would like a sticker, either email me (bunchc at gmail) or ping me on twitter and we can arrange something.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Live Blog - Cloud Security: Do you know where your workloads are running?</title>
-      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</link>
-      <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</guid>
-      <description>
-
-&lt;p&gt;Session background can be found &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/98e55a657e2e78e8beacaaacde714a0f&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Speaker: Raghu Yeluri, Intel Corporation&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;As an Enterprise and/or a Cloud service provider, you would have to ensure that all regulatory requirements for workload and data sovereignty are met.   You have to answer the questions from your customers like:&lt;/p&gt;
-
-&lt;p&gt;where is my workload running? ,  Are my workloads running in a compliant location? ,  How can I trust the Integrity of the host servers on which my workloads are running , can you prove to me that my workloads and data have not violated policies? , How can I control via policy where my workload can and cannot migrate and run .&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Live Blog&lt;/h2&gt;
-
-&lt;p&gt;Geo Tag / Asset tags are set in a write once area. Can be almost anything, user provided names, gps coordinates, actual asset tags, and importantly, the certificate of attestation from the TPM.&lt;/p&gt;
-
-&lt;p&gt;Today we&amp;rsquo;re using Glance Image Registry to set the launch properties / policies: e.g. Only runs in France. The &amp;ldquo;Trust and Launch&amp;rdquo; scheduler filter runs last against the list of servers left. It then runs a variant of Open Attestation to say, &amp;ldquo;Which are trusted?&amp;rdquo;. From there, the scheduler will deploy. This is all automatic. Only setting the tags is manual. This same attestation happens during migrations as well.&lt;/p&gt;
-
-&lt;p&gt;This is how we enable boundary control. We added Horizon plugins to support launch policies. Extended Nova scheduler for location filtering, and glance for policies. Finally we provide a number of tools that work in conjunction (OAT, etc). The end-to-end bits can be done entirely in OSS however.&lt;/p&gt;
-
-&lt;p&gt;This should be upstream in Kilo, however, we (Intel) provide scripts to make this work in Icehouse &amp;amp; Juno.&lt;/p&gt;
-
-&lt;p&gt;Live Demo - Lol WiFi!&lt;/p&gt;
-
-&lt;p&gt;There is no maximum number of tags that can be set, things like GEO, PCI-DSS, etc can be set, these are then used to select the servers from there.&lt;/p&gt;
-
-&lt;p&gt;Magic number of policies: 5. This was in conversation with NIST and MSP&amp;rsquo;s&lt;/p&gt;
-
-&lt;p&gt;Looking forward:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Extend geo-tagging for volumes&lt;/li&gt;
-&lt;li&gt;Tenant-controlled encryption / decryption under controlled circumstances&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Extend geo-tagging for volumes - Basically the above but for Cinder. The scheduler is pluggable, so we should be able to make this happen. The assumption being x86 storage host. This will be more difficult with traditional SAN/NAS due to not being TXT enabled&amp;hellip; &lt;em&gt;yet&lt;/em&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -170,6 +125,70 @@
     </item>
     
     <item>
+      <title>Live Blog - Cloud Security: Do you know where your workloads are running?</title>
+      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</link>
+      <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</guid>
+      <description>
+
+&lt;p&gt;Session background can be found &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/98e55a657e2e78e8beacaaacde714a0f&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Speaker: Raghu Yeluri, Intel Corporation&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As an Enterprise and/or a Cloud service provider, you would have to ensure that all regulatory requirements for workload and data sovereignty are met.   You have to answer the questions from your customers like:&lt;/p&gt;
+
+&lt;p&gt;where is my workload running? ,  Are my workloads running in a compliant location? ,  How can I trust the Integrity of the host servers on which my workloads are running , can you prove to me that my workloads and data have not violated policies? , How can I control via policy where my workload can and cannot migrate and run .&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Live Blog&lt;/h2&gt;
+
+&lt;p&gt;Geo Tag / Asset tags are set in a write once area. Can be almost anything, user provided names, gps coordinates, actual asset tags, and importantly, the certificate of attestation from the TPM.&lt;/p&gt;
+
+&lt;p&gt;Today we&amp;rsquo;re using Glance Image Registry to set the launch properties / policies: e.g. Only runs in France. The &amp;ldquo;Trust and Launch&amp;rdquo; scheduler filter runs last against the list of servers left. It then runs a variant of Open Attestation to say, &amp;ldquo;Which are trusted?&amp;rdquo;. From there, the scheduler will deploy. This is all automatic. Only setting the tags is manual. This same attestation happens during migrations as well.&lt;/p&gt;
+
+&lt;p&gt;This is how we enable boundary control. We added Horizon plugins to support launch policies. Extended Nova scheduler for location filtering, and glance for policies. Finally we provide a number of tools that work in conjunction (OAT, etc). The end-to-end bits can be done entirely in OSS however.&lt;/p&gt;
+
+&lt;p&gt;This should be upstream in Kilo, however, we (Intel) provide scripts to make this work in Icehouse &amp;amp; Juno.&lt;/p&gt;
+
+&lt;p&gt;Live Demo - Lol WiFi!&lt;/p&gt;
+
+&lt;p&gt;There is no maximum number of tags that can be set, things like GEO, PCI-DSS, etc can be set, these are then used to select the servers from there.&lt;/p&gt;
+
+&lt;p&gt;Magic number of policies: 5. This was in conversation with NIST and MSP&amp;rsquo;s&lt;/p&gt;
+
+&lt;p&gt;Looking forward:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Extend geo-tagging for volumes&lt;/li&gt;
+&lt;li&gt;Tenant-controlled encryption / decryption under controlled circumstances&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Extend geo-tagging for volumes - Basically the above but for Cinder. The scheduler is pluggable, so we should be able to make this happen. The assumption being x86 storage host. This will be more difficult with traditional SAN/NAS due to not being TXT enabled&amp;hellip; &lt;em&gt;yet&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Cookbook - Now on Juno</title>
+      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
+      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
+      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
+
+&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
+cd openstackcookbook
+vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Paris Summit - Day 2</title>
       <link>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2</link>
       <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
@@ -195,25 +214,6 @@
 &lt;li&gt;If the waiter tells you no, he means it.&lt;/li&gt;
 &lt;li&gt;Sausage that says &amp;lt;&lt;AAAAA&gt;&amp;gt; is not your friend.&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>OpenStack Cookbook - Now on Juno</title>
-      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
-      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
-      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
-
-&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
-cd openstackcookbook
-vagrant up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
 </description>
     </item>
     
