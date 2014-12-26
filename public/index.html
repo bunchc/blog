@@ -65,6 +65,57 @@
 
 <article class="post">
     <header>
+      <h2><a href='http://blog.codybunch.com/posts/2014-12-26-Holiday-Zen-Moments'> Holiday Zen Moments</a> </h2>
+      <div class="meta">Fri, Dec 26, 2014</div>
+    </header>
+
+    <p><img src="http://i.imgur.com/iT7TOPI.jpg" alt="I ride because I ride" />
+</p>
+
+<p>It&rsquo;s the holidays WOOOOO! Well, maybe no seven O&rsquo;s woo, but still, a good time nevertheless. On the Zen moments thing, about 6 years ago, my father told me <a href="http://commuteorlando.com/wordpress/2009/02/03/a-zen-master-asks-why-ride-a-bicycle/">this story</a>, and designed the sticker you see above.</p>
+
+<p>The story:</p>
+
+<blockquote>
+<p>Five students of a Zen master was back from the market on their bicycles. As they dismounted, their master asked: &ldquo;Why are you riding your bicycles?”</p>
+
+<p>Each of them came up with different answers to their master’s query.</p>
+
+<p>The first student said: “It is the bicycle that is carrying the sack of potatoes. I am glad that my back has escaped the pain of bearing the weight.”</p>
+
+<p>The master was glad and said: ”You are a smart boy. When you become old you will be saved of a hunch back unlike me.”</p>
+
+<p>The second student had a different answer: ”I love to have my eyes over the trees and the sprawling fields as I go riding.”</p>
+
+<p>The teacher commended: “You have your eyes open and you see the world.”</p>
+
+<p>The third disciple came up with yet a different answer: ”When I ride I am content to chant ‘nam myoho renge kyo’”&gt;</p>
+
+<p>The master spoke words of appreciation: ”Your mind will roll with ease like a newly trued wheel.” &gt;</p>
+
+<p>The fourth disciple said: “Riding my bicycle I live in perfect harmony of things.” &gt;</p>
+
+<p>The pleased master said: ”You are actually riding the golden path of non-harming or non violence.”&gt;</p>
+
+<p>The fifth student said: ”I ride my bicycle to ride my bicycle.” &gt;</p>
+
+<p>The master walked up to him and sat at his feet and said: “I am your disciple!”</p>
+</blockquote>
+
+<p>Having ridden a bicycle for a number of years, I have used it for various means and in various phases. Weight-loss, transportation, racing, harmony with nature, etc. However, over the last several years through varied events, dramas and the like, I have learned that in cycling: &ldquo;I ride because I ride.&rdquo;</p>
+
+<p>If you also ride because you ride, and would like a sticker, either email me (bunchc at gmail) or ping me on twitter and we can arrange something.</p>
+
+    <footer>
+        <a href='http://blog.codybunch.com/posts/2014-12-26-Holiday-Zen-Moments'><nobr>Read more →</nobr></a>
+    </footer>
+</article>
+
+              
+              
+
+<article class="post">
+    <header>
       <h2><a href='http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running'> Live Blog - Cloud Security: Do you know where your workloads are running?</a> </h2>
       <div class="meta">Wed, Nov 5, 2014</div>
     </header>
@@ -554,62 +605,6 @@ history -c
 
     <footer>
         <a href='http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes'><nobr>Read more →</nobr></a>
-    </footer>
-</article>
-
-              
-              
-
-<article class="post">
-    <header>
-      <h2><a href='http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder'> Changing Jenkins Home Folder</a> </h2>
-      <div class="meta">Mon, Oct 27, 2014</div>
-    </header>
-
-    
-
-<p>Everything Jenkins does happens in the context of the jenkins user by default. While that sounds obvious, it has some interesting implications if you aren&rsquo;t careful.</p>
-
-<h2 id="toc_0">The Problem</h2>
-
-<p>In my homelab, I&rsquo;ve installed 14.04 onto a 16gb usb key. This is a hold over from the days when it was an ESXi lab, but, it works for the most part. However, for things like downloading vagrant boxes and the like, one needs to mount external storage. Enter the problem: Jenkins sets itself up in /var/lib/jenkins by default, which lives on my very limited usb stick.</p>
-
-<p>This in turn means anytime Jenkins tried to &lsquo;vagrant up&rsquo; a thing, it would fill my root partition trying to store all the temporary files vagrant used. Whoops.</p>
-
-<h2 id="toc_1">Changing the Jenkins Home Directory</h2>
-
-<p>There are a number of posts out there on how to do this. None of them, however, addressed the vagrant issue in particular. To do that, one has to hit it with a larger bat.</p>
-
-<h3 id="toc_2">First Change /etc/defaults</h3>
-
-<p>The first thing to do, is change how Jenkins thinks of itself. The most straight forward way I found was to change that in /etc/defaults/jenkins. This will be around line 23 or 25:</p>
-
-<pre><code># jenkins home location
-JENKINS_HOME=/new/location
-</code></pre>
-
-<h3 id="toc_3">Then Change /etc/passwd</h3>
-
-<p>This is the step that was needed to fix the problem of Jenkins running vagrant and vagrant subsequently filling /:</p>
-
-<p>Change:
-<code>jenkins:x:105:114:Jenkins,,,:/var/lib/jenkins:/bin/bash</code></p>
-
-<p>To this:
-<code>jenkins:x:105:114:Jenkins,,,:/new/location:/bin/bash</code></p>
-
-<h3 id="toc_4">Finally Restart Jenkins</h3>
-
-<p>Now to make sure all the things stick:</p>
-
-<p><code>sudo /etc/init.d/jenkins restart</code></p>
-
-<h2 id="toc_5">Summary</h2>
-
-<p>In this post we showed you how to change the Jenkins home directory, and why it&rsquo;s also important to change it in /etc/passwd.</p>
-
-    <footer>
-        <a href='http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder'><nobr>Read more →</nobr></a>
     </footer>
 </article>
 
