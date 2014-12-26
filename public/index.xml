@@ -3,7 +3,7 @@
   <channel>
       <title>Recent Content on blog.codybunch.com - The random msuings of an IT guy </title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://blog.codybunch.com/index.xml/</link>
+    <link>http://blog.codybunch.com/index.xml</link>
     
     
     
@@ -11,10 +11,10 @@
     
     <item>
       <title>Live Blog - Cloud Security: Do you know where your workloads are running?</title>
-      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running/</link>
+      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</link>
       <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</guid>
       <description>
 
 &lt;p&gt;Session background can be found &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/98e55a657e2e78e8beacaaacde714a0f&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -56,10 +56,10 @@
     
     <item>
       <title>Live Blog - Keystone to Keystone Federation</title>
-      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Keystone-to-Keystone-Federation/</link>
+      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Keystone-to-Keystone-Federation</link>
       <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Keystone-to-Keystone-Federation/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Keystone-to-Keystone-Federation</guid>
       <description>
 
 &lt;p&gt;Session details &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/f7207fef7547319f322fa5cfee05cf49&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;
@@ -119,30 +119,11 @@
     </item>
     
     <item>
-      <title>OpenStack Cookbook - Now on Juno</title>
-      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno/</link>
-      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno/</guid>
-      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
-
-&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
-cd openstackcookbook
-vagrant up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Paris Summit - Day 2</title>
-      <link>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2/</link>
+      <link>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2</link>
       <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2</guid>
       <description>
 
 &lt;p&gt;Day number 2, Day number 2! He touched the cloud!&lt;/p&gt;
@@ -167,11 +148,30 @@ vagrant up
     </item>
     
     <item>
+      <title>OpenStack Cookbook - Now on Juno</title>
+      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
+      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
+      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
+
+&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
+cd openstackcookbook
+vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Paris Summit - Day 1</title>
-      <link>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</link>
+      <link>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1</link>
       <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1</guid>
       <description>&lt;p&gt;Hooray Paris!&lt;/p&gt;
 
 &lt;p&gt;Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&amp;rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.&lt;/p&gt;
@@ -182,10 +182,10 @@ vagrant up
     
     <item>
       <title>Clone all the USB keys! - Method 3</title>
-      <link>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/</link>
+      <link>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3</link>
       <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3</guid>
       <description>&lt;p&gt;Method 3 you ask? Wel, sure, I &lt;a href=&#34;http://openstack.prov12n.com/usb-key-duplication-on-osx-on-the-cheap/&#34;&gt;wrote on this around&lt;/a&gt; the time of OSCON earlier this year. However, for the OpenStack in Paris, we needed a larger axe. Thanks to &lt;a href=&#34;https://twitter.com/larsbutler&#34;&gt;Lars&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://github.com/cloudnull&#34;&gt;Mr. Cloud Null&lt;/a&gt;, we managed to apply the appropriate amount of strategic violence:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;cat ~/fuckshitup.sh
@@ -211,10 +211,10 @@ done
     
     <item>
       <title>OpenStack Book Discounts During Summit</title>
-      <link>http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit</link>
       <pubDate>Fri, 31 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-31-OpenStack-Book-Discounts-During-Summit</guid>
       <description>
 
 &lt;p&gt;Starting now and running the week of the summit, the two best selling OpenStack books will be on super sale:&lt;/p&gt;
@@ -235,10 +235,10 @@ done
     
     <item>
       <title>Paris Summit Preparation</title>
-      <link>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation</link>
       <pubDate>Wed, 29 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-29-Paris-Summit-Preparation</guid>
       <description>&lt;p&gt;As you might have guessed from the large number of ZeroVM posts recently, that something was up. If you are going to be at the OpenStack Summit in Paris, there will be a ZeroVM workshop given by my coworkers &lt;a href=&#34;https://twitter.com/eglute&#34;&gt;Egle&lt;/a&gt;, &lt;a href=&#34;https://twitter.com/larsbutler&#34;&gt;Lars&lt;/a&gt;, and I.&lt;/p&gt;
 
 &lt;p&gt;This session will be a 90-minute, into the deep end, building applications to work with ZeroVM.&lt;/p&gt;
@@ -256,10 +256,10 @@ done
     
     <item>
       <title>Using Packer to Make Vagrant Boxes</title>
-      <link>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes</link>
       <pubDate>Tue, 28 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-28-Using-Packer-to-Make-Vagrant-Boxes</guid>
       <description>
 
 &lt;p&gt;Part of working on the 3rd edition of the OpenStack Cookbook required, among other things, a new release of Ubuntu that came pre-loaded with the Juno OpenStack packages. Not a problem! Excepting that there were no ready made images on &lt;a href=&#34;http://vagrantcloud.com&#34;&gt;Vagrant Cloud&lt;/a&gt;. Enter Packer.&lt;/p&gt;
@@ -454,10 +454,10 @@ history -c
     
     <item>
       <title>Changing Jenkins Home Folder</title>
-      <link>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder</link>
       <pubDate>Mon, 27 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-27-Changing-Jenkins-Home-Folder</guid>
       <description>
 
 &lt;p&gt;Everything Jenkins does happens in the context of the jenkins user by default. While that sounds obvious, it has some interesting implications if you aren&amp;rsquo;t careful.&lt;/p&gt;
@@ -504,10 +504,10 @@ JENKINS_HOME=/new/location
     
     <item>
       <title>ZeroVM - A ZeroCloud Lab</title>
-      <link>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab</link>
       <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab</guid>
       <description>
 
 &lt;p&gt;At this point we&amp;rsquo;re pretty far down the ZeroVM rabbit hole. We&amp;rsquo;ve covered quite a bit of ground to get to this stage as well. Specific to this post, you will want to know more about ZeroCloud. You can do that &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-13-ZeroVM---Getting-Started-with-ZeroCloud&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -588,10 +588,10 @@ EOF
     
     <item>
       <title>ZeroVM - Getting Started with ZeroCloud</title>
-      <link>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</link>
       <pubDate>Wed, 22 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</guid>
       <description>
 
 &lt;p&gt;If you are getting up to speed on ZeroVM as I am, you will find the following useful:&lt;/p&gt;
@@ -658,10 +658,10 @@ EOF
     
     <item>
       <title>ZeroVM - IO Operations in ZeroVM</title>
-      <link>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels</link>
       <pubDate>Tue, 21 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels</guid>
       <description>
 
 &lt;p&gt;If you are just joining these posts, you might want to take a few minutes and review these other posts on ZeroVM:&lt;/p&gt;
@@ -783,10 +783,10 @@ Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,
     
     <item>
       <title>ZeroVM Link Dump</title>
-      <link>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump</link>
       <pubDate>Mon, 20 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump</guid>
       <description>
 
 &lt;p&gt;Instead of curating my own links this time, my friend and colleague &lt;a href=&#34;http://cczona.com&#34;&gt;Carina C. Zona, ZeroVM&amp;rsquo;s community manager&lt;/a&gt; has gathered these as they relate to ZeroVM:&lt;/p&gt;
@@ -878,10 +878,10 @@ Camuel Gilydov and Constantine Peresypkin at OpenStack Summit [2013-04]
     
     <item>
       <title>ZeroVM - Getting Started, Again</title>
-      <link>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/</link>
+      <link>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again</link>
       <pubDate>Fri, 17 Oct 2014 00:00:00 UTC</pubDate>
       
-      <guid>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/</guid>
+      <guid>http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again</guid>
       <description>
 
 &lt;p&gt;Ok, so now that we&amp;rsquo;ve covered a LOT of ZeroVM background &amp;amp; isolation details, let&amp;rsquo;s actually start to get our hands dirty.&lt;/p&gt;
