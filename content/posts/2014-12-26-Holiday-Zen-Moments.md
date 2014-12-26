@@ -4,6 +4,8 @@ date: 2014-12-26
 categories: 
 ---
 
+Apologies in advance if this is a bit more personal than technical. There is plenty more tech content coming, have no fear.
+
 ![I ride because I ride](http://i.imgur.com/iT7TOPI.jpg)
 
 It's the holidays WOOOOO! Well, maybe no seven O's woo, but still, a good time nevertheless. On the Zen moments thing, about 6 years ago, my father told me [this story](http://commuteorlando.com/wordpress/2009/02/03/a-zen-master-asks-why-ride-a-bicycle/), and designed the sticker you see above.
@@ -34,6 +36,10 @@ The story:
 
 >The master walked up to him and sat at his feet and said: “I am your disciple!”
 
-Having ridden a bicycle for a number of years, I have used it for various means and in various phases. Weight-loss, transportation, racing, harmony with nature, etc. However, over the last several years through varied events, dramas and the like, I have learned that in cycling: "I ride because I ride."
+Having ridden a bicycle for a number of years, I have used it for various means and in various phases. Weight-loss, transportation, racing, harmony with nature, etc. However, over the last several years through varied events, dramas and the like, I have learned that in cycling: "I ride because I ride".
+
+During the holidays, one can get caught up in the presents, people, dramas, and the ever present exhaustion of well, the holidays. Over the years, I've been in all of the above situations and then some. This year, like in cycling, I am trying to "Holidays because I Holidays".
+
+Regardless of how, what, or why you get together this season, try to take a moment, sit back and enjoy them as much as you can.
 
 If you also ride because you ride, and would like a sticker, either email me (bunchc at gmail) or ping me on twitter and we can arrange something.
