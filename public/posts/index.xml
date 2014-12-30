@@ -7,7 +7,69 @@
     
     
     
-    <updated>Fri, 26 Dec 2014 00:00:00 UTC</updated>
+    <updated>Tue, 30 Dec 2014 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Unbreak Email in 2015: 3 folders, 2 times a day, 1 rule</title>
+      <link>http://blog.codybunch.com/posts/2014-12-30-Unbreak-Email-3-folders-2-times-a-day-1-rule</link>
+      <pubDate>Tue, 30 Dec 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-12-30-Unbreak-Email-3-folders-2-times-a-day-1-rule</guid>
+      <description>
+
+&lt;p&gt;With the new year upon us, a lot of you will likely make some manner of commitment to be better at handling communications, process email, and in general, get things done.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a system I&amp;rsquo;ve built / adapted from others who are much more effective at email than I am. The system in general has helped reduce stress and help me focus on and engage better with the parts of email that matter. Because I am lazy, it&amp;rsquo;s also super simple and automated to a degree. I am not prescribing this as a fix to all of your email woes, rather, suggesting that like me, you read, learn, and adapt it to help improve how you handle email next year. (&lt;em&gt;ZOMG RUNON&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s got some basic components, and because lists are a good SEO / Click-Bait thing, that&amp;rsquo;s how we&amp;rsquo;ll arrange it:&lt;/p&gt;
+
+&lt;h1 id=&#34;toc_0&#34;&gt;Unbreak Email&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;3 Folders&lt;/li&gt;
+&lt;li&gt;2 Times a day&lt;/li&gt;
+&lt;li&gt;1 Processing Rule&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;3 Folders&lt;/h2&gt;
+
+&lt;p&gt;It&amp;rsquo;s actually two for processing and one for storing reference material. These folders are:&lt;/p&gt;
+
+&lt;p&gt;-&amp;gt; Inbox
+|-&amp;gt; I&amp;rsquo;m Awesome
+|-&amp;gt; Done&lt;/p&gt;
+
+&lt;p&gt;The basic workflow is that everything lands in the inbox, and gets processed into either the &amp;ldquo;I&amp;rsquo;m Awesome&amp;rdquo; (or Kudos, etc) folder or into the Done folder.&lt;/p&gt;
+
+&lt;p&gt;What is this &amp;ldquo;I&amp;rsquo;m Awesome&amp;rdquo; folder? It actually serves a few needs.&lt;/p&gt;
+
+&lt;p&gt;First and foremost it&amp;rsquo;s a tool to be used around review time. That is, you take any email where someone thanks you for a job well done, a contribution to a project, and other similar things, and place them here. If you do self-reviews, retrospectives, or other similar management things, it is handy to have this as a reminder of the contributions you&amp;rsquo;ve made over that time period, and if need be, remind &lt;em&gt;The Man™&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Second, and no less important, is this folders ability to recharge your batteries. If you start to experience burn out, feel like you aren&amp;rsquo;t having an impact, and other similar feelings, looking back at this folder should remind you a bit about why you do what you do.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;2 Times A Day&lt;/h2&gt;
+
+&lt;p&gt;I generally check email twice a day. That is, across all accounts (gmail, provmware, work, etc). Twice a day.&lt;/p&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t a hard and fast rule. That is, emergencies and other high priority things happen in life that necessitate checking with more frequency.&lt;/p&gt;
+
+&lt;p&gt;For things like collaboration, team communication, social, and more, there are more and better, near instant forms of communication.&lt;/p&gt;
+
+&lt;p&gt;During these processing times, process the &amp;ldquo;Inbox&amp;rdquo; folder first, as this contains everything that is addressed to me, or needs input. Giving these priority let&amp;rsquo;s you address the 20% of email that needs 80% of your attention.&lt;/p&gt;
+
+&lt;p&gt;Next, process the &amp;ldquo;Done&amp;rdquo; folder which will contain mostly automated emails and email list mails. In this case, the &amp;ldquo;One Rule&amp;rdquo; discussed next puts anything and everything that is not addressed directly to you into the Done folder. This is because in the majority of circumstances, mail coming to an email list or from an automated source is informative, but not of major consequence if missed or filed as &amp;ldquo;Done&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;As these emails in this folder are largely informative in nature, skimming them has worked well for me. Skimming strategies however, are best left for another post (or some manner of productivity expert).&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_3&#34;&gt;1 Email Rule&lt;/h2&gt;
+
+&lt;p&gt;The 1 rule to rule them all that I use to support all of the above:&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;On incoming mail, where I am not in the TO: or CC: field, move to &amp;lsquo;Done&amp;rsquo;&amp;ldquo;.&lt;/p&gt;
+
+&lt;p&gt;This enables the bits above, and in one fell swoop, will reduce your load significantly.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Holiday Zen Moments</title>
@@ -170,25 +232,6 @@
     </item>
     
     <item>
-      <title>OpenStack Cookbook - Now on Juno</title>
-      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
-      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
-      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
-
-&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
-cd openstackcookbook
-vagrant up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Paris Summit - Day 2</title>
       <link>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2</link>
       <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
@@ -214,6 +257,25 @@ vagrant up
 &lt;li&gt;If the waiter tells you no, he means it.&lt;/li&gt;
 &lt;li&gt;Sausage that says &amp;lt;&lt;AAAAA&gt;&amp;gt; is not your friend.&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>OpenStack Cookbook - Now on Juno</title>
+      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
+      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
+      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
+
+&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
+cd openstackcookbook
+vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
 </description>
     </item>
     
@@ -829,101 +891,6 @@ Channel = /home/vagrant/nvram.1,/dev/nvram,3,0,4294967296,4294967296,4294967296,
 &lt;h2 id=&#34;toc_6&#34;&gt;Summary&lt;/h2&gt;
 
 &lt;p&gt;In this post we covered how IO is handled in ZeroVM. We first explained the Channel concept, how quotas are handled within channels, and finally, how to add a channel or channels at ZeroVM runtime using a manifest.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ZeroVM Link Dump</title>
-      <link>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump</link>
-      <pubDate>Mon, 20 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump</guid>
-      <description>
-
-&lt;p&gt;Instead of curating my own links this time, my friend and colleague &lt;a href=&#34;http://cczona.com&#34;&gt;Carina C. Zona, ZeroVM&amp;rsquo;s community manager&lt;/a&gt; has gathered these as they relate to ZeroVM:&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Posts by Lars&lt;/h2&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm&#34;&gt;https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.packtpub.com/books/content/zerovm-virtualization-designed-cloud&#34;&gt;https://www.packtpub.com/books/content/zerovm-virtualization-designed-cloud&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;&amp;ldquo;ZeroVM Architecture and ZVM Runtime (ZRT)&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Ryan McKinney at University of Texas San Antonio Cloud &amp;amp; Big Data Laboratory [2014-08-05]
-- &lt;a href=&#34;http://www.slideshare.net/sgt_mac/zero-vm-architecture&#34;&gt;slides (work in progress)&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_2&#34;&gt;&amp;ldquo;Changing the World with ZeroVM and Swift&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Jakub Krajcovic at PyConAU OpenStack Miniconf [2014-08-01]
-- &lt;a href=&#34;https://www.youtube.com/watch?v=e8Jui4EQbB8&amp;amp;list=UUS9sdEyduD9K83K3GkvQlOA&#34;&gt;video&lt;/a&gt;
-- &lt;a href=&#34;http://www.slideshare.net/jakubk/changing-the-world-with-zerovm-and-swift&#34;&gt;slides&lt;/a&gt;
-- &lt;a href=&#34;http://sites.rcbops.com/openstack_miniconf/2014/07/openstack-miniconf-programme-for-pycon-au/&#34;&gt;abstract&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_3&#34;&gt;&amp;ldquo;Deep Dive into ZeroVM&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Van Lindberg at OSCON Expo [2014-07-23]
-- &lt;em&gt;(materials unavailable)&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_4&#34;&gt;&amp;ldquo;What Is ZeroVM?&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Carina C. Zona at OSCON Expo [2014-07-22]
-- &lt;a href=&#34;http://www.slideshare.net/cczona/what-is-zerovm&#34;&gt;slides&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_5&#34;&gt;&amp;ldquo;ZeroVM: Virtualization for the Cloud&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Lars Butler at EuroPython [2014-07-21]
-- &lt;a href=&#34;https://www.youtube.com/watch?v=_a-aMMCSExM&amp;amp;t=32m55s&#34;&gt;video&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_6&#34;&gt;&amp;ldquo;Introduction to ZeroVM&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Muharem Jrnjadovic at Open Cloud Day [2014-07]
-- &lt;a href=&#34;http://player.mashpedia.com/player.php?q=12biEPjZFgY&#34;&gt;video&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_7&#34;&gt;&amp;ldquo;NoSQL - Computable Object Store with OpenStack Swift and ZeroVM&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;(aka &amp;ldquo;Programmable Object Store with OpenStack Swift and ZeroVM&amp;rdquo;)
-Adrian Otto at BigDataCamp [2014-06-14]
-- &lt;a href=&#34;https://www.youtube.com/watch?v=VYZU_4w_dCA&#34;&gt;video&lt;/a&gt;
-- &lt;a href=&#34;http://1e1bd9b12a3230982c98-e2a0e10379dcd0e09ec354fba3ca6600.r72.cf1.rackcdn.com/ZeroCloud.pdf&#34;&gt;slides&lt;/a&gt;
-- &lt;a href=&#34;http://www.campsite.org/bigdatacampla/event/531/session/921&#34;&gt;abstract&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_8&#34;&gt;&amp;ldquo;Using ZeroVM and Swift to Build a Compute Enabled Storage Platform&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Blake Yeager &amp;amp; Camuel Gilydov at OpenStack Summit [2014-05-14]
-- &lt;a href=&#34;https://www.youtube.com/watch?v=oR1RUSdUQCs&#34;&gt;video&lt;/a&gt;
-- &lt;a href=&#34;https://www.openstack.org/assets/presentation-media/ZeroVM-and-OpenStack-Swift.pdf&#34;&gt;slides&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_9&#34;&gt;&amp;ldquo;Using ZeroVM and Swift to Build a Compute Enabled Storage Platform&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Blake Yeager at Open BigCloud Symposium [2014-05-08]
-- &lt;em&gt;(materials unavailable)&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_10&#34;&gt;&amp;ldquo;ZeroVM Background&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Prosunjit Biswas at University of Texas at San Antionio [UTSA] Institute of Cyber Security [2014-04-23]
-- &lt;a href=&#34;http://www.slideshare.net/prosunjit/zerovm-backgroud&#34;&gt;slides&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_11&#34;&gt;&amp;ldquo;Process Virtualization with ZeroVM&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Jakub Krajcovi at rax.io [2014-02-26]
-- &lt;a href=&#34;http://www.slideshare.net/jakubk/how-to-revolutioniseanindustryraxio&#34;&gt;slides&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;##&amp;ldquo;ZeroVM Zwift: OpenStack Platform&amp;rdquo;
-Camuel Gilydov and Constantine Peresypkin at OpenStack Summit [2013-04]
-- &lt;a href=&#34;http://openstacksummitnovember2013.sched.org/event/6baa884625e0da79f8a0d582f0d600dc#.VDw-rb7FPIY&#34;&gt;abstract&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_12&#34;&gt;&amp;ldquo;Big Data on OpenStack&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Camuel Gilydov at OpenStack Isreal [2012-06]
-- &lt;a href=&#34;https://www.youtube.com/watch?v=bbBunW0ms10&#34;&gt;video&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_13&#34;&gt;&amp;ldquo;Containers or VMs: Which Virtualization Technology Works for You?&amp;rdquo;&lt;/h2&gt;
-
-&lt;p&gt;Panel discussion with ZeroVM, Docker, and VMWare at while42 meetup [2014-03-04]
-- &lt;a href=&#34;https://www.youtube.com/watch?v=_Dm1KeC6VRI&#34;&gt;video&lt;/a&gt;
-- &lt;a href=&#34;https://www.eventbrite.com/e/meetnlearn-vm-or-containers-which-virtualization-techno-works-for-you-tickets-10666785643&#34;&gt;info&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
