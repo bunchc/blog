@@ -35,9 +35,10 @@
 
 &lt;p&gt;It&amp;rsquo;s actually two for processing and one for storing reference material. These folders are:&lt;/p&gt;
 
-&lt;p&gt;-&amp;gt; Inbox
-|-&amp;gt; I&amp;rsquo;m Awesome
-|-&amp;gt; Done&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;-&amp;gt; Inbox
+|-&amp;gt; I&#39;m Awesome
+|-&amp;gt; Done
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The basic workflow is that everything lands in the inbox, and gets processed into either the &amp;ldquo;I&amp;rsquo;m Awesome&amp;rdquo; (or Kudos, etc) folder or into the Done folder.&lt;/p&gt;
 
@@ -232,6 +233,25 @@
     </item>
     
     <item>
+      <title>OpenStack Cookbook - Now on Juno</title>
+      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
+      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
+      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
+
+&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
+cd openstackcookbook
+vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Paris Summit - Day 2</title>
       <link>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2</link>
       <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
@@ -257,25 +277,6 @@
 &lt;li&gt;If the waiter tells you no, he means it.&lt;/li&gt;
 &lt;li&gt;Sausage that says &amp;lt;&lt;AAAAA&gt;&amp;gt; is not your friend.&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>OpenStack Cookbook - Now on Juno</title>
-      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
-      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
-      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
-
-&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
-cd openstackcookbook
-vagrant up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
 </description>
     </item>
     

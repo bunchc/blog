@@ -20,9 +20,11 @@ It's got some basic components, and because lists are a good SEO / Click-Bait th
 
 It's actually two for processing and one for storing reference material. These folders are:
 
+```
 -> Inbox
 |-> I'm Awesome
 |-> Done
+```
 
 The basic workflow is that everything lands in the inbox, and gets processed into either the "I'm Awesome" (or Kudos, etc) folder or into the Done folder.
 
