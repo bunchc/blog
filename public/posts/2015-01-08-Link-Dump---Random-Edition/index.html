@@ -7,8 +7,8 @@
 <head>
     <meta charset="utf-8">
     <base href="http://blog.codybunch.com">
-    <title> Clone all the USB keys! - Method 3 </title>
-    <link rel="canonical" href="http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3">
+    <title> Link Dump - Random Edition </title>
+    <link rel="canonical" href="http://blog.codybunch.com/posts/2015-01-08-Link-Dump---Random-Edition">
     
 
 <link rel="stylesheet" href="/css/poole.css">
@@ -54,29 +54,23 @@
 
     
     <div class="container content">
-      <h1 class="post-title">Clone all the USB keys! - Method 3</h1>
+      <h1 class="post-title">Link Dump - Random Edition</h1>
         <section id="main">
-          <h5 id="date"> Mon Nov 3, 2014 </h5>
-          <p>Method 3 you ask? Wel, sure, I <a href="http://openstack.prov12n.com/usb-key-duplication-on-osx-on-the-cheap/">wrote on this around</a> the time of OSCON earlier this year. However, for the OpenStack in Paris, we needed a larger axe. Thanks to <a href="https://twitter.com/larsbutler">Lars</a> &amp; <a href="https://github.com/cloudnull">Mr. Cloud Null</a>, we managed to apply the appropriate amount of strategic violence:</p>
+          <h5 id="date"> Thu Jan 8, 2015 </h5>
+          <p>Today&rsquo;s link dump is brought to you by Google Chrome and my poor swap file.</p>
 
-<pre><code>cat ~/fuckshitup.sh
-#!/bin/bash
-set -e -o -v
-
-for i in `jot 19 3`;
-    do sudo diskutil erasedisk FAT32 PARIS /dev/disk${i}
-done
-
-for i in `jot 19 3`;
-    do sudo diskutil partitionDisk /dev/disk${i} MBR MS-DOS PARIS 0b
-done
-
-for i in `jot 19 3`;
-    do rsync --progress -az /Volumes/PARIS &quot;/Volumes/PARIS $i/&quot; &amp;
-done
-</code></pre>
-
-<p>First it formats all the disks, then it rsyncs all the things.</p>
+<ul>
+<li><a href="https://github.com/prakhar1989/awesome-courses">Things to do in 2015 (Comp Sci Learnings)</a></li>
+<li><a href="http://dcg.ethz.ch/lectures/podc_allstars/lecture/podc.pdf">Principals of Distributed Computing</a></li>
+<li><a href="http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html">Google Distributed Systems Class / Book</a></li>
+<li><a href="http://www.cs.cornell.edu/Courses/CS5412/2014sp/Syllabus.htm">Some Distributed systems slides</a></li>
+<li><a href="http://www.amazon.com/Guide-Reliable-Distributed-Systems-High-Assurance/dp/1447124154">Guide to Reliable Distributed Systems</a></li>
+<li><a href="https://github.com/sophron/wifiphisher">Wifi Phisher</a></li>
+<li><a href="https://github.com/xiam/hyperfox">Hyperfox</a></li>
+<li><a href="https://github.com/buffer/thug">Thug</a></li>
+<li><a href="http://bruteforce.gr/">Some cool projects</a></li>
+<li><a href="http://www.technologyreview.com/twelvetomorrows/14/">Twelve Tomorrows</a></li>
+</ul>
 
         </section>
     </div>
@@ -90,14 +84,10 @@ done
   <hr />
   <hr />
   
-    <span class="left">
-    &nbsp; <em>&laquo; Previous:</em> <a class="next" href="http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2">Paris Summit - Day 2</a>
-    </span>
-  
 
   
     <span class="right">
-    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1"> &nbsp; Paris Summit - Day 1</a> &raquo;
+    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2015-01-07-On-OpenStack-2015-Board-Elections"> &nbsp; On OpenStack 2015 Board Elections</a> &raquo;
     </span>
   
 </div>

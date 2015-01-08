@@ -7,7 +7,30 @@
     
     
     
-    <updated>Wed, 07 Jan 2015 00:00:00 UTC</updated>
+    <updated>Thu, 08 Jan 2015 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Link Dump - Random Edition</title>
+      <link>http://blog.codybunch.com/posts/2015-01-08-Link-Dump---Random-Edition</link>
+      <pubDate>Thu, 08 Jan 2015 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2015-01-08-Link-Dump---Random-Edition</guid>
+      <description>&lt;p&gt;Today&amp;rsquo;s link dump is brought to you by Google Chrome and my poor swap file.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/prakhar1989/awesome-courses&#34;&gt;Things to do in 2015 (Comp Sci Learnings)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://dcg.ethz.ch/lectures/podc_allstars/lecture/podc.pdf&#34;&gt;Principals of Distributed Computing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.hpcs.cs.tsukuba.ac.jp/~tatebe/lecture/h23/dsys/dsd-tutorial.html&#34;&gt;Google Distributed Systems Class / Book&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.cs.cornell.edu/Courses/CS5412/2014sp/Syllabus.htm&#34;&gt;Some Distributed systems slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.amazon.com/Guide-Reliable-Distributed-Systems-High-Assurance/dp/1447124154&#34;&gt;Guide to Reliable Distributed Systems&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sophron/wifiphisher&#34;&gt;Wifi Phisher&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/xiam/hyperfox&#34;&gt;Hyperfox&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/buffer/thug&#34;&gt;Thug&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://bruteforce.gr/&#34;&gt;Some cool projects&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.technologyreview.com/twelvetomorrows/14/&#34;&gt;Twelve Tomorrows&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>On OpenStack 2015 Board Elections</title>
@@ -251,6 +274,25 @@
     </item>
     
     <item>
+      <title>OpenStack Cookbook - Now on Juno</title>
+      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
+      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
+      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
+
+&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
+cd openstackcookbook
+vagrant up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Paris Summit - Day 2</title>
       <link>http://blog.codybunch.com/posts/2014-11-04-Paris-Summit---Day-2</link>
       <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
@@ -276,25 +318,6 @@
 &lt;li&gt;If the waiter tells you no, he means it.&lt;/li&gt;
 &lt;li&gt;Sausage that says &amp;lt;&lt;AAAAA&gt;&amp;gt; is not your friend.&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>OpenStack Cookbook - Now on Juno</title>
-      <link>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</link>
-      <pubDate>Tue, 04 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-04-OpenStack-Cookbook---Now-on-Juno</guid>
-      <description>&lt;p&gt;With the summit this week, I feel it&amp;rsquo;s appropriate to announce that the &lt;a href=&#34;https://github.com/openstackcookbook/openstackcookbook/tree/juno&#34;&gt;scripts supporting the OpenStack Cookbook&lt;/a&gt; have been updated (and are mostly functional) on OpenStack Juno.&lt;/p&gt;
-
-&lt;p&gt;To get started with them, you&amp;rsquo;ll need either VMware Workstation/Fusion or Virtualbox, Vagrant, and Git.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/openstackcookbook/openstackcookbook -b juno
-cd openstackcookbook
-vagrant up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;These scripts will be updated and expanded once again as we being writing on the third edition of the OpenStack Cookbook.&lt;/p&gt;
 </description>
     </item>
     
@@ -715,76 +738,6 @@ EOF
 &lt;h2 id=&#34;toc_3&#34;&gt;Summary&lt;/h2&gt;
 
 &lt;p&gt;In this post, we showed you how to build a ZeroCloud lab and run an example &amp;ldquo;Hello World&amp;rdquo; application within it. If you would like to explore some more complex applications, be sure to explore the various talks and videos &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ZeroVM - Getting Started with ZeroCloud</title>
-      <link>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</link>
-      <pubDate>Wed, 22 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-10-22-ZeroVM---Getting-Started-with-ZeroCloud</guid>
-      <description>
-
-&lt;p&gt;If you are getting up to speed on ZeroVM as I am, you will find the following useful:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background&#34;&gt;Background&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO&#34;&gt;Isolation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/&#34;&gt;IO Operations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/&#34;&gt;Getting Started with ZeroVM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump&#34;&gt;Lots of ZeroVM Resources&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Additionally, this &lt;a href=&#34;https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm&#34;&gt;post&lt;/a&gt; does a great job of explaining how ZeroVM fits when you start to approach middling to large (Read: &lt;em&gt;Big Data&lt;/em&gt;) problems. Go read it now.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Getting Started with ZeroCloud&lt;/h2&gt;
-
-&lt;p&gt;Now that you&amp;rsquo;ve read the &lt;a href=&#34;https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm&#34;&gt;introduction by Lars&lt;/a&gt;, and I trust that you have, we can start looking into the &amp;lsquo;what&amp;rsquo; of ZeroCloud. In this post we&amp;rsquo;ll touch on it&amp;rsquo;s architecture and use case or two. In a subsequent post we&amp;rsquo;ll show you how to build your own small-scale lab for such an environment.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Also go here, watch &lt;a href=&#34;https://www.youtube.com/watch?v=VYZU_4w_dCA&#34;&gt;this&lt;/a&gt;, around the 16:30 mark, pay attention to the &amp;rsquo;t = data / Rate&amp;rsquo; bits.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; This is where things in ZeroVM start to get really cool.&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_1&#34;&gt;ZeroCloud Architecture&lt;/h3&gt;
-
-&lt;p&gt;The best way to describe the what and how of ZeroCloud is with a few diagrams which we will then dive into. These are borrowed form slides in past presentations.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://openstack.prov12n.com/screens/1e1bd9b12a3230982c98-e2a0e10379dcd0e09ec354fba3ca6600.r72.cf1.rackcdn.comZeroCloud.pdf_2014-10-21_13-09-08.jpg&#34; alt=&#34;Highlevel ZeroCloud Architecture&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;This first diagram is a &lt;em&gt;hugely&lt;/em&gt; simplified view of a swift environment, that is, if you have worked with OpenStack Swift it should look familiar enough. The &amp;ldquo;Proxy&amp;rdquo; nodes at the top are Swift Proxies, the Storage Nodes below are well, object storage nodes.&lt;/p&gt;
-
-&lt;p&gt;What changes for ZeroCloud is the addition of a few ZVM parts made available via Swift Middleware. In this case ZVM represents job brokers, some messaging, ZeroVM itself, as well as an &amp;lsquo;executor&amp;rsquo; that handles the connecting of channels and the reading / writing of objects in Swift. This next diagram breaks that down further:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://openstack.prov12n.com/screens/1e1bd9b12a3230982c98-e2a0e10379dcd0e09ec354fba3ca6600.r72.cf1.rackcdn.comZeroCloud.pdf_2014-10-21_13-10-12.jpg&#34; alt=&#34;ZeroCloud Dataflow Architecture&#34; /&gt;
-&lt;/p&gt;
-
-&lt;p&gt;In this diagram, which admittedly is an eyechart, each step in the ZeroVM Swift Middleware is shown. Working left to right:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; The user initiates a job request via the Swift REST API by sending a post request with the code to be executed.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; This hits the Swift Proxy node and is handed to the ZeroVM middleware, which, via a job scheduler finds where the closest replica of your data is, and sends the request along.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; The job arrives at the executor who then fires up a net-new ZeroVM session for the job, opens the required IO Channels to your file* and if needed other ZeroVM sessions.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; The ZeroVM job, finished with it&amp;rsquo;s work, sends the response back up to the Proxy Server who then serves the response back to the user.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;em&gt;Note:&lt;/em&gt; re: file in #3, in the default configuration this is a net new copy of the file rather than the actual object itself. This prevents accidental damage to the file.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;toc_2&#34;&gt;ZeroCloud Use Cases&lt;/h3&gt;
-
-&lt;p&gt;So what do you do with a deterministic, computable, distributed data store? Some things that jump to mind are things like &amp;ldquo;A Giant MapReduce Cluster&amp;rdquo;, similar to the one described &lt;a href=&#34;https://www.packtpub.com/books/content/mapreduce-openstack-swift-and-zerovm&#34;&gt;here&lt;/a&gt;. As Lars describes, ZeroCloud can address one of the biggest MapReduce computational issues, that is data locality.&lt;/p&gt;
-
-&lt;p&gt;In addition to MapReduce type workloads, what else can one do? One could couple ElasticSeach and Log Stash, and indeed serve Kibana directly from Zero Cloud. Video trans-coding is another use case that I&amp;rsquo;ve seen.&lt;/p&gt;
-
-&lt;p&gt;ZeroVM/ZeroCloud then, works well when you have a data heavy workload that would benefit being attacked in a distributed fashion.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_3&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;In this post we introduced you to ZeroCloud, the amalgamation of ZeroVM and OpenStack Swift. We dove into the architecture of ZeroCloud and introduced some use cases where having programmable distributed storage system is insanely useful.&lt;/p&gt;
 </description>
     </item>
     
