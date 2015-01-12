@@ -7,7 +7,176 @@
     
     
     
-    <updated>Thu, 08 Jan 2015 00:00:00 UTC</updated>
+    <updated>Fri, 09 Jan 2015 00:00:00 UTC</updated>
+    
+    <item>
+      <title>Basic Server Hardening with Salt</title>
+      <link>http://blog.codybunch.com/posts/2015-01-09-Basic-Server-Hardening-with-Salt</link>
+      <pubDate>Fri, 09 Jan 2015 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2015-01-09-Basic-Server-Hardening-with-Salt</guid>
+      <description>
+
+&lt;p&gt;Before we get started, take a gander at my last few posts on this, &lt;a href=&#34;http://openstack.prov12n.com/basic-hardening-part-2-using-heat-templates/&#34;&gt;here&lt;/a&gt; and &lt;a href=&#34;http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The idea here is roughly the same. That is, build a small, basic &amp;lsquo;base&amp;rsquo; profile, template, state, or whatever, that has some simple hardening bits applied. The idea being to give you a reasonable start in turn letting you apply additional layers down the road.&lt;/p&gt;
+
+&lt;p&gt;The reason you&amp;rsquo;d move away from doing this with OpenStack Orchestration (Heat) and into a config management tool is that it allows you to apply the same practices more generically. That is not everyone runs OpenStack, but lots of folks are moving to some flavor of configuration management tool, if they weren&amp;rsquo;t there already. You can then include these SaltStates in Heat or whatever orchestration tool of choice.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Basic Hardening with SaltStack&lt;/h2&gt;
+
+&lt;p&gt;For the sake of not making this a &lt;em&gt;huge-tastic&lt;/em&gt; blog post, we&amp;rsquo;ll skip the part where I explain the what and how of getting started with SaltStack. Many others have done better than I. What follows is my top.sls, secureserver.sls and sysctl.sys files.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_1&#34;&gt;top.sls&lt;/h3&gt;
+
+&lt;p&gt;This file controls what Salt minions get what &amp;lsquo;states&amp;rsquo;. For securing &lt;em&gt;all&lt;/em&gt; the servers, that&amp;rsquo;s pretty straight forward. I would like to call out, however, the ordering of the states:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;base:
+  &#39;*&#39;:
+    - sysctl
+    - secureserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This defines a &amp;lsquo;base&amp;rsquo; state that will match for all Salt minions. (Minion is Salt for agent.) It then states to apply first the sysctl state, then the secureserver state.&lt;/p&gt;
+
+&lt;h3 id=&#34;toc_2&#34;&gt;sysctl.sls&lt;/h3&gt;
+
+&lt;p&gt;There isn&amp;rsquo;t much fancy to this file. In fact, it&amp;rsquo;s more or less a YAML formatted version of what you&amp;rsquo;d throw into &lt;code&gt;/etc/sysctl.conf&lt;/code&gt;. What the lines below do is turn off IP routing, ignore broadcasts, responses, and all manner of other fun icmp stuff.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;net.ipv4.icmp_echo_ignore_broadcasts:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.icmp_ignore_bogus_error_responses:
+  sysctl.present:
+  - value: 1
+
+net.ipv4.tcp_syncookies:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.all.log_martians:
+  sysctl.present:
+  - value: 1
+
+net.ipv4.conf.default.log_martians:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.all.accept_source_route:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.accept_source_route:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.all.rp_filter:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.default.rp_filter:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.all.accept_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.accept_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.all.secure_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.secure_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.ip_forward:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.all.send_redirects:
+    sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.send_redirects:
+  sysctl.present:
+    - value: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;toc_3&#34;&gt;secureserver.sls&lt;/h3&gt;
+
+&lt;p&gt;This file, unlike the sysctl bits, actually does some install and config bits. If you&amp;rsquo;ve read the post I mentioned at the beginning of this post, you&amp;rsquo;ll recognize the packages being installed.&lt;/p&gt;
+
+&lt;p&gt;The configure bits are two fold: 1) We configure logwatch using a file hosted on the Salt master; 2) We configure IP tables to allow ssh and deny all the other things:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;iptables:
+  pkg:
+    - installed
+
+denyhosts:
+  pkg:
+    - installed
+
+psad:
+  pkg:
+    - installed
+
+fail2ban:
+  pkg:
+    - installed
+
+logwatch:
+  pkg:
+    - installed
+
+aide:
+  pkg:
+    - installed
+
+/etc/cron.daily/00logwatch:
+  file:
+    - managed
+    - source: salt://cron.daily/00logwatch
+    - require:
+      - pkg: logwatch
+
+ssh:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - jump: ACCEPT
+    - match: state
+    - connstate: NEW
+    - dport: 22
+    - proto: tcp
+    - sport: 1025:65535
+    - save: True
+
+allow established:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - match: state
+    - connstate: ESTABLISHED
+    - jump: ACCEPT
+
+default to reject:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - jump: REJECT
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;toc_4&#34;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;In this post we&amp;rsquo;ve covered how to do some very very basic hardening of your server using SaltStack. This likely wont work for all circumstances (like if you&amp;rsquo;re going to actually run nginx or apache, you need to add those ports accordingly).&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Link Dump - Random Edition</title>
@@ -322,6 +491,20 @@ vagrant up
     </item>
     
     <item>
+      <title>Paris Summit - Day 1</title>
+      <link>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1</link>
+      <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1</guid>
+      <description>&lt;p&gt;Hooray Paris!&lt;/p&gt;
+
+&lt;p&gt;Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&amp;rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.&lt;/p&gt;
+
+&lt;p&gt;I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a &lt;a href=&#34;http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/&#34;&gt;full schedule&lt;/a&gt; of 100-ish more this week.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Clone all the USB keys! - Method 3</title>
       <link>http://blog.codybunch.com/posts/2014-11-03-Clone-all-the-USB-keys---Method-3</link>
       <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
@@ -347,20 +530,6 @@ done
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;First it formats all the disks, then it rsyncs all the things.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Paris Summit - Day 1</title>
-      <link>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1</link>
-      <pubDate>Mon, 03 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-03-Paris-Summit---Day-1</guid>
-      <description>&lt;p&gt;Hooray Paris!&lt;/p&gt;
-
-&lt;p&gt;Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&amp;rsquo;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.&lt;/p&gt;
-
-&lt;p&gt;I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a &lt;a href=&#34;http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/&#34;&gt;full schedule&lt;/a&gt; of 100-ish more this week.&lt;/p&gt;
 </description>
     </item>
     
@@ -654,90 +823,6 @@ JENKINS_HOME=/new/location
 &lt;h2 id=&#34;toc_5&#34;&gt;Summary&lt;/h2&gt;
 
 &lt;p&gt;In this post we showed you how to change the Jenkins home directory, and why it&amp;rsquo;s also important to change it in /etc/passwd.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>ZeroVM - A ZeroCloud Lab</title>
-      <link>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab</link>
-      <pubDate>Thu, 23 Oct 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-10-23-ZeroVM---A-ZeroCloud-Lab</guid>
-      <description>
-
-&lt;p&gt;At this point we&amp;rsquo;re pretty far down the ZeroVM rabbit hole. We&amp;rsquo;ve covered quite a bit of ground to get to this stage as well. Specific to this post, you will want to know more about ZeroCloud. You can do that &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-13-ZeroVM---Getting-Started-with-ZeroCloud&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Regarding getting up to speed on ZeroVM as I am, you will find the following useful:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-15-ZeroVM---Some-Background&#34;&gt;Background&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-16-ZeroVM---Security-Isolation-and-IO&#34;&gt;Isolation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-21-ZeroVM---IO--Channels/&#34;&gt;IO Operations&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-17-ZeroVM---Getting-Started-Again/&#34;&gt;Getting Started with ZeroVM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump&#34;&gt;Lots of ZeroVM Resources&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Building The ZeroCloud Lab&lt;/h2&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;There are a few ways of going about this, however before we get started, realize that this is still early days and if you find this post a few months or a year or two down the road, it will likely be super out of date.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To get working with ZeroCloud, the most straight forward path is to follow the directions in the ZeroVM Docs &lt;a href=&#34;http://docs.zerovm.org/zerocloud/devenv.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Once you&amp;rsquo;ve finished, you should have a functional ZeroCloud lab.&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_1&#34;&gt;Experimenting in the ZeroCloud Lab&lt;/h2&gt;
-
-&lt;p&gt;Having a lab up in running is one thing, but it&amp;rsquo;s rather boring thing by itself. So, let&amp;rsquo;s do something with it!&lt;/p&gt;
-
-&lt;h3 id=&#34;toc_2&#34;&gt;ZeroCloud Hello World Example&lt;/h3&gt;
-
-&lt;p&gt;The first thing we&amp;rsquo;ll try to do, is a generic &amp;ldquo;Hello World&amp;rdquo; example, taken from &lt;a href=&#34;http://docs.zerovm.org/zerocloud/runningcode.html&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; Log into the lab:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vagrant ssh
-
-cd devstack/
-./rejoin-stack.sh
-source /vagrant/adminrc
-
-zpm auth
-export OS_AUTH_TOKEN=PKIZ_Zrz_Qa5NJm44FWeF7Wp...
-export OS_STORAGE_URL=http://127.0.0.1:8080/v1/AUTH_7fbcd8784f8843a180cf187bbb12e49c
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; You will need to change the AUTH_TOKEN and STORAGE_URL values to match those returned by zpm auth.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Create our &amp;ldquo;Hello World&amp;rdquo; python file:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cat &amp;gt; example &amp;lt;&amp;lt;EOF
-#!file://python2.7:python
-import sys
-print(&amp;quot;Hello from ZeroVM!&amp;quot;)
-print(&amp;quot;sys.platform is &#39;%s&#39;&amp;quot; % sys.platform)
-EOF
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Now we run the example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl -i -X POST -H &amp;quot;X-Auth-Token: $OS_AUTH_TOKEN&amp;quot; \
-  -H &amp;quot;X-Zerovm-Execute: 1.0&amp;quot; -H &amp;quot;Content-Type: application/python&amp;quot; \
-  --data-binary @example $OS_STORAGE_URL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Ok, so what did we do then? In the first step we logged in to our lab, sourced a file that contains credentials for our environment, and then set some additional environment variables to store our auth token and swift url.&lt;/p&gt;
-
-&lt;p&gt;Next we created the hello-world example file. In the absence of a text editor we just dumped everything between &amp;ldquo;&amp;lt;&amp;lt;EOF&amp;rdquo; and &amp;ldquo;EOF&amp;rdquo; into the file &amp;lsquo;example&amp;rsquo;. Note the first line in the file begins with &lt;code&gt;#!file://&lt;/code&gt;. This is important as it lets the parser know what to do with said file, in this case, fire up python.&lt;/p&gt;
-
-&lt;p&gt;Finally, we use curl against our Swift install, letting it know to jump out to the ZeroVM middleware and that our application type is python. Additionally we specify our entire program as the payload in &lt;code&gt;--data-binary&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;toc_3&#34;&gt;Summary&lt;/h2&gt;
-
-&lt;p&gt;In this post, we showed you how to build a ZeroCloud lab and run an example &amp;ldquo;Hello World&amp;rdquo; application within it. If you would like to explore some more complex applications, be sure to explore the various talks and videos &lt;a href=&#34;http://blog.codybunch.com/posts/2014-10-20-ZeroVM-Link-Dump&#34;&gt;here.&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
