@@ -182,6 +182,11 @@ default to reject:
 &lt;li&gt;&lt;a href=&#34;https://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics&#34;&gt;https://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/&#34;&gt;http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers&#34;&gt;http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.softpanorama.org/Net/Transport_layer/hardening_tcp_stack_in_linux.shtml&#34;&gt;http://www.softpanorama.org/Net/Transport_layer/hardening_tcp_stack_in_linux.shtml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.saltstack.com/en/latest/ref/states/all/salt.states.sysctl.html&#34;&gt;http://docs.saltstack.com/en/latest/ref/states/all/salt.states.sysctl.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.ssh.html&#34;&gt;http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.ssh.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://linuxconfig.org/collection-of-basic-linux-firewall-iptables-rules&#34;&gt;http://linuxconfig.org/collection-of-basic-linux-firewall-iptables-rules&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://docs.saltstack.com/en/latest/ref/states/all/salt.states.iptables.html&#34;&gt;http://docs.saltstack.com/en/latest/ref/states/all/salt.states.iptables.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -342,51 +347,6 @@ default to reject:
     </item>
     
     <item>
-      <title>Live Blog - Cloud Security: Do you know where your workloads are running?</title>
-      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</link>
-      <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
-      
-      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</guid>
-      <description>
-
-&lt;p&gt;Session background can be found &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/98e55a657e2e78e8beacaaacde714a0f&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Speaker: Raghu Yeluri, Intel Corporation&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;As an Enterprise and/or a Cloud service provider, you would have to ensure that all regulatory requirements for workload and data sovereignty are met.   You have to answer the questions from your customers like:&lt;/p&gt;
-
-&lt;p&gt;where is my workload running? ,  Are my workloads running in a compliant location? ,  How can I trust the Integrity of the host servers on which my workloads are running , can you prove to me that my workloads and data have not violated policies? , How can I control via policy where my workload can and cannot migrate and run .&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;toc_0&#34;&gt;Live Blog&lt;/h2&gt;
-
-&lt;p&gt;Geo Tag / Asset tags are set in a write once area. Can be almost anything, user provided names, gps coordinates, actual asset tags, and importantly, the certificate of attestation from the TPM.&lt;/p&gt;
-
-&lt;p&gt;Today we&amp;rsquo;re using Glance Image Registry to set the launch properties / policies: e.g. Only runs in France. The &amp;ldquo;Trust and Launch&amp;rdquo; scheduler filter runs last against the list of servers left. It then runs a variant of Open Attestation to say, &amp;ldquo;Which are trusted?&amp;rdquo;. From there, the scheduler will deploy. This is all automatic. Only setting the tags is manual. This same attestation happens during migrations as well.&lt;/p&gt;
-
-&lt;p&gt;This is how we enable boundary control. We added Horizon plugins to support launch policies. Extended Nova scheduler for location filtering, and glance for policies. Finally we provide a number of tools that work in conjunction (OAT, etc). The end-to-end bits can be done entirely in OSS however.&lt;/p&gt;
-
-&lt;p&gt;This should be upstream in Kilo, however, we (Intel) provide scripts to make this work in Icehouse &amp;amp; Juno.&lt;/p&gt;
-
-&lt;p&gt;Live Demo - Lol WiFi!&lt;/p&gt;
-
-&lt;p&gt;There is no maximum number of tags that can be set, things like GEO, PCI-DSS, etc can be set, these are then used to select the servers from there.&lt;/p&gt;
-
-&lt;p&gt;Magic number of policies: 5. This was in conversation with NIST and MSP&amp;rsquo;s&lt;/p&gt;
-
-&lt;p&gt;Looking forward:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Extend geo-tagging for volumes&lt;/li&gt;
-&lt;li&gt;Tenant-controlled encryption / decryption under controlled circumstances&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Extend geo-tagging for volumes - Basically the above but for Cinder. The scheduler is pluggable, so we should be able to make this happen. The assumption being x86 storage host. This will be more difficult with traditional SAN/NAS due to not being TXT enabled&amp;hellip; &lt;em&gt;yet&lt;/em&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Live Blog - Keystone to Keystone Federation</title>
       <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Keystone-to-Keystone-Federation</link>
       <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
@@ -447,6 +407,51 @@ default to reject:
 &lt;li&gt;Fine Grained ACLs&lt;/li&gt;
 &lt;li&gt;More protocols&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Live Blog - Cloud Security: Do you know where your workloads are running?</title>
+      <link>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</link>
+      <pubDate>Wed, 05 Nov 2014 00:00:00 UTC</pubDate>
+      
+      <guid>http://blog.codybunch.com/posts/2014-11-05-Live-Blog---Cloud-Security-Do-you-know-where-your-workloads-are-running</guid>
+      <description>
+
+&lt;p&gt;Session background can be found &lt;a href=&#34;https://openstacksummitnovember2014paris.sched.org/event/98e55a657e2e78e8beacaaacde714a0f&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Speaker: Raghu Yeluri, Intel Corporation&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;As an Enterprise and/or a Cloud service provider, you would have to ensure that all regulatory requirements for workload and data sovereignty are met.   You have to answer the questions from your customers like:&lt;/p&gt;
+
+&lt;p&gt;where is my workload running? ,  Are my workloads running in a compliant location? ,  How can I trust the Integrity of the host servers on which my workloads are running , can you prove to me that my workloads and data have not violated policies? , How can I control via policy where my workload can and cannot migrate and run .&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Live Blog&lt;/h2&gt;
+
+&lt;p&gt;Geo Tag / Asset tags are set in a write once area. Can be almost anything, user provided names, gps coordinates, actual asset tags, and importantly, the certificate of attestation from the TPM.&lt;/p&gt;
+
+&lt;p&gt;Today we&amp;rsquo;re using Glance Image Registry to set the launch properties / policies: e.g. Only runs in France. The &amp;ldquo;Trust and Launch&amp;rdquo; scheduler filter runs last against the list of servers left. It then runs a variant of Open Attestation to say, &amp;ldquo;Which are trusted?&amp;rdquo;. From there, the scheduler will deploy. This is all automatic. Only setting the tags is manual. This same attestation happens during migrations as well.&lt;/p&gt;
+
+&lt;p&gt;This is how we enable boundary control. We added Horizon plugins to support launch policies. Extended Nova scheduler for location filtering, and glance for policies. Finally we provide a number of tools that work in conjunction (OAT, etc). The end-to-end bits can be done entirely in OSS however.&lt;/p&gt;
+
+&lt;p&gt;This should be upstream in Kilo, however, we (Intel) provide scripts to make this work in Icehouse &amp;amp; Juno.&lt;/p&gt;
+
+&lt;p&gt;Live Demo - Lol WiFi!&lt;/p&gt;
+
+&lt;p&gt;There is no maximum number of tags that can be set, things like GEO, PCI-DSS, etc can be set, these are then used to select the servers from there.&lt;/p&gt;
+
+&lt;p&gt;Magic number of policies: 5. This was in conversation with NIST and MSP&amp;rsquo;s&lt;/p&gt;
+
+&lt;p&gt;Looking forward:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Extend geo-tagging for volumes&lt;/li&gt;
+&lt;li&gt;Tenant-controlled encryption / decryption under controlled circumstances&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Extend geo-tagging for volumes - Basically the above but for Cinder. The scheduler is pluggable, so we should be able to make this happen. The assumption being x86 storage host. This will be more difficult with traditional SAN/NAS due to not being TXT enabled&amp;hellip; &lt;em&gt;yet&lt;/em&gt;.&lt;/p&gt;
 </description>
     </item>
     

@@ -170,3 +170,8 @@ In this post we've covered how to do some very very basic hardening of your serv
 - [https://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics](https://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics)
 - [http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/](http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/)
 - [http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers)
+- [http://www.softpanorama.org/Net/Transport_layer/hardening_tcp_stack_in_linux.shtml](http://www.softpanorama.org/Net/Transport_layer/hardening_tcp_stack_in_linux.shtml)
+- [http://docs.saltstack.com/en/latest/ref/states/all/salt.states.sysctl.html](http://docs.saltstack.com/en/latest/ref/states/all/salt.states.sysctl.html)
+- [http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.ssh.html](http://docs.saltstack.com/en/latest/ref/modules/all/salt.modules.ssh.html)
+- [http://linuxconfig.org/collection-of-basic-linux-firewall-iptables-rules](http://linuxconfig.org/collection-of-basic-linux-firewall-iptables-rules)
+- [http://docs.saltstack.com/en/latest/ref/states/all/salt.states.iptables.html](http://docs.saltstack.com/en/latest/ref/states/all/salt.states.iptables.html)
