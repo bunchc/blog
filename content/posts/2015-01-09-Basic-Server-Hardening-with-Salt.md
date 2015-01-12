@@ -165,3 +165,8 @@ default to reject:
 ## Summary
 
 In this post we've covered how to do some very very basic hardening of your server using SaltStack. This likely wont work for all circumstances (like if you're going to actually run nginx or apache, you need to add those ports accordingly).
+
+## Resources
+- [https://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics](https://www.thefanclub.co.za/how-to/how-secure-ubuntu-1204-lts-server-part-1-basics)
+- [http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/](http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/)
+- [http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers](http://plusbryan.com/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers)
