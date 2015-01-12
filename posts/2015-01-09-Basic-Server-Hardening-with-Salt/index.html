@@ -1,0 +1,283 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <base href="http://blog.codybunch.com">
+    <title> Basic Server Hardening with Salt </title>
+    <link rel="canonical" href="http://blog.codybunch.com/posts/2015-01-09-Basic-Server-Hardening-with-Salt">
+    
+
+<link rel="stylesheet" href="/css/poole.css">
+<link rel="stylesheet" href="/css/syntax.css">
+<link rel="stylesheet" href="/css/lanyon.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+</head>
+
+
+<body class="theme-base-08">
+  
+
+
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+
+<div class="sidebar" id="sidebar">
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    <a class="sidebar-nav-item" href="/posts">Blog</a>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2014 Spencer Lyon. Powered by <a href="http://hugo.spf13.com">Hugo</a>. Design adapted from <a href="http://lanyon.getpoole.com">Lanyon</a>.
+    </p>
+  </div>
+</div>
+
+
+  
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          <a href="/posts" title="Blog">Blog Posts</a>
+        </h3>
+      </div>
+    </div>
+
+    
+    <div class="container content">
+      <h1 class="post-title">Basic Server Hardening with Salt</h1>
+        <section id="main">
+          <h5 id="date"> Fri Jan 9, 2015 </h5>
+          
+
+<p>Before we get started, take a gander at my last few posts on this, <a href="http://openstack.prov12n.com/basic-hardening-part-2-using-heat-templates/">here</a> and <a href="http://openstack.prov12n.com/basic-hardening-with-user-data-cloud-init/">here</a>.</p>
+
+<p>The idea here is roughly the same. That is, build a small, basic &lsquo;base&rsquo; profile, template, state, or whatever, that has some simple hardening bits applied. The idea being to give you a reasonable start in turn letting you apply additional layers down the road.</p>
+
+<p>The reason you&rsquo;d move away from doing this with OpenStack Orchestration (Heat) and into a config management tool is that it allows you to apply the same practices more generically. That is not everyone runs OpenStack, but lots of folks are moving to some flavor of configuration management tool, if they weren&rsquo;t there already. You can then include these SaltStates in Heat or whatever orchestration tool of choice.</p>
+
+<h2 id="toc_0">Basic Hardening with SaltStack</h2>
+
+<p>For the sake of not making this a <em>huge-tastic</em> blog post, we&rsquo;ll skip the part where I explain the what and how of getting started with SaltStack. Many others have done better than I. What follows is my top.sls, secureserver.sls and sysctl.sys files.</p>
+
+<h3 id="toc_1">top.sls</h3>
+
+<p>This file controls what Salt minions get what &lsquo;states&rsquo;. For securing <em>all</em> the servers, that&rsquo;s pretty straight forward. I would like to call out, however, the ordering of the states:</p>
+
+<pre><code>base:
+  '*':
+    - sysctl
+    - secureserver
+</code></pre>
+
+<p>This defines a &lsquo;base&rsquo; state that will match for all Salt minions. (Minion is Salt for agent.) It then states to apply first the sysctl state, then the secureserver state.</p>
+
+<h3 id="toc_2">sysctl.sls</h3>
+
+<p>There isn&rsquo;t much fancy to this file. In fact, it&rsquo;s more or less a YAML formatted version of what you&rsquo;d throw into <code>/etc/sysctl.conf</code>. What the lines below do is turn off IP routing, ignore broadcasts, responses, and all manner of other fun icmp stuff.</p>
+
+<pre><code>net.ipv4.icmp_echo_ignore_broadcasts:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.icmp_ignore_bogus_error_responses:
+  sysctl.present:
+  - value: 1
+
+net.ipv4.tcp_syncookies:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.all.log_martians:
+  sysctl.present:
+  - value: 1
+
+net.ipv4.conf.default.log_martians:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.all.accept_source_route:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.accept_source_route:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.all.rp_filter:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.default.rp_filter:
+  sysctl.present:
+    - value: 1
+
+net.ipv4.conf.all.accept_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.accept_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.all.secure_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.secure_redirects:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.ip_forward:
+  sysctl.present:
+    - value: 0
+
+net.ipv4.conf.all.send_redirects:
+    sysctl.present:
+    - value: 0
+
+net.ipv4.conf.default.send_redirects:
+  sysctl.present:
+    - value: 0
+</code></pre>
+
+<h3 id="toc_3">secureserver.sls</h3>
+
+<p>This file, unlike the sysctl bits, actually does some install and config bits. If you&rsquo;ve read the post I mentioned at the beginning of this post, you&rsquo;ll recognize the packages being installed.</p>
+
+<p>The configure bits are two fold: 1) We configure logwatch using a file hosted on the Salt master; 2) We configure IP tables to allow ssh and deny all the other things:</p>
+
+<pre><code>iptables:
+  pkg:
+    - installed
+
+denyhosts:
+  pkg:
+    - installed
+
+psad:
+  pkg:
+    - installed
+
+fail2ban:
+  pkg:
+    - installed
+
+logwatch:
+  pkg:
+    - installed
+
+aide:
+  pkg:
+    - installed
+
+/etc/cron.daily/00logwatch:
+  file:
+    - managed
+    - source: salt://cron.daily/00logwatch
+    - require:
+      - pkg: logwatch
+
+ssh:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - jump: ACCEPT
+    - match: state
+    - connstate: NEW
+    - dport: 22
+    - proto: tcp
+    - sport: 1025:65535
+    - save: True
+
+allow established:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - match: state
+    - connstate: ESTABLISHED
+    - jump: ACCEPT
+
+default to reject:
+  iptables.append:
+    - table: filter
+    - chain: INPUT
+    - jump: REJECT
+</code></pre>
+
+<h2 id="toc_4">Summary</h2>
+
+<p>In this post we&rsquo;ve covered how to do some very very basic hardening of your server using SaltStack. This likely wont work for all circumstances (like if you&rsquo;re going to actually run nginx or apache, you need to add those ports accordingly).</p>
+
+        </section>
+    </div>
+  </div>
+
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  
+
+<div class="container">
+  <hr />
+  <hr />
+  
+
+  
+    <span class="right">
+    <em>Next: </em><a class="next" href="http://blog.codybunch.com/posts/2015-01-08-Link-Dump---Random-Edition"> &nbsp; Link Dump - Random Edition</a> &raquo;
+    </span>
+  
+</div>
+
+  <br />
+  
+<div class="container">
+  <ul class="catlist">
+    <li><em>Categories: </em></li>
+    
+  </ul>
+</div>
+
+
+
+  
+  
+
+<div class="container content">
+<footer>
+  <div>
+    <p class="right credit">
+    Fancy footer here. Link to <a href="/">Home Page</a>
+    </p>
+  </div>
+</footer>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-36732392-2', 'sglyon.com');
+  ga('send', 'pageview');
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
