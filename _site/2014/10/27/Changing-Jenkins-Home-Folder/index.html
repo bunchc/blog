@@ -1,0 +1,37 @@
+<p>Everything Jenkins does happens in the context of the jenkins user by default. While that sounds obvious, it has some interesting implications if you aren&#39;t careful. </p>
+
+<h2>The Problem</h2>
+
+<p>In my homelab, I&#39;ve installed 14.04 onto a 16gb usb key. This is a hold over from the days when it was an ESXi lab, but, it works for the most part. However, for things like downloading vagrant boxes and the like, one needs to mount external storage. Enter the problem: Jenkins sets itself up in /var/lib/jenkins by default, which lives on my very limited usb stick.</p>
+
+<p>This in turn means anytime Jenkins tried to &#39;vagrant up&#39; a thing, it would fill my root partition trying to store all the temporary files vagrant used. Whoops.</p>
+
+<h2>Changing the Jenkins Home Directory</h2>
+
+<p>There are a number of posts out there on how to do this. None of them, however, addressed the vagrant issue in particular. To do that, one has to hit it with a larger bat.</p>
+
+<h3>First Change /etc/defaults</h3>
+
+<p>The first thing to do, is change how Jenkins thinks of itself. The most straight forward way I found was to change that in /etc/defaults/jenkins. This will be around line 23 or 25:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"># jenkins home location
+JENKINS_HOME=/new/location
+</code></pre></div>
+<h3>Then Change /etc/passwd</h3>
+
+<p>This is the step that was needed to fix the problem of Jenkins running vagrant and vagrant subsequently filling /:</p>
+
+<p>Change:
+<code>jenkins:x:105:114:Jenkins,,,:/var/lib/jenkins:/bin/bash</code></p>
+
+<p>To this:
+<code>jenkins:x:105:114:Jenkins,,,:/new/location:/bin/bash</code></p>
+
+<h3>Finally Restart Jenkins</h3>
+
+<p>Now to make sure all the things stick:</p>
+
+<p><code>sudo /etc/init.d/jenkins restart</code></p>
+
+<h2>Summary</h2>
+
+<p>In this post we showed you how to change the Jenkins home directory, and why it&#39;s also important to change it in /etc/passwd.</p>

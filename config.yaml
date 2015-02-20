@@ -1,9 +1,0 @@
----
-contentdir: "content"
-layoutdir: "layouts"
-publishdir: "public"
-indexes:
-  category: "categories"
-baseurl: "http://blog.codybunch.com"
-title: "blog.codybunch.com - The random msuings of an IT guy"
-...

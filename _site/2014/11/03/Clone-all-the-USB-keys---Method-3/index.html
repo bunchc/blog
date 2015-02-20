@@ -1,0 +1,18 @@
+<p>Method 3 you ask? Wel, sure, I <a href="http://openstack.prov12n.com/usb-key-duplication-on-osx-on-the-cheap/">wrote on this around</a> the time of OSCON earlier this year. However, for the OpenStack in Paris, we needed a larger axe. Thanks to <a href="https://twitter.com/larsbutler">Lars</a> &amp; <a href="https://github.com/cloudnull">Mr. Cloud Null</a>, we managed to apply the appropriate amount of strategic violence:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">cat ~/fuckshitup.sh
+#!/bin/bash
+set -e -o -v
+
+for i in `jot 19 3`;
+    do sudo diskutil erasedisk FAT32 PARIS /dev/disk${i}
+done
+
+for i in `jot 19 3`;
+    do sudo diskutil partitionDisk /dev/disk${i} MBR MS-DOS PARIS 0b
+done
+
+for i in `jot 19 3`;
+    do rsync --progress -az /Volumes/PARIS &quot;/Volumes/PARIS $i/&quot; &amp;
+done
+</code></pre></div>
+<p>First it formats all the disks, then it rsyncs all the things.</p>

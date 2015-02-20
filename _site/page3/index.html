@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Cody Bunch &middot; Some Random IT Guy - OpenStack, DevOps, Cloud, Things
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Offering all manner of technical how-to (and how not to) and other technical content. I specalize in OpenStack, VMware, and most things automation and cloud related.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/about/">About</a>
+        
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+
+    <a class="sidebar-nav-item" href="/archive/v1.0.0.zip">Download</a>
+    <a class="sidebar-nav-item" href="">GitHub project</a>
+    <span class="sidebar-nav-item">Currently v1.0.0</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      &copy; 2015. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Cody Bunch</a>
+            <small>Some Random IT Guy - OpenStack, DevOps, Cloud, Things</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/11/03/Paris-Summit---Day-1/">
+        Paris Summit - Day 1
+      </a>
+    </h1>
+
+    <span class="post-date">03 Nov 2014</span>
+
+    <p>Hooray Paris!</p>
+
+<p>Well, maybe. Having only seen the inside of the conference center and hotel lobby of the hotel nextdoor, I didn&#39;t get to do much summiting today. Rather, the day was spent prepping for tomorrows workshop.</p>
+
+<p>I do hear that the #vBrownBags are doing extremely well with 19 individual sessions recorded (and streamed?) today, and a <a href="http://openstack.prov12n.com/vbrownbag-techtalk-schedule-at-openstack-summit-paris-2/">full schedule</a> of 100-ish more this week.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/11/03/Clone-all-the-USB-keys---Method-3/">
+        Clone all the USB keys! - Method 3
+      </a>
+    </h1>
+
+    <span class="post-date">03 Nov 2014</span>
+
+    <p>Method 3 you ask? Wel, sure, I <a href="http://openstack.prov12n.com/usb-key-duplication-on-osx-on-the-cheap/">wrote on this around</a> the time of OSCON earlier this year. However, for the OpenStack in Paris, we needed a larger axe. Thanks to <a href="https://twitter.com/larsbutler">Lars</a> &amp; <a href="https://github.com/cloudnull">Mr. Cloud Null</a>, we managed to apply the appropriate amount of strategic violence:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">cat ~/fuckshitup.sh
+#!/bin/bash
+set -e -o -v
+
+for i in `jot 19 3`;
+    do sudo diskutil erasedisk FAT32 PARIS /dev/disk${i}
+done
+
+for i in `jot 19 3`;
+    do sudo diskutil partitionDisk /dev/disk${i} MBR MS-DOS PARIS 0b
+done
+
+for i in `jot 19 3`;
+    do rsync --progress -az /Volumes/PARIS &quot;/Volumes/PARIS $i/&quot; &amp;
+done
+</code></pre></div>
+<p>First it formats all the disks, then it rsyncs all the things.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/10/31/OpenStack-Book-Discounts-During-Summit/">
+        OpenStack Book Discounts During Summit
+      </a>
+    </h1>
+
+    <span class="post-date">31 Oct 2014</span>
+
+    <p>Starting now and running the week of the summit, the two best selling OpenStack books will be on super sale:</p>
+
+<h2>OpenStack Cookbook</h2>
+
+<p>Book : nieX72Mn7U</p>
+
+<p>eBook: k1QxrwyMvD</p>
+
+<h2>Learning OpenStack Networking (Neutron)</h2>
+
+<p>Book : luyLRpSQ</p>
+
+<p>eBook: IXQ1swn2</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/10/29/Paris-Summit-Preparation/">
+        Paris Summit Preparation
+      </a>
+    </h1>
+
+    <span class="post-date">29 Oct 2014</span>
+
+    <p>As you might have guessed from the large number of ZeroVM posts recently, that something was up. If you are going to be at the OpenStack Summit in Paris, there will be a ZeroVM workshop given by my coworkers <a href="https://twitter.com/eglute">Egle</a>, <a href="https://twitter.com/larsbutler">Lars</a>, and I.</p>
+
+<p>This session will be a 90-minute, into the deep end, building applications to work with ZeroVM.</p>
+
+<p>The materials, if you want to play along at home, can be found here:</p>
+
+<ul>
+<li><a href="https://4d01a92196a72e3b4215-657ddb0c96a24057e840f50c14fc13dd.ssl.cf1.rackcdn.com/ZeroCloud_Demo-07.ova">The ZeroCloud Appliance</a></li>
+<li><a href="http://docs.zerovm.org/zerocloud/snakebin/snakebin.html">The Online copy of the workshop</a></li>
+</ul>
+
+<p>Still missing are the slides and video which I will update the post with after the show. See you in Paris.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/10/28/Using-Packer-to-Make-Vagrant-Boxes/">
+        Using Packer to Make Vagrant Boxes
+      </a>
+    </h1>
+
+    <span class="post-date">28 Oct 2014</span>
+
+    <p>Part of working on the 3rd edition of the OpenStack Cookbook required, among other things, a new release of Ubuntu that came pre-loaded with the Juno OpenStack packages. Not a problem! Excepting that there were no ready made images on <a href="http://vagrantcloud.com">Vagrant Cloud</a>. Enter Packer.</p>
+
+<h2>Packer?</h2>
+
+<p>What the deuce is packer? From the <a href="https://packer.io/">packer.io</a> site:</p>
+
+<blockquote>
+<p>Packer is a tool for creating identical machine images for multiple platforms from a single source configuration.</p>
+</blockquote>
+
+<p>Said another way, it takes the &#39;configuration is code&#39; and pushes it back to the golden images, to a degree. The idea is one can shrink the time to deploy if instead of starting with the most generic box and adding, you start somewhere in the middle, adding common things to a &#39;golden&#39; image, and then deploying on top of that.</p>
+
+<p>In the use-case for the OpenStack Cookbook? Well, we just needed a manila Ubuntu 14.10 box for Fusion and Virtualbox. As there are three of us on the project now, having a common starting ground is ideal.</p>
+
+<h2>Our Packer Setup</h2>
+
+<p>I&#39;ll leave installing Packer as an exercise for the reader. The <a href="https://packer.io/docs">docs</a> are pretty good in the regard.</p>
+
+<p>For our build, we use the following packer.json:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">{
+  &quot;builders&quot;: [
+    {&quot;type&quot;: &quot;virtualbox-iso&quot;,
+    &quot;guest_os_type&quot;: &quot;Ubuntu_64&quot;,
+    &quot;iso_url&quot;: &quot;http://mirror.anl.gov/pub/ubuntu-iso/CDs/utopic/ubuntu-14.10-server-amd64.iso&quot;,
+    &quot;iso_checksum&quot;: &quot;91bd1cfba65417bfa04567e4f64b5c55&quot;,
+    &quot;iso_checksum_type&quot;:&quot;md5&quot;,
+    &quot;http_directory&quot;: &quot;preseed&quot;,
+    &quot;ssh_username&quot;: &quot;vagrant&quot;,
+    &quot;ssh_password&quot;: &quot;vagrant&quot;,
+    &quot;boot_wait&quot;:&quot;5s&quot;,
+    &quot;output_directory&quot;: &quot;ubuntu64_basebox_virtualbox&quot;,
+    &quot;shutdown_command&quot;: &quot;echo &#39;shutdown -P now&#39; &gt; shutdown.sh; echo &#39;vagrant&#39;|sudo -S sh &#39;shutdown.sh&#39;&quot;,
+    &quot;boot_command&quot;: [
+      &quot;&lt;esc&gt;&lt;esc&gt;&lt;enter&gt;&lt;wait&gt;&quot;,
+      &quot;/install/vmlinuz noapic &quot;,
+      &quot;ks=http://:/preseed.cfg &quot;,
+      &quot;debian-installer=en_US auto locale=en_US kbd-chooser/method=us &quot;,
+      &quot;hostname= &quot;,
+      &quot;fb=false debconf/frontend=noninteractive &quot;,
+      &quot;keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA &quot;,
+      &quot;keyboard-configuration/variant=USA console-setup/ask_detect=false &quot;,
+      &quot;initrd=/install/initrd.gz -- &quot;,
+      &quot;&lt;enter&gt;&quot;]
+    },
+    {&quot;type&quot;: &quot;vmware-iso&quot;,
+    &quot;guest_os_type&quot;: &quot;ubuntu-64&quot;,
+    &quot;iso_url&quot;: &quot;http://mirror.anl.gov/pub/ubuntu-iso/CDs/utopic/ubuntu-14.10-server-amd64.iso&quot;,
+    &quot;iso_checksum&quot;: &quot;91bd1cfba65417bfa04567e4f64b5c55&quot;,
+    &quot;iso_checksum_type&quot;:&quot;md5&quot;,
+    &quot;http_directory&quot;: &quot;preseed&quot;,
+    &quot;ssh_username&quot;: &quot;vagrant&quot;,
+    &quot;ssh_password&quot;: &quot;vagrant&quot;,
+    &quot;boot_wait&quot;:&quot;5s&quot;,
+    &quot;output_directory&quot;: &quot;ubuntu64_basebox_vmware&quot;,
+    &quot;shutdown_command&quot;: &quot;echo &#39;shutdown -P now&#39; &gt; shutdown.sh; echo &#39;vagrant&#39;|sudo -S sh &#39;shutdown.sh&#39;&quot;,
+    &quot;boot_command&quot;: [
+      &quot;&lt;esc&gt;&lt;esc&gt;&lt;enter&gt;&lt;wait&gt;&quot;,
+      &quot;/install/vmlinuz noapic &quot;,
+      &quot;ks=http://:/preseed.cfg &quot;,
+      &quot;debian-installer=en_US auto locale=en_US kbd-chooser/method=us &quot;,
+      &quot;hostname= &quot;,
+      &quot;fb=false debconf/frontend=noninteractive &quot;,
+      &quot;keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA &quot;,
+      &quot;keyboard-configuration/variant=USA console-setup/ask_detect=false &quot;,
+      &quot;initrd=/install/initrd.gz -- &quot;,
+      &quot;&lt;enter&gt;&quot;]
+    }],
+  &quot;provisioners&quot;: [{
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;execute_command&quot;: &quot;echo &#39;vagrant&#39; | sudo -S sh &#39;&#39;&quot;,
+    &quot;inline&quot;: [
+      &quot;apt-get update -y&quot;,
+      &quot;apt-get install -y linux-headers-$(uname -r) build-essential dkms&quot;,
+      &quot;apt-get clean&quot;,
+      &quot;mount -o loop VBoxGuestAdditions.iso /media/cdrom&quot;,
+      &quot;sh /media/cdrom/VBoxLinuxAdditions.run&quot;,
+      &quot;umount /media/cdrom&quot;,
+      &quot;mkdir /home/vagrant/.ssh&quot;,
+      &quot;mkdir /root/.ssh&quot;,
+      &quot;wget -qO- https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub &gt;&gt; ~/.ssh/authorized_keys&quot;,
+      &quot;echo &#39;vagrant ALL=NOPASSWD:ALL&#39; &gt; /tmp/vagrant&quot;,
+      &quot;chmod 0440 /tmp/vagrant&quot;,
+      &quot;mv /tmp/vagrant /etc/sudoers.d/&quot;
+    ]}],
+  &quot;post-processors&quot;: [
+  {
+      &quot;type&quot;: &quot;vagrant&quot;,
+      &quot;override&quot;: {
+        &quot;virtualbox&quot;: {
+          &quot;output&quot;: &quot;utopic-x64-virtualbox.box&quot;
+        },
+        &quot;vmware&quot;: {
+          &quot;output&quot;: &quot;utopic-x64-vmware.box&quot;
+        }
+      }
+    }
+  ]
+}
+</code></pre></div>
+<p>This in turn calls a kickstart (yes kickstart on Ubuntu) file stored in the preseed folder. This looks like:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">install
+text
+
+cdrom
+
+lang en_US.UTF-8
+keyboard us
+
+network --device eth0 --bootproto dhcp
+
+timezone --utc America/Chicago
+
+zerombr
+clearpart --all --initlabel
+bootloader --location=mbr
+
+part /boot --fstype=ext3 --size=256 --asprimary
+part pv.01 --size=1024 --grow --asprimary
+volgroup vg_root pv.01
+logvol swap --fstype swap --name=lv_swap --vgname=vg_root --size=1024
+logvol / --fstype=ext4 --name=lv_root --vgname=vg_root --size=1024 --grow
+
+auth --enableshadow --enablemd5
+
+# rootpw is vagrant
+rootpw --iscrypted $1$dUDXSoA9$/bEOTiK9rmsVgccsYir8W0
+user --disabled
+
+firewall --disabled
+
+skipx
+
+reboot
+
+%packages
+ubuntu-minimal
+openssh-server
+openssh-client
+wget
+curl
+git
+man
+vim
+ntp
+
+%post
+apt-get update
+
+apt-get upgrade -y linux-generic
+
+update-grub
+
+useradd -m -s /bin/bash vagrant
+echo vagrant:vagrant | chpasswd
+
+mkdir -m 0700 -p /home/vagrant/.ssh
+
+curl https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub &gt;&gt; /home/vagrant/.ssh/authorized_keys
+
+chmod 600 /home/vagrant/.ssh/authorized_keys
+chown -R vagrant:vagrant /home/vagrant/.ssh
+
+echo &quot;vagrant ALL=(ALL) NOPASSWD: ALL&quot; &gt;&gt; /etc/sudoers
+
+sed -i &#39;s/^PermitRootLogin without-password/PermitRootLogin yes/&#39; /etc/ssh/sshd_config
+
+apt-get clean
+
+rm -rf /tmp/*
+
+rm -f /var/log/wtmp /var/log/btmp
+
+history -c
+</code></pre></div>
+<p>Once both files are in place and packer is installed, building the images is as simple as:</p>
+
+<p><code>packer build packer.json</code></p>
+
+<p>This will take a <em>long</em> time, but it does eventually get there, and will produce two .box files in the output folders you specified in the packer.json. From there, you can upload them somewhere and have vagrantcloud make them available, as we have under <code>bunchc/utopic-x64</code>.</p>
+
+<h2>Summary</h2>
+
+<p>In this post we looked at how to use packer.io to build Vagrant boxes for both VMware Workstation / Fusion and Virtualbox.</p>
+
+  </div>
+  
+</div>
+
+<div class="pagination">
+  
+    <a class="pagination-item older" href="/page4">Older</a>
+  
+  
+    
+      <a class="pagination-item newer" href="/page2">Newer</a>
+    
+  
+</div>
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+  </body>
+</html>
