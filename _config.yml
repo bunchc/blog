@@ -5,7 +5,7 @@ highlighter:         pygments
 # Permalinks
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
-permalink:           pretty
+permalink:           /:year/:month/:day/:title/
 relative_permalinks: true
 
 # Setup
@@ -14,7 +14,7 @@ tagline:             'Some Random IT Guy - OpenStack, DevOps, Cloud, Things'
 description:         'Offering all manner of technical how-to (and how not to) and other technical content. I specalize in OpenStack, VMware, and most things automation and cloud related.'
 url:                 http://lanyon.getpoole.com
 baseurl:             /
-paginate:            5
+paginate:            10
 
 # About/contact
 author:
@@ -24,3 +24,7 @@ author:
 
 # Custom vars
 version:             1.0.0
+
+gems:
+  - jekyll-redirect-from
+  - jekyll-sitemap
