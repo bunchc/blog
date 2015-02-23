@@ -1,6 +1,7 @@
 ---
 title: "A Detour Into Camp Coffee"
 date: 2015-02-20
+layout: post
 categories: 
 ---
 
