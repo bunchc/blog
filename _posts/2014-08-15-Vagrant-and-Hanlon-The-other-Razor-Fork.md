@@ -1,5 +1,6 @@
 ---
 title: "Vagrant and Hanlon (The other Razor Fork)"
+layout: post
 date: 2014-08-15
 categories: 
 ---

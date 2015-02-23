@@ -1,5 +1,6 @@
 ---
 title: "OpenStack Cookbook 3rd Edition"
+layout: post
 date: 2014-10-10
 categories: 
 ---

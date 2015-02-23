@@ -1,5 +1,6 @@
 ---
 title: "Basic Server Hardening with Salt"
+layout: post
 date: 2015-01-09
 categories: 
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Holiday Zen Moments"
+layout: post
 date: 2014-12-26
 categories: 
 ---

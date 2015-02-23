@@ -1,5 +1,6 @@
 ---
 title: "OpenStack Book Discounts During Summit"
+layout: post
 date: 2014-10-31
 categories: 
 ---

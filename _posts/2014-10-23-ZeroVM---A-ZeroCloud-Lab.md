@@ -1,5 +1,6 @@
 ---
 title: "ZeroVM - A ZeroCloud Lab"
+layout: post
 date: 2014-10-23
 categories: 
 ---

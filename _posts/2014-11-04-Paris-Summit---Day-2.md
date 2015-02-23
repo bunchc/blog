@@ -1,5 +1,6 @@
 ---
 title: "Paris Summit - Day 2"
+layout: post
 date: 2014-11-04
 categories: 
 ---

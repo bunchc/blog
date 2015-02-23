@@ -1,5 +1,6 @@
 ---
 title: "Live Blog - Cloud Security: Do you know where your workloads are running?"
+layout: post
 date: 2014-11-05
 categories: 
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Running Rackspace Private Cloud on the Rackspace Public Cloud"
+layout: post
 date: 2014-10-13
 categories: 
 ---

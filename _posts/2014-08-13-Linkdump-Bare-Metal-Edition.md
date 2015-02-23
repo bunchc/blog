@@ -1,5 +1,6 @@
 ---
 title: "Linkdump Bare-Metal Edition"
+layout: post
 date: 2014-08-13 16:17:13
 categories: 
 ---

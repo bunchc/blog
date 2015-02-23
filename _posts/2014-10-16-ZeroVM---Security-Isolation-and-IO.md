@@ -1,5 +1,6 @@
 ---
 title: "ZeroVM - Isolation"
+layout: post
 date: 2014-10-16
 categories: 
 ---

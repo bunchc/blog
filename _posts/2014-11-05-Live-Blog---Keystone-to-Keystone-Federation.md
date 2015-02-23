@@ -1,5 +1,6 @@
 ---
 title: "Live Blog - Keystone to Keystone Federation"
+layout: post
 date: 2014-11-05
 categories: 
 ---

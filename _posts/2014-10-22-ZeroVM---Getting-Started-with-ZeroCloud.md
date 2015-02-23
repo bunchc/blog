@@ -1,5 +1,6 @@
 ---
 title: "ZeroVM - Getting Started with ZeroCloud"
+layout: post
 date: 2014-10-22
 categories: 
 ---

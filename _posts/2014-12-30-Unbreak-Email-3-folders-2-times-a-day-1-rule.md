@@ -1,5 +1,6 @@
 ---
 title: "Unbreak Email in 2015: 3 folders, 2 times a day, 1 rule"
+layout: post
 date: 2014-12-30
 categories: 
 ---

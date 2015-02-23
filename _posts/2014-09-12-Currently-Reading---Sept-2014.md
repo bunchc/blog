@@ -1,5 +1,6 @@
 ---
 title: "Currently Reading - Sept 2014"
+layout: post
 date: 2014-09-12
 categories: 
 ---

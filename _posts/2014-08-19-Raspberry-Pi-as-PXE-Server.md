@@ -1,5 +1,6 @@
 ---
 title: "Raspberry Pi as PXE Server"
+layout: post
 date: 2014-08-19
 categories: 
 ---

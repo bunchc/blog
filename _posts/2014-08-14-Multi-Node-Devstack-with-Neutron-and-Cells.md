@@ -1,5 +1,6 @@
 ---
 title: "Multi-Node Devstack with Neutron and Cells"
+layout: post
 date: 2014-08-14
 categories: 
 ---

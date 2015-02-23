@@ -1,5 +1,6 @@
 ---
 title: "ZeroVM Link Dump"
+layout: post
 date: 2014-10-20
 categories: 
 ---

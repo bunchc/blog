@@ -1,5 +1,6 @@
 ---
 title: "ZeroVM - Some Background"
+layout: post
 date: 2014-10-15
 categories: 
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Changing Jenkins Home Folder"
+layout: post
 date: 2014-10-27
 categories: 
 ---

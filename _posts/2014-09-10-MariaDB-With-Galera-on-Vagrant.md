@@ -1,5 +1,6 @@
 ---
 title: "MariaDB With Galera on Vagrant"
+layout: post
 date: 2014-09-10
 categories: 
 ---

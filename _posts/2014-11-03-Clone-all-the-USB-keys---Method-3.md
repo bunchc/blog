@@ -1,5 +1,6 @@
 ---
 title: "Clone all the USB keys! - Method 3"
+layout: post
 date: 2014-11-03
 categories: 
 ---

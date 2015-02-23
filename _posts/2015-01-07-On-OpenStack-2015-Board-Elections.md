@@ -1,5 +1,6 @@
 ---
 title: "On OpenStack 2015 Board Elections"
+layout: post
 date: 2015-01-07
 categories: 
 ---

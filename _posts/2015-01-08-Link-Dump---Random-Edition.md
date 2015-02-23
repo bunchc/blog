@@ -1,5 +1,6 @@
 ---
 title: "Link Dump - Random Edition"
+layout: post
 date: 2015-01-08
 categories: 
 ---

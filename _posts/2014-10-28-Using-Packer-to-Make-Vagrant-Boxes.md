@@ -1,5 +1,6 @@
 ---
 title: "Using Packer to Make Vagrant Boxes"
+layout: post
 date: 2014-10-28
 categories: 
 ---

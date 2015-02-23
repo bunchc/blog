@@ -1,5 +1,6 @@
 ---
 title: "Paris Summit Preparation"
+layout: post
 date: 2014-10-29
 categories: 
 ---

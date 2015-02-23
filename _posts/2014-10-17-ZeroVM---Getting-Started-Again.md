@@ -1,5 +1,6 @@
 ---
 title: "ZeroVM - Getting Started, Again"
+layout: post
 date: 2014-10-17
 categories: 
 ---

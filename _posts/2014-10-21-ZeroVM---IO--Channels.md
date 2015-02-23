@@ -1,5 +1,6 @@
 ---
 title: "ZeroVM - IO Operations in ZeroVM"
+layout: post
 date: 2014-10-21
 categories: 
 ---
