@@ -1,5 +1,5 @@
 # Dependencies
-markdown:            redcarpet
+markdown:            kramdown
 highlighter:         pygments
 
 # Permalinks
@@ -12,7 +12,7 @@ relative_permalinks: true
 title:               Cody Bunch
 tagline:             'Some Random IT Guy - OpenStack, DevOps, Cloud, Things'
 description:         'Offering all manner of technical how-to (and how not to) and other technical content. I specalize in OpenStack, VMware, and most things automation and cloud related.'
-url:                 http://lanyon.getpoole.com
+url:                 http://blog.codybunch.com
 baseurl:             /
 paginate:            10
 
@@ -21,6 +21,8 @@ author:
   name:              Cody Bunch
   url:               https://blog.codybunch.com
   email:             bunchc@gmail.com
+  twitter:           cody_bunch
+  github:            bunchc
 
 # Custom vars
 version:             1.0.0
