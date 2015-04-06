@@ -35,4 +35,4 @@ To be fair, I'm not sure this will get even the requsite 5 responses. As this is
 
 [Here it is.](https://docs.google.com/forms/d/1CDLnbIpgDOAdYRNkTvRoZaHINC5th_9m9oWY_0zaCyA/viewform?usp=send_form)
 
-That's all there is to it. Just let me know how I can help.
+That's all there is to it. Disclaimer: It's a Google form, who's only recipient is me (insofar as these things can be guaranteed).
