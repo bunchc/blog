@@ -29,6 +29,7 @@ Here are some Vagrantfile settings specific to VMware desktop products that will
     vmware.vmx["unity.wasCapable"] = "FALSE"
     vmware.vmx["vhv.enable"] = "TRUE"
   end
+
 ```
 
 The basics of what we're doing is as follows:
