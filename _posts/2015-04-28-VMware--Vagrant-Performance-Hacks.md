@@ -9,8 +9,8 @@ I believe I've posted on this before, however I think I deleted the gist that co
 
 Here are some Vagrantfile settings specific to VMware desktop products that will help you eek out a bit more performance.
 
-```
-# VMware Fusion / Workstation
+
+  # VMware Fusion / Workstation
   config.vm.provider :vmware_fusion or config.vm.provider :vmware_workstation do |vmware, override|
     override.vm.synced_folder ".", "/vagrant", type: "nfs"
 
@@ -30,7 +30,6 @@ Here are some Vagrantfile settings specific to VMware desktop products that will
     vmware.vmx["vhv.enable"] = "TRUE"
   end
 
-```
 
 The basics of what we're doing is as follows:
 - Using NFS shared folders
