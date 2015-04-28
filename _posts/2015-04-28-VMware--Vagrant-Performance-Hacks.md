@@ -32,6 +32,7 @@ Here are some Vagrantfile settings specific to VMware desktop products that will
 
 
 The basics of what we're doing is as follows:
+
 - Using NFS shared folders
 - Turning off logging
 - Tuning memory settings
