@@ -14,20 +14,20 @@ To begin with, we'll use the adapted Ansible role from [here](https://github.com
 From there, create a playbook.yaml that contains the following:
 
 
-    + hosts: all
+    - hosts: all
       user: root
       tasks:
-        + group_by: key=os_{{ ansible_distribution }}
+        - group_by: key=os_{{ ansible_distribution }}
 
-    + hosts: os_CentOS
+    - hosts: os_CentOS
       user: root
       roles:
-        + cis-centos
+        - cis-centos
 
-    + hosts: os_Ubuntu
+    - hosts: os_Ubuntu
       user: root
       roles:
-        + cis-ubuntu
+        - cis-ubuntu
 
 
 Your playbook file contains three sections. The first uses a 'group_by' task to separate hosts out by operating system. The last two sections then apply the right CIS role according to the OS reported back in. 
