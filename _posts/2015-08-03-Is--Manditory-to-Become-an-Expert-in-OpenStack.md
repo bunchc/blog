@@ -1,5 +1,5 @@
 ---
-title: "Is  Manditory to Become an Expert in OpenStack"
+title: "Is /thing/ Manditory to Become an Expert in OpenStack"
 date: 2015-08-03
 layout: "post"
 categories: 
