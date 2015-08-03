@@ -16,6 +16,7 @@ While not entirely clear or very specific question wise, here's the answer I put
 > So, attempting to extract some context from your question to provide a better answer, I'll attempt to go two routes:
 > 
 > 1) "Is RedHat Linux mandatory..."; and
+> 
 > 2) "Is RedHat OpenStack mandatory..."
 > 
 > The short answer to these questions, is that no, no specific Linux or OpenStack distribution is required to become an expert. That being said, some familiarity with Linux will give you a good foundation for working with OpenStack. Additionally, an OpenStack distribution will help ease the learning curve associated with learning OpenStack.
