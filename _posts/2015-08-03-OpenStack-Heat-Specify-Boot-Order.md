@@ -14,27 +14,24 @@ The Heat Orchestration Template, or HOT, specification provides a 'depends_on' a
 
 In the [OpenStack docs](http://docs.openstack.org/developer/heat/template_guide/hot_spec.html#hot-spec-resources-dependencies) they provide the following example:
 
-```
-resources:
-  server1:
-    type: OS::Nova::Server
-    depends_on: server2
+    resources:
+      server1:
+        type: OS::Nova::Server
+        depends_on: server2
 
-  server2:
-    type: OS::Nova::Server
-```
+      server2:
+        type: OS::Nova::Server
+
 
 Or for multiple servers:
-```
-resources:
-  server1:
-    type: OS::Nova::Server
-    depends_on: [ server2, server3 ]
 
-  server2:
-    type: OS::Nova::Server
+    resources:
+      server1:
+        type: OS::Nova::Server
+        depends_on: [ server2, server3 ]
 
-  server3:
-    type: OS::Nova::Server
-```
+      server2:
+        type: OS::Nova::Server
 
+      server3:
+        type: OS::Nova::Server
