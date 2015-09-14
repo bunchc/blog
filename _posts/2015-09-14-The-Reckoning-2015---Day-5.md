@@ -11,7 +11,7 @@ Day .5? Day 0? Something like that. [The Reckoning](http://thereckoning.techreck
 
 ![vBrownBag Unconference Banner](https://pbs.twimg.com/media/COz1mD1UkAAhzD_.jpg)
 
-The day 5 unconference got the event under way. We started with 10-15 minutes of finding topics of interest to those in attendance. Which wasn't all that hard once we got moving. From there, we broke into two smaller discussion groups, and things really got moving.
+The day .5 unconference got the event under way. We started with 10-15 minutes of finding topics of interest to those in attendance. Which wasn't all that hard once we got moving. From there, we broke into two smaller discussion groups, and things really got moving.
 
 While one could list in bullet points the various things that were talked about, I think that would fail to catch both the energy and genuine sentiment of those present. On the whole, professional development, transitioning from engineering to management, mentorship, and the like... all front of mind for those in attendence.
 
