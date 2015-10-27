@@ -5,7 +5,7 @@ layout: "post"
 categories: 
 ---
 
-Day number 1, or my second day in Tokyo started a bit early, but, that worked out well, as I managed to get a good feel for the city by taking a quick job around:
+Day number 1, or my second day in Tokyo started a bit early, but, that worked out well, as I managed to get a good feel for the city by taking a quick jog around:
 
 ![Tokyo 5k](https://dl.dropboxusercontent.com/u/2201734/IMG_9332.JPG)
 ![Tokyo 5k 2](https://dl.dropboxusercontent.com/u/2201734/IMG_9339.JPG)
@@ -14,7 +14,7 @@ Day number 1, or my second day in Tokyo started a bit early, but, that worked ou
 From there, the Summit started in ernest.
 
 ## Day 1 Keynote
-Rather than a live blog or som erunning notes with commentary, I'll just call out a few highlights:
+Rather than a live blog or some running notes with commentary, I'll just call out a few highlights:
 - [Official certifications](http://www.openstack.org/news/view/133/openstack-foundation-launches-professional-certification-program-for-openstack-cloud-administrators)
 - My teammate @eglute rocked the keynote!
 ![Egle Keynote](https://pbs.twimg.com/media/CSSHwPVUEAAyqCx.jpg:large)
@@ -25,7 +25,7 @@ Rather than a live blog or som erunning notes with commentary, I'll just call ou
 
 ![Signage](https://pbs.twimg.com/media/CSSUFAcUkAAhot3.jpg)
 
-Booksignings I've done in the past have lasted 10-15 minutes, and generally ran through a few hundred books in that time. This time we came prepared, with what feels like 500+ books each day of the summit:
+Book signings I've done in the past have lasted 10-15 minutes, and generally ran through a few hundred books in that time. This time we came prepared, with what feels like 500+ books each day of the summit:
 
 ![So Many](https://pbs.twimg.com/media/CSSbrwQUwAAABfm.jpg)
 
