@@ -1,6 +1,6 @@
 ---
 title: "OpenStack Summit Tokyo - Day 1"
-date: 2015-10-27
+date: 2015-10-28
 layout: "post"
 categories: 
 ---
