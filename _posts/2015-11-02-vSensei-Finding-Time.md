@@ -2,7 +2,7 @@
 title: "#vSensei Finding Time"
 date: 2015-11-02
 layout: "post"
-categories: 
+categories: vSensei
 ---
 
 In running the vSensei program, one runs into a number of common themes, which is worth a meta post in and of itself. That is, how did we all find ourselves at this point in our career, with all the same questions, and not much in the way of guidance. I digress.
