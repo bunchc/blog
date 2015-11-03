@@ -27,6 +27,8 @@ Depending on how bad or how often you squirrel, skimming is where you will spend
 
 Skimming, in this context, is the rapid consumption and partial assimilation of a data source, or bit of content. Specifically, skimming in this context is meant to serve as a first pass on materials, allow you to gain a general familiarity, and to highlight any areas of interest for later consumption.
 
+**Update:** [On Skimming vs Speed Reading](http://www.scotthyoung.com/blog/2015/01/19/speed-reading-redo/). Remembering our goal for assimilating information, is comprehension and retention, rather than speed.
+
 ### Written Material
 
 Most technical books, blog posts, and the like all follow a very familiar format. That format is amazingly similar to an outline. That is:
