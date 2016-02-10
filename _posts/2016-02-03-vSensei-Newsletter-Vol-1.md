@@ -5,7 +5,7 @@ layout: "post"
 categories: vSensei, newsletter
 ---
 
-Over the last little while, I've been running a sort of Ad-Hoc mentorship program, which to my surprise, is now becoming a bit more serious. While still not formal by any-means, we now have a monthly newsletter. (In case you haven't yet, you can sign up here for the vSensei newsletter.)
+Over the last little while, I've been running a sort of Ad-Hoc mentorship program, which to my surprise, is now becoming a bit more serious. While still not formal by any-means, we now have a monthly newsletter. (In case you haven't yet, you can sign up [here](http://vsensei.expert/) for the vSensei newsletter.)
 
 The plan at this stage then, is to publish the prior month's newsletter as the current month goes live. That is, if you're not a member, you can still find all but the most current newsletter on this site.
 
