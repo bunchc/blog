@@ -9,7 +9,7 @@ A post or two ago, we explored [setting up BGP to route between networks using L
 
 Then enters Scott Lowe, and [Technology Short Take #70](http://blog.scottlowe.org/2016/08/12/technology-short-take-70/). At the bottom of the networking section, as if it weren't the coolest thing on the list, there is this gem: 
 
-    "https://github.com/CumulusNetworks/topology_converter/tree/master/documentation#the-reference-topology looks neat—I need to try to find time to give it a spin."
+    "This looks neat—I need to try to find time to give it a spin."
 
 So that's what we're doing!
 
