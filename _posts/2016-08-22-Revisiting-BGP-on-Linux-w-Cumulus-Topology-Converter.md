@@ -28,6 +28,7 @@ Now that we've got the tools installed, we need to create our topology. Remember
 ![Topology](https://i.imgur.com/MDit7Wr.png)
 
 In the language of topology converter, that looks like this:
+
 ```
 graph dc1 {
   "spine01" [function="spine" os="CumulusCommunity/cumulus-vx" version="3.0.1" memory="512" config="./helper_scripts/extra_switch_config.sh" mgmt_ip="172.10.100.1"]
