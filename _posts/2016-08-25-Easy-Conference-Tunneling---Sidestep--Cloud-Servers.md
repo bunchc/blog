@@ -10,6 +10,7 @@ VMworld 2016 is upon us. Or was at the time of this writing. That doesn't change
 In this post, we'll cover setting up a Cloud server, ssh keys, and sidestep to provide you with traffic tunneling and encryption from where-ever you are.
 
 Assumptions:
+
 - An account with some cloud provider
 - A recent version of OSX
 
