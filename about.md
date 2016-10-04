@@ -9,7 +9,7 @@ Cody Bunch is a Private Cloud / Virtualization Architect, VMware vExpert, and VM
 
 # Writing
 
-Besides blogging, I have taken on a number of longer-form projects as well. Specifically around OpenStack and automation:
+Besides blogging, Cody has taken on a number of longer-form projects as well. Specifically around OpenStack and automation:
 
 * [OpenStack Cloud Computing Cookbook 3rd Edition](https://www.amazon.com/OpenStack-Cloud-Computing-Cookbook-Third-ebook/dp/B00ZCECXOA)
 * [OpenStack Cloud Computing Cookbook 2nd Edition](http://www.amazon.com/OpenStack-Cloud-Computing-Cookbook-Second-ebook/dp/B00FZMREUM/ref=sr_1_2?ie=UTF8&qid=1424463848&sr=8-2&keywords=cloud+computing+cookbook)
@@ -25,7 +25,7 @@ Besides blogging, I have taken on a number of longer-form projects as well. Spec
 
 # Speaking
 
-I've been known to speak at a few events here and there. Here are some of them I can find links for:
+Cody has speoken at a number of industry events:
 
 * Interop Las Vegas 2016 - [Batman is not a career strategy](http://info.interop.com/lasvegas/scheduler/speaker/bunch-cody.38403)
 * Boston VMUG 2016 - [Automation, you're doing it wrong](http://blog.codybunch.com/2016/06/20/Speaker-Notes-Slides-BOS-VMUG-2016/)
