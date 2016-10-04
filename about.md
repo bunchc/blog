@@ -11,10 +11,13 @@ Cody Bunch is a Private Cloud / Virtualization Architect, VMware vExpert, and VM
 
 Besides blogging, I have taken on a number of longer-form projects as well. Specifically around OpenStack and automation:
 
+* [OpenStack Cloud Computing Cookbook 3rd Edition](https://www.amazon.com/OpenStack-Cloud-Computing-Cookbook-Third-ebook/dp/B00ZCECXOA)
 * [OpenStack Cloud Computing Cookbook 2nd Edition](http://www.amazon.com/OpenStack-Cloud-Computing-Cookbook-Second-ebook/dp/B00FZMREUM/ref=sr_1_2?ie=UTF8&qid=1424463848&sr=8-2&keywords=cloud+computing+cookbook)
 * [OpenStack Security Guide](http://docs.openstack.org/sec/)
 * [vCenter Orchestrator Book](http://www.amazon.com/Automating-vSphere-vCenter-Orchestrator-Technology/dp/0321799917/ref=sr_1_1?ie=UTF8&qid=1424463917&sr=8-1&keywords=vcenter+orchestrator)
-* [Other Blog](http://ProfessionalVMware.com)
+* [Other Blog](http://vbrownbag.com)
+* Tech Editor: [OpenStack Networking Essentials](https://www.amazon.com/OpenStack-Networking-Essentials-James-Denton/dp/1785283278/ref=sr_1_1?ie=UTF8&qid=1475605939&sr=8-1&keywords=james+denton+openstack)
+* Tech Editor: [OpenStack Troubleshooting](https://www.amazon.com/Troubleshooting-OpenStack-Tony-Campbell/dp/1783986883/ref=sr_1_1?ie=UTF8&qid=1475605901&sr=8-1&keywords=openstack+troubleshooting)
 * Tech Editor: [VMware vCloud Director Cookbook](http://www.amazon.com/VMware-vCloud-Director-Cookbook-Langenhan-ebook/dp/B00G66TJV8/ref=sr_1_1?ie=UTF8&qid=1424463943&sr=8-1&keywords=VMware+vCloud+Director+Cookbook)
 * Tech Editor: [Managing VMware Infrastructure with Windows PowerShell](http://www.amazon.com/Managing-VMware-Infrastructure-Windows-PowerShell/dp/0982131402)
 * Tech Editor: [VMware VI and vSphere SDK: Managing the VMware Infrastructure and vSphere](http://www.amazon.com/VMware-VI-vSphere-SDK-Infrastructure/dp/0137153635)
@@ -23,6 +26,7 @@ Besides blogging, I have taken on a number of longer-form projects as well. Spec
 
 I've been known to speak at a few events here and there. Here are some of them I can find links for:
 
+* Boston BMUG 2016 - [Automation, you're doing it wrong](http://blog.codybunch.com/2016/06/20/Speaker-Notes-Slides-BOS-VMUG-2016/)
 * OpenStack Summit, Paris 2014 - [ZeroVM](https://www.youtube.com/watch?v=aBTD3rlUCr0)
 * VTUG Winter Warmer 2014 ([Here](https://www.youtube.com/watch?v=6hPDZ4M0JOM))
 * \#vBrownBag at VMworld 2014 - [Revenge of GhettoSAN](https://www.youtube.com/watch?v=nPGH8K1c4PY)
@@ -42,18 +46,19 @@ I've been known to speak at a few events here and there. Here are some of them I
 
 # Podcasting
 
-* [Couch to OpenStack](http://openstack.prov12n.com/about-couch-to-openstack/)
 * [\#vBrownBags](http://professionalvmware.com/brownbags/)
+* [Couch to OpenStack](http://openstack.prov12n.com/about-couch-to-openstack/)
 * [Cloud Cast](http://www.thecloudcast.net/2013/07/the-cloudcast-net-93-journey-from.html)
+* [Geek Whisperers](http://geek-whisperers.com/2015/10/the-importance-of-being-a-mentor-with-cody-bunch-ep-98/)
 
 # Contact Info
 
 If you need to reach out to Cody, he can be found in the following places:
 
-- E-mail: [bunchc@professionalvmware.com](mailto:bunchc@professionalvmware.com)
+- E-mail: [bunchc@gmail.com](mailto:bunchc@gmail.com)
 - Twitter: [@cody_bunch](http://twitter.com/cody_bunch)
 - Linked-In: [Here](http://www.linkedin.com/pub/gerald-bunch/3/195/421)
 
-# Disclosures / Sponsored by…
+# Disclosures / Sponsored by
 
 It should be stated that my blogging activities are hobbies. With that said, everything I blog here are my own personal opinions, and as such, they do not necessarily reflect the views and opinions of my employer.
