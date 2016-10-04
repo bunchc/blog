@@ -26,7 +26,8 @@ Besides blogging, I have taken on a number of longer-form projects as well. Spec
 
 I've been known to speak at a few events here and there. Here are some of them I can find links for:
 
-* Boston BMUG 2016 - [Automation, you're doing it wrong](http://blog.codybunch.com/2016/06/20/Speaker-Notes-Slides-BOS-VMUG-2016/)
+* Interop Las Vegas 2016 - [Batman is not a career strategy](http://info.interop.com/lasvegas/scheduler/speaker/bunch-cody.38403)
+* Boston VMUG 2016 - [Automation, you're doing it wrong](http://blog.codybunch.com/2016/06/20/Speaker-Notes-Slides-BOS-VMUG-2016/)
 * OpenStack Summit, Paris 2014 - [ZeroVM](https://www.youtube.com/watch?v=aBTD3rlUCr0)
 * VTUG Winter Warmer 2014 ([Here](https://www.youtube.com/watch?v=6hPDZ4M0JOM))
 * \#vBrownBag at VMworld 2014 - [Revenge of GhettoSAN](https://www.youtube.com/watch?v=nPGH8K1c4PY)
