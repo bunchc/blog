@@ -13,6 +13,7 @@ Besides blogging, I have taken on a number of longer-form projects as well. Spec
 
 * [OpenStack Cloud Computing Cookbook 3rd Edition](https://www.amazon.com/OpenStack-Cloud-Computing-Cookbook-Third-ebook/dp/B00ZCECXOA)
 * [OpenStack Cloud Computing Cookbook 2nd Edition](http://www.amazon.com/OpenStack-Cloud-Computing-Cookbook-Second-ebook/dp/B00FZMREUM/ref=sr_1_2?ie=UTF8&qid=1424463848&sr=8-2&keywords=cloud+computing+cookbook)
+* [OpenStack: Building a Cloud Environment](https://www.amazon.com/OpenStack-Building-Environment-Alok-Shrivastwa-ebook/dp/B01M0IREB3/ref=sr_1_fkmr0_1?ie=UTF8&qid=1475604913&sr=8-1-fkmr0&keywords=cody+bunch+vmware)
 * [OpenStack Security Guide](http://docs.openstack.org/sec/)
 * [vCenter Orchestrator Book](http://www.amazon.com/Automating-vSphere-vCenter-Orchestrator-Technology/dp/0321799917/ref=sr_1_1?ie=UTF8&qid=1424463917&sr=8-1&keywords=vcenter+orchestrator)
 * [Other Blog](http://vbrownbag.com)
