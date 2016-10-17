@@ -163,8 +163,8 @@ To attach to the console: ```sudo virsh console 1``` should bring up the ubuntu 
 # Resources
 
 There were so, so many blogs used as a staring point for this that I'm sure I've missed one or two, but here we go:
-- [http://blog.johngoulah.com/tag/virt-install/](http://blog.johngoulah.com/tag/virt-install/)
-- [http://blog.scottlowe.org/2015/05/20/fully-automated-ubuntu-install/](http://blog.scottlowe.org/2015/05/20/fully-automated-ubuntu-install/)
-- [https://raymii.org/s/articles/virt-install_introduction_and_copy_paste_distro_install_commands.html](https://raymii.org/s/articles/virt-install_introduction_and_copy_paste_distro_install_commands.html)
-- [http://therandomsecurityguy.com/openvswitch-cheat-sheet/](http://therandomsecurityguy.com/openvswitch-cheat-sheet/)
-- [http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/](http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/)
++ [http://blog.johngoulah.com/tag/virt-install/](http://blog.johngoulah.com/tag/virt-install/)
++ [http://blog.scottlowe.org/2015/05/20/fully-automated-ubuntu-install/](http://blog.scottlowe.org/2015/05/20/fully-automated-ubuntu-install/)
++ [https://raymii.org/s/articles/virt-install_introduction_and_copy_paste_distro_install_commands.html](https://raymii.org/s/articles/virt-install_introduction_and_copy_paste_distro_install_commands.html)
++ [http://therandomsecurityguy.com/openvswitch-cheat-sheet/](http://therandomsecurityguy.com/openvswitch-cheat-sheet/)
++ [http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/](http://blog.scottlowe.org/2012/08/17/installing-kvm-and-open-vswitch-on-ubuntu/)
