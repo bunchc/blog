@@ -47,9 +47,10 @@ sudo service openvswitch-switch start
 ```
 
 Now that OVS is installed and started, it is time to start configuring things. The below code block:
-- enables ipv4 forwarding
-- creates and ovs bridge
-- adds eth2 to the bridge
+
++ enables ipv4 forwarding
++ creates and ovs bridge
++ adds eth2 to the bridge
 
 ```
 sudo echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
@@ -107,12 +108,12 @@ sudo virt-install -n demo01 -r 256 --vcpus 1 \
 
 Like I said, a pretty involved command. We'll break down the more interesting or non-obvious parameters:
 
--r is memory in MB
---location is the URL that contains the initrd image to boot linux
---os-variant for this one, consult the man page for virt-install to get the right name.
---network - This one took me the longest to sort out. That is, bridge=br0 was straight forward, but knowing to set virtualport_type to OVS took looking at the man page more times than I would like to admit.
---hvm and --virt-type kvm - These values tell virt-install to create a vm that will run on a hypervisor, and that the hypervisor of choice is KVM.
---disk - the two values here, size and path are straight forward. Disk size in GB and the path to where it should create the file.
++ -r is memory in MB
++ --location is the URL that contains the initrd image to boot linux
++ --os-variant for this one, consult the man page for virt-install to get the right name.
++ --network - This one took me the longest to sort out. That is, bridge=br0 was straight forward, but knowing to set virtualport_type to OVS took looking at the man page more times than I would like to admit.
++ --hvm and --virt-type kvm - These values tell virt-install to create a vm that will run on a hypervisor, and that the hypervisor of choice is KVM.
++ --disk - the two values here, size and path are straight forward. Disk size in GB and the path to where it should create the file.
 
 Once you execute this command, virt-install will create an XML that represents the VM, boot it, and attempt to install an operating system. This will leave you a prompt to attach to the VM and finish the installation.
 
