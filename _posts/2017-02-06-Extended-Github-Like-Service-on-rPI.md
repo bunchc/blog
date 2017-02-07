@@ -10,7 +10,9 @@ The good folks over at [Hypriot](https://blog.hypriot.com/post/run-your-own-gith
 > Yes yes, we're running on a Raspberry PI, 'scale' in this case just means build it a bit more like you'd deploy on real hardware.
 
 Forgiving my ascii, the following depicts what we will build:
+
 ```
+
 +------------------------+
 |                        |
 |      nginx             |
@@ -30,6 +32,7 @@ Forgiving my ascii, the following depicts what we will build:
 |     postgres           |
 |                        |
 +------------------------+
+
 ```
 
 This build is involved, so, lets dive in.
