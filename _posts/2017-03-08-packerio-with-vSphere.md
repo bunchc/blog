@@ -35,25 +35,7 @@ The entire json I use is [here](https://gist.github.com/bunchc/6169e81148972b7c5
 
 Next, post-processors. Here be the magic. 
 
-```
-    "post-processors": [
-        {
-            "type": "vsphere",
-            "keep_input_artifact": true,
-            "only": ["ubuntu-14.04.i386.vmware", "ubuntu-14.04.i386.vmware"],
-            "host": "{{user `vsphere_host`}}",
-            "username": "{{user `vsphere_user`}}",
-            "password": "{{user `vsphere_pass`}}",
-            "datacenter": "{{user `vsphere_datacenter`}}",
-            "cluster": "{{user `vsphere_cluster`}}",
-            "datastore": "{{user `vsphere_datastore`}}",
-            "vm_folder": "/",
-            "vm_name": "{{ build_name }}",
-            "vm_network": "{{user `vsphere_network`}}",
-            "insecure": "true"
-        }
-    ]
-```
+![post-processors](https://i.imgur.com/kiTHcph.png)
 
 Some highlights:
 
