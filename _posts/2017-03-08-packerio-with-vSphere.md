@@ -89,3 +89,5 @@ Build 'ubuntu-14.04.amd64.vmware' finished.
 ```
 
 ![vSphere client](https://i.imgur.com/7GrGzK2.png)
+
+With that, all should be in working order.
