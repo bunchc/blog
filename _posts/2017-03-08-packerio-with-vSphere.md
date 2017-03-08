@@ -44,7 +44,7 @@ Some highlights:
 * only - tells packer to only run this post-processor for the named builds.
 * the remaining lines - the vSphere specific variables from the prior section.
 
->**Note:** Only change the variables rather than specifying names directly. Otherwise, OVFTool will get stupid angry about escaping charachters.
+>**Note:** Only change the variables rather than specifying names directly. Otherwise, OVFTool will get stupid angry about escaping characters.
 
 ## The Packer to vSphere Build
 
