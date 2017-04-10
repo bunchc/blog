@@ -7,7 +7,7 @@ categories: powershell, windows, devops
 
 I had a need to create and recreate Windows domains for some lab work I've been up to. What follows here is adapted from [@davidstamen](https://twitter.com/davidstamen) who blogs [here](http://davidstamen.com). More specifically it is extracted from his Vagrant Windows lab, [here](https://github.com/dstamen/Vagrant/tree/master/windows).
 
->**Warning!** Boxstarter is sort of like curl | sudo bash for Windows.
+>**Warning!** Boxstarter is sort of like curl pipe sudo bash for Windows.
 
 First things first, look over what we're doing:
 <script src="https://gist.github.com/bunchc/1d97b496aa1d6efe146f799b2fb34547.js"></script>
