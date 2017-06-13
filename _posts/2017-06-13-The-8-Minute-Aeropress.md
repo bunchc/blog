@@ -30,7 +30,7 @@ First things first, we need to get the grind right. For the Porlex Mini linked a
 
 On the top half of the grinder, turn the knob 6 "clicks" counterclockwise.
 
-For other griders you are looking for a grind a bit finer than what you'd use for French Press. This is because we're going to be steeping for a bit longer than is typical, and want to get the extraction just so.
+For other grinders you are looking for a grind a bit finer than what you'd use for French Press. This is because we're going to be steeping for a bit longer than is typical, and want to get the extraction just so.
 
 ## Process
 
