@@ -1,7 +1,7 @@
 ---
 title: "Run OpenStack Tempest in openstack-ansible"
 date: 2017-09-05
-layout: "post"
+layout: post
 categories: openstack, testing, ansible, tempest, openstack-ansible
 ---
 
