@@ -5,11 +5,11 @@ layout: "post"
 categories: keystone, openstack, openstack-ansible, troubleshooting
 ---
 
-# Credential migration in progress. Cannot perform writes to credential table.
+## Credential migration in progress. Cannot perform writes to credential table.
 
 In openstack-ansible versions 15.1.7 and 15.1.8, there is an issue with the version of shade and the keystone db_sync steps not completing properly. This is fixed in 15.1.9, however, if running one afore mentioned releases, the following may help.
 
-# Symptom:
+### Symptom:
 
 Keystone reports 500 error when attempting to operate on the credential table.
 
@@ -38,7 +38,7 @@ openstack credential create admin my-secret-stuff
 An unexpected error prevented the server from fulfilling your request. (HTTP 500) (Request-ID: req-d8814c07-59a6-4a06-80dc-1f46082f0866)
 ```
 
-## Fix at build time
+#### Fix at build time
 
 To fix when building, add shade 1.22.2 to the global-requirements-pins.txt prior to building the environment:
 
@@ -50,7 +50,7 @@ scripts/bootstrap-ansible.sh \
     && scripts/run-playbooks.sh
 ```
 
-## To fix while running
+#### To fix while running
 
 * Pin shade to 1.22.2
 * Rerun os-keystone-install.yml
@@ -68,8 +68,6 @@ echo "shade==1.22.2" | tee -a /opt/openstack-ansible/global-requirements-pins.tx
 cd /opt/openstack-ansible/playbooks
 openstack-ansible -vvv os-keystone-install.yml
 ```
-
-### keystone db_sync steps
 
 With shade pinned, the following steps should unlock the credential table in the keystone database:
 
@@ -118,7 +116,7 @@ openstack credential create admin my-secret-stuff
 +------------+----------------------------------+
 ```
 
-## Still didn't work?
+#### Still didn't work?
 
 1. Dump the keystone database to a file, then make a backup of said file
 
@@ -169,7 +167,7 @@ openstack credential create admin my-secret-stuff
 +------------+----------------------------------+
 ```
 
-# Resources
+## Resources
 
 The following resources were not harmed during the filming of this blog post:
 
