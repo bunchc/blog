@@ -7,279 +7,176 @@ categories: faas, function as a service, kubernetes, openfaas, devops, cloud
 
 In this post, we're going to setup a cluster of Raspberry Pi 2 Model B's with Kubernetes. We are then going to install OpenFaaS on top of it so we can build _serverless_ apps. (Not that there aren't servers, but you're not supposed to care, or some such).
 
-As I found when building this cluster out, the Kubernetes space is moving _fast_. Extremely so. That means, this post, like the ones I followed to build the cluster, will be outdated by the time you get here. With luck however, you'll find a clue or two here that will help you get going.
+__Update!__
 
-# Install the head node
+The prior release of this post ended up duplicating a lot of the work that [Alex Ellis](https://blog.alexellis.io/) published [here.](https://gist.github.com/alexellis/fdbc90de7691a1b9edb545c17da2d975).
 
-First things first, you need to install and prep the first node. My head node is Raspbian Jesse ([https://www.raspberrypi.org/downloads/raspbian/](https://www.raspberrypi.org/downloads/raspbian/)), written with Etcher to an SD card. Once booted, you have some work to do.
+In fact, once I'd hit publish, my post was already out of date. So, to get Kubernetes and OpenFaaS going on the PI, start there. What follows here, then, are the changes I made to the process to fit my environment.
 
-## Setup the node
+# Requirements
 
-1. Update the OS and install some required packages:
+For my lab cluster, I wanted the environment to be functional, portable, isolated from the rest of my network, and accessible over wifi. The network layout looks a bit like this:
 
-```
-sudo apt-get update \
-    && sudo apt-get dist-upgrade -y --force-yes
-sudo apt-get install -y \
-    vim \
-    git \
-    wget \
-    curl \
-    unzip \
-    build-essential \
-    raspi-config \
-    mosh \
-    ntpdate \
-    glances \
-    avahi-daemon \
-    netatalk
-```
+![Network layout](https://i.imgur.com/xhMT7Hz.png)
 
-2. Next enable ssh:
+Networks:
 
-```
-sudo systemctl enable ssh
-sudo systemctl start ssh
-```
+* Green - Lab-Net - 10.127.8.x/24
+* Blue - K8s Net - 172.12.0.0/12
 
-3. Disable swap:
+# Build
 
-```
-sudo dphys-swapfile swapoff && \
-  sudo dphys-swapfile uninstall && \
-  sudo update-rc.d dphys-swapfile remove
-```
+The build has two parts, hardware and software. Rather than provide you with a complete manifest of the hardware, we'll summarize it so we can spend more time on the software parts.
 
-3a. Enable cgroups:
+## Hardware
 
-Add the following to the end of ```/boot/cmdline.txt```:
+* 7x Raspberry Pi 2 Model B
+* 1x 8 port 100Mbit switch (It's what I had around)
+* 1x Anker 10 port usb charger
+* 7x Ethernet cables
+* 1x usb wifi adapter
+* 2x GeauxRobot 4-layer Dog Bone Stack Clear Case Box Enclosure
+* Some zip ties
 
-```
-cgroup_enable=cpuset cgroup_enable=memory
-```
+## Software
 
-4. Copy over ssh keys
+Here's where the rubber meets the road. First, familiarize yourself with Alex's build instructions, [here.](https://gist.github.com/alexellis/fdbc90de7691a1b9edb545c17da2d975).
+
+To make my process a little smoother, I used [Packer](https://www.packer.io/) to embed Docker, Kubeadm, avahi, and cloud-init into the image. Then used Hypriot's [flash](https://github.com/hypriot/flash) utility to burn all 7 images with the right host names.
+
+> __Note:__ Avahi allows me to connect to the nodes from node-01 over the private network by name, without having to setup DNS.
+
+### Building the new Raspbian image
+
+> __Assumption:__ Here we make the assumption that you have Vagrant installed and operational.
+
+Packer does not ship with an arm image builder. Thankfully, the community has supplied one: [https://github.com/solo-io/packer-builder-arm-image](https://github.com/solo-io/packer-builder-arm-image)
+
+First, clone the repo, and start the [Vagrant Test Environment](https://github.com/solo-io/packer-builder-arm-image#vagrant-test-environment)
 
 ```
-ssh-copy-id pi@node-01.local
+git clone https://github.com/solo-io/packer-builder-arm-image
+cd packer-builder-arm-image
+vagrant up && vagrant ssh
 ```
 
-5. (Optional) Setup the screen
+Next, you will need to create some supporting files for packer. Specifically, we need to create a json file that tells Packer what to build, a customization script to install our additional packages, and a user-data.yml for the ```flash``` process.
 
-My head node has a screen that I'll be using to show cluster status. It was installed and setup thusly:
+The files I used can be found [here](https://gist.github.com/bunchc/99a04536be770d0c9a64efca0b0fbe00), and places into the ```/vagrant/``` folder of the VM.
 
-```
-curl -SLs https://apt.adafruit.com/add-pin | sudo bash
-sudo apt-get install -y --force-yes raspberrypi-bootloader adafruit-pitft-helper raspberrypi-kernel
+> __Note:__ If you are using Raspberry PI 3's with built in Wifi, the user-data.yml I supplied will have them all connect to your network, rather than forcing them to communicate through the master node.
 
-sudo adafruit-pitft-helper -t 35r
-```
-
-6. Make eth0 static
+Finally, we're ready to build the image, to do that, from inside the Test VM, run the following commands:
 
 ```
+sudo packer build /vagrant/kubernetes_base.json
+rsync --progress --archive /home/vagrant/output-arm-image/image /vagrant/raspbian-stretch-modified.img
+```
+
+You can now shutdown the Test VM.
+
+### Burning the image to the cards
+
+Now that you have a custom image, it's time to put it on the card. To do that, with the ```flash``` command installed, the following command will burn each SD card and set it's hostname:
+
+```
+for i in {01..07}; do ~/Downloads/flash --hostname node-$i --userdata ./user-data.yml ./raspbian-stretch-modified.img; done
+```
+
+Place the SD cards into your RaspberryPIs and boot! This will take a few minutes.
+
+## Setting up networking
+
+From the network diagram earlier, you'll have seen that we're using node-01 as both the Kubernetes master, as well as the network gateway for the rest of the nodes. To supply the nodes with connectivity, we need to configure NAT and DHCP. The following commands will do this for you:
+
+1. Set eth0 to static
+
+Change the address and netmask to fit your environment.
+
+```
+# Set eth0 to static
 echo "allow-hotplug eth0
 auto eth0
 iface eth0 inet static
-    address 172.16.1.1
-    netmask 255.255.255.0" | sudo tee /etc/network/interfaces.d/eth0
+    address 172.12.0.1
+    netmask 255.240.0.0" | sudo tee /etc/network/interfaces.d/eth0
+
+# Restart networking
+sudo systemctl restart networking
 ```
 
-7. Install Docker
+2. Configure NAT
 
 ```
-curl -sSL get.docker.com | sh && \
-sudo usermod pi -aG docker
-```
-
-(Optional) My other cluster nodes run Hypriot, which meant I needed to do some extra leg work to get the right docker onboard:
-
-```
-sudo apt-get autoremove -y docker-engine \
-    && sudo apt-get purge docker-engine -y \
-    && sudo rm -rf /etc/docker/ \
-    && sudo rm -f /etc/systemd/system/multi-user.target.wants/docker.service \
-    && sudo rm -rf /var/lib/docker \
-    && sudo systemctl daemon-reload \
-    && sudo apt-get install -y docker-engine=17.03.1~ce-0~raspbian-jessie
-```
-
-8. (Optional) Setup NAT (from ethernet to wifi)
-
-I wanted my cluster to be isolated from the rest of my network. To this end, all the cluster nodes communicate over ethernet, while the head node functions as a NAT device, allowing them to connect over it's wifi interface to the rest of my network.
-
-```
+# Configure NAT
 echo -e '\n#Enable IP Routing\nnet.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.conf \
-    && sudo sysctl -p \
-    && sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE \
-    && sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT \
-    && sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT \
-    && sudo apt-get install -y iptables-persistent
+  && sudo sysctl -p \
+  && sudo iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE \
+  && sudo iptables -A FORWARD -i wlan0 -o eth0 -m state --state RELATED,ESTABLISHED -j ACCEPT \
+  && sudo iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT \
+  && sudo apt-get install -y iptables-persistent
 
+# Enable the service that retains our iptables through reboots
 sudo systemctl enable netfilter-persistent
 ```
 
-8a. (Optional) Setup DHCP
+3. Configure DHCP
 
-As my cluster nodes are isolated, the head node runs DHCP to provide addressing.
+Change ```dhcp-range=172.12.0.200,172.15.255.254,12h``` in the command below to fit your private network.
 
 ```
+# Configure DHCP
 sudo apt-get install -y dnsmasq \
-    && sudo sed -i "s/#dhcp-range=192.168.0.50,192.168.0.150,12h/dhcp-range=172.16.1.2,172.16.1.254,12h/" /etc/dnsmasq.conf \
-    && sudo sed -i "s/#interface=/interface=eth0/" /etc/dnsmasq.conf
+  && sudo sed -i "s/#dhcp-range=192.168.0.50,192.168.0.150,12h/dhcp-range=172.12.0.200,172.15.255.254,12h/" /etc/dnsmasq.conf \
+  && sudo sed -i "s/#interface=/interface=eth0/" /etc/dnsmasq.conf
+sudo systemctl daemon-reload && sudo systemctl restart dnsmasq
 ```
 
-9. Reboot
-
-At this point we've made extensive modifications to the head node. To ensure swap stays disabled, cgroups are enabled, and the screen does as it should, a reboot is needed here.
+4. Check that your nodes are getting addresses
 
 ```
-sudo reboot
+sudo cat /var/lib/misc/dnsmasq.leases
+1516260768 b8:27:eb:65:ae:6c 172.13.235.110 node-06 01:b8:27:eb:65:ae:6c
+1516259308 b8:27:eb:48:29:01 172.14.32.87 node-02 01:b8:27:eb:48:29:01
+1516260040 b8:27:eb:c4:8b:6b 172.15.204.242 node-04 01:b8:27:eb:c4:8b:6b
+1516261126 b8:27:eb:e2:1f:27 172.12.85.144 node-07 01:b8:27:eb:e2:1f:27
+1516260385 b8:27:eb:69:fa:ff 172.14.174.146 node-05 01:b8:27:eb:69:fa:ff
+1516259665 b8:27:eb:66:2d:2d 172.14.218.40 node-03 01:b8:27:eb:66:2d:2d
 ```
 
-10. Install kubeadm
+## Installing Kubernetes
+
+Next up, is the actual Kubernetes install process. My process differed slightly from Alex's, in a few ways.
+
+### Master node
+
+On the Master node I first pulled all the images. This speeds up the ```kubeadm init``` process significantly.
 
 ```
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update -q && sudo apt-get install -qy kubeadm=1.8.5-00
+docker pull gcr.io/google_containers/kube-scheduler-arm:v1.8.6
+docker pull gcr.io/google_containers/kube-controller-manager-arm:v1.8.6
+docker pull gcr.io/google_containers/kube-apiserver-arm:v1.8.6
+docker pull gcr.io/google_containers/pause-arm:3.0
+docker pull gcr.io/google_containers/etcd-arm:3.0.17
 ```
 
-11. Initialize the head node
-
-As we want our cluster to communicate over the private network, we need to specify address for the API server to listen on. This is done with ```--apiserver-advertise-address=``` and allows the other nodes in our cluster to join properly.
-
-We also specify ```--pod-network-cidr``` as a pool of addresses that our pods will be assigned.
-
-__Note:__ This will take a while.
+After ```kubeadm init``` finishes, I installed weave using the method suggested in their [documentation](https://www.weave.works/docs/net/latest/kubernetes/kube-addon/):
 
 ```
-sudo kubeadm init \
-    --apiserver-advertise-address=172.16.1.1 \
-    --pod-network-cidr 172.16.1.0/24
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 ```
 
-Then, run the bit it gives you at the end:
+### Adding the remaining nodes
+
+Once all the services showed healthy, rather than ssh to each remaining node, I used the following bash one-liner:
 
 ```
-mkdir -p $HOME/.kube \
-    && sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config \
-    && sudo chown $(id -u):$(id -g) $HOME/.kube/config
-```
-
-__Note:__ Save the join token. You can generate another one if you forgot to save this, but you will need the token to join additional nodes.
-
-12. Check that it worked
-
-```
-kubectl get pods --namespace=kube-system
-```
-
-13. Generate a new machine ID
-
-As a side effect of the imaging process, you may end up with nodes that do not have a unique machine-id. Generate a new one:
-
-```
-sudo rm /var/lib/dbus/machine-id
-sudo rm /etc/machine-id
-sudo systemd-machine-id-setup
-sudo reboot
-```
-
-14. Networking
-
-On the master node:
-
-```
-kubectl apply -f https://git.io/weave-kube-1.6
-```
-
-15. Check our work:
-
-```
-kubectl exec -n kube-system weave-net-2zl6f -c weave -- /home/weave/weave --local status connections
-```
-
-16. (Optional) Create a user & role
-
-If you will be deploying the dashboard, you will need an admin user, role, and login token.
-
-Creating the user & role:
-
-```
-echo "apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: admin-user
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: admin-user
-  namespace: kube-system" | tee role.yml
-
-echo "apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: admin-user
-  namespace: kube-system"| tee user.yml
-
-kubectl create -f user.yml
-kubectl create -f role.yml
-```
-
-Getting a login token:
-
-```
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
-```
-
-## Additional nodes
-
-1. Updates
-
-```
-sudo apt-get update && sudo apt-get dist-upgrade -y --force-yes
-```
-
-2. Install kubeadm
-
-```
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add - && \
-  echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list && \
-  sudo apt-get update -q && \
-  sudo apt-get install -qy kubeadm
-```
-
-3. Join the cluster
-
-This is where the token from before comes in handy:
-
-```
-sudo kubeadm join --token  172.16.1.1:6443 --discovery-token-unsafe-skip-ca-verification
-```
-
-4. Check for the new nodes
-
-On the head node, you can use the following command to check if your new nodes have joined properly:
-
-```
-kubectl get nodes
+for i in {02..07}; do ssh -t pi@node-01.local ssh -t pi@node-$i.local kubeadm join --token redacted 172.12.0.1:6443 --discovery-token-ca-cert-hash sha256:redacted; done
 ```
 
 ## Install OpenFaaS
 
-At this point you can follow from step 2.0b on the official OpenFaaS guide: [https://github.com/openfaas/faas/blob/master/guide/deployment_k8s.md](https://github.com/openfaas/faas/blob/master/guide/deployment_k8s.md)
-
-```
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
-
-git clone https://github.com/openfaas/faas-netes
-cd faas-netes
-kubectl apply -f faas.armhf.yml,rbac.yml,monitoring.armhf.yml
-```
+Once all the nodes show in ```kubectl get nodes```, you can preform the OpenFaaS install as documented in [Alex's blog post](https://blog.alexellis.io/serverless-kubernetes-on-raspberry-pi/).
 
 # Resources
 
