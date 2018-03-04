@@ -15,13 +15,13 @@ Before we begin, let's get a few things out of the way:
 
 ## Test Hardware
 
-__Test hardware:__
-
 CPU: 2x Quad-Core AMD Opteron(tm) Processor 2374 HE
 RAM: 64GB
 Disk: 4x 1T 5400 rpm disks, Raid 1
 Controller: LSI MegaRAID 8708EM2 Rev: 1.40
 OS: Ubuntu 16.04 LTS
+
+> Old hardare is old. But hey, it is a workhorse.
 
 ## Test Workload
 
