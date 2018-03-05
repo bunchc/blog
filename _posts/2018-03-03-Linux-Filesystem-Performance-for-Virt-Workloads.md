@@ -43,8 +43,8 @@ The test matrix worked out to 8 tests in all:
 | xfs     | ext4     |  noop    | KVM         |
 | xfs     | ext4     |  noop    | vbox        |
 | xfs     | xfs      | deadline | KVM         |
-| xfs     | xfs      | deadline | KVM         |
-| xfs     | ext4     | deadline | vbox        |
+| xfs     | xfs      | deadline | vbox        |
+| xfs     | ext4     | deadline | KVM         |
 | xfs     | ext4     | deadline | vbox        |
 
 ## Test Process
