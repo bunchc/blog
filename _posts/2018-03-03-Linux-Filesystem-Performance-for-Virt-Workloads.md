@@ -67,67 +67,67 @@ $ time (vagrant up --provider=$PROVIDER_NAME)
 
 __Test 1:__
 
-__Host FS:__ xfs
-__Guest FS:__ xfs
-__Virt Engine:__ libvirt/kvm
-__Host IO Scheduler:__ noop
-__Total Time:__ 174m48.193s
+* __Host FS:__ xfs
+* __Guest FS:__ xfs
+* __Virt Engine:__ libvirt/kvm
+* __Host IO Scheduler:__ noop
+* __Total Time:__ 174m48.193s
 
 __Test 2:__
 
-__Host FS:__ xfs
-__Guest FS:__ xfs
-__Virt Engine:__ vbox
-__Host IO Scheduler:__ noop
-__Total Time:__ 213m35.169s
+* __Host FS:__ xfs
+* __Guest FS:__ xfs
+* __Virt Engine:__ vbox
+* __Host IO Scheduler:__ noop
+* __Total Time:__ 213m35.169s
 
 __Test 3:__
 
-__Host FS:__ xfs
-__Guest FS:__ ext4
-__Virt Engine:__ libvirt/kvm
-__Host IO Scheduler:__ noop
-__Total Time:__ 172m5.682s
+* __Host FS:__ xfs
+* __Guest FS:__ ext4
+* __Virt Engine:__ libvirt/kvm
+* __Host IO Scheduler:__ noop
+* __Total Time:__ 172m5.682s
 
 __Test 4:__
 
-__Host FS:__ xfs
-__Guest FS:__ ext4
-__Virt Engine:__ vbox
-__Host IO Scheduler:__ noop
-__Total Time:__ 207m53.895s
+* __Host FS:__ xfs
+* __Guest FS:__ ext4
+* __Virt Engine:__ vbox
+* __Host IO Scheduler:__ noop
+* __Total Time:__ 207m53.895s
 
 __Test 5:__
 
-__Host FS:__ xfs
-__Guest FS:__ xfs
-__Virt Engine:__ libvirt/kvm
-__Host IO Scheduler:__ deadline
-__Total Time:__ 172m44.424s
+* __Host FS:__ xfs
+* __Guest FS:__ xfs
+* __Virt Engine:__ libvirt/kvm
+* __Host IO Scheduler:__ deadline
+* __Total Time:__ 172m44.424s
 
 __Test 6:__
 
-__Host FS:__ xfs
-__Guest FS:__ xfs
-__Virt Engine:__ vbox
-__Host IO Scheduler:__ deadline
-__Total Time:__ 235m34.411s
+* __Host FS:__ xfs
+* __Guest FS:__ xfs
+* __Virt Engine:__ vbox
+* __Host IO Scheduler:__ deadline
+* __Total Time:__ 235m34.411s
 
 __Test 7:__
 
-__Host FS:__ xfs
-__Guest FS:__ ext4
-__Virt Engine:__ libvirt/kvm
-__Host IO Scheduler:__ deadline
-__Total Time:__ 172m31.418s
+* __Host FS:__ xfs
+* __Guest FS:__ ext4
+* __Virt Engine:__ libvirt/kvm
+* __Host IO Scheduler:__ deadline
+* __Total Time:__ 172m31.418s
 
 __Test 4:__
 
-__Host FS:__ xfs
-__Guest FS:__ ext4
-__Virt Engine:__ vbox
-__Host IO Scheduler:__ deadline
-__Total Time:__ 209m43.955s
+* __Host FS:__ xfs
+* __Guest FS:__ ext4
+* __Virt Engine:__ vbox
+* __Host IO Scheduler:__ deadline
+* __Total Time:__ 209m43.955s
 
 # Conclusions
 
