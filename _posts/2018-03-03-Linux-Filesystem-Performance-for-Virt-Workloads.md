@@ -65,6 +65,19 @@ $ time (vagrant up --provider=$PROVIDER_NAME)
 
 ## Results
 
+Here are the results of each test. Surprisingly, ext4 on xfs was faster in all cases. Who'd have thought.
+
+| Host FS | Guest FS | IO Sched | Virt Engine |     Time    |
+|:-------:|:--------:|:--------:|:-----------:|:-----------:|
+| xfs     | xfs      |  noop    | KVM         | 174m48.193s |
+| xfs     | xfs      |  noop    | vbox        | 213m35.169s |
+| xfs     | ext4     |  noop    | KVM         | 172m5.682s  |
+| xfs     | ext4     |  noop    | vbox        | 207m53.895s |
+| xfs     | xfs      | deadline | KVM         | 172m44.424s |
+| xfs     | xfs      | deadline | vbox        | 235m34.411s |
+| xfs     | ext4     | deadline | KVM         | 172m31.418s |
+| xfs     | ext4     | deadline | vbox        | 209m43.955s |
+
 __Test 1:__
 
 * __Host FS:__ xfs
