@@ -27,7 +27,7 @@ TICK Stack (Telegraf, InfluxDB, Chronograf, Kapacitor), like ELK, provides a set
 
 The following sections rely heavily on the [Ansible playbooks from Larry Smith Jr.](https://github.com/mrlesmithjr?utf8=%E2%9C%93&tab=repositories&q=ansible&type=&language=).
 
-If you have vagrant, virtualbox or libvirt and would like to play along, the lab that accompanies this post can be found here. To start the lab, run ```vagrant up``` and go fetch a coffee. ##TODO: cleanup lab and get it to git.
+If you have vagrant, virtualbox or libvirt and would like to play along, the lab that accompanies this post can be found [here.](https://github.com/bunchc/vagrant-ansible-elkstack/tree/refactoring) To start the lab, run ```vagrant up``` and go fetch a coffee.
 
 ## Netdata - System stats collection
 
