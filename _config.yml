@@ -12,7 +12,7 @@ permalink:           /:year/:month/:day/:title/
 title:               Cody Bunch
 tagline:             'Some Random IT Guy - OpenStack, DevOps, Cloud, Things'
 description:         'Offering all manner of technical how-to (and how not to) and other technical content. I specalize in OpenStack, VMware, and most things automation and cloud related.'
-url:                 http://blog.codybunch.com
+url:                 https://blog.codybunch.com
 baseurl:             /
 paginate:            10
 
