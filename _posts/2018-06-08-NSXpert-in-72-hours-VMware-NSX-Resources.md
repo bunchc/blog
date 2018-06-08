@@ -17,6 +17,8 @@ While I'm sure there are more out there, I plan to start with the #vBrownBag NSX
 * [NSX Edge Gateway & Distributed Firewall](https://www.youtube.com/watch?v=IR5s61uC-vY&feature=youtu.be)
 * [NSX Switching and Routing](https://www.youtube.com/watch?v=IxvRt_Li7GA&feature=youtu.be)
 
+Also worth mentioning, the official [VMware NSX YouTube Channel](https://www.youtube.com/watch?v=gqcwJEhIiqs).
+
 ## Blog Resources
 
 * [NSX Study Guide](http://www.virtually-limitless.com/vcix-nv-study-guide/)
@@ -26,6 +28,10 @@ There are a huge number of guides here, but they are comprehensive.
 * [VMware Hands On Labs](https://labs.hol.vmware.com/HOL/catalogs/catalog/681)
 
 You will need to search for NSX specific labs. Recommended was getting started and then working as best as you could along with the study guides linked prior.
+
+* [VMware NSX Lab Guides](https://blogs.vmware.com/networkvirtualization/2017/08/announcing-three-new-vmware-nsx-guides.html/)
+
+In depth guides for getting up and going on VMware NSX
 
 * [VMware Validated Design](https://www.vmware.com/solutions/software-defined-datacenter/validated-designs.html)
 
@@ -38,3 +44,7 @@ When all else fails check the docs.
 * [NSX Community Forum](https://communities.vmware.com/community/vmtn/nsx)
 
 When the docs fail, check the communities forums.
+
+## Classes
+
+While I don't think I'll have time over the next few days to attend a class, VMware has quite a few available: <https://mylearn.vmware.com/mgrReg/plan.cfm?plan=48389&ui=www_edu>
