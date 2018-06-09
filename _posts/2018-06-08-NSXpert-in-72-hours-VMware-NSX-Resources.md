@@ -73,6 +73,13 @@ More Links!
 * [DFW Packet Walk](https://thewificable.com/2017/03/13/nsx-dfw-packet-walk/)
 
 
+**UPDATE 2018-06-09 @ 12:21**
+Additional links from [@williamwilloby](https://twitter.com/williamwilloby)
+
+* [(Un)official VCIX-NV Study Guide](http://lostdomain.org/vcix-nv-study-guide/)
+* [NSX Certification resources](https://nsxcentral.blogspot.com/2017/03/vmware-nsx-certification-resources.html?m=1)
+
+
 ## Classes
 
 While I don't think I'll have time over the next few days to attend a class, VMware has quite a few available: <https://mylearn.vmware.com/mgrReg/plan.cfm?plan=48389&ui=www_edu>
