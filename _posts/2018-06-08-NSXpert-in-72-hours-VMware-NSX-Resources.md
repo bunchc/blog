@@ -19,7 +19,7 @@ While I'm sure there are more out there, I plan to start with the #vBrownBag NSX
 
 Also worth mentioning, the official [VMware NSX YouTube Channel](https://www.youtube.com/watch?v=gqcwJEhIiqs).
 
-## Blog Resources
+## Written Resources
 
 * [NSX Study Guide](http://www.virtually-limitless.com/vcix-nv-study-guide/)
 
@@ -44,6 +44,18 @@ When all else fails check the docs.
 * [NSX Community Forum](https://communities.vmware.com/community/vmtn/nsx)
 
 When the docs fail, check the communities forums.
+
+**UPDATE 2018-06-09**
+
+A few more links came up overnight that should be shared.
+
+* [Architecting NSX for Service Providers](https://www.vmware.com/content/dam/digitalmarketing/vmware/en/pdf/vcat/vmware-architecting-a-vmware-nsx-solution.pdf)
+
+A PDF Guide to architecting NSX solutions for service providers. This will help you wrap your head around some of the considerations for how to deploy NSX within the context of the VMware SDDC.
+
+* [NSX Installation Guide](https://docs.vmware.com/en/VMware-NSX-for-vSphere/6.4/com.vmware.nsx.install.doc/GUID-D8578F6E-A40C-493A-9B43-877C2B75ED52.html)
+
+The ultimate HOL, is of course, setting it up yourself. This is a subset of the docs that walks you through an installation.
 
 ## Classes
 
