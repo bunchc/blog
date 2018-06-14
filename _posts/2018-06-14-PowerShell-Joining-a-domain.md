@@ -25,7 +25,8 @@ To join the server to the domain, we will:
 
 ```powershell
 Get-NetAdapter -InferfaceIndex
-Set-DnsClientServerAddress -InterfaceIndex 2 -ServerAddresses ("10.127.16.100")
+Set-DnsClientServerAddress -InterfaceIndex 2 `
+    -ServerAddresses ("10.127.16.100")
 ```
 
 2. Optional: Rename the computer
@@ -35,9 +36,11 @@ This can be done in two ways, either rename & reboot, or rename as part of the j
 **Rename and reboot**
 
 ```powershell
+# If you have more work to do, remove the -Reboot 
+# from the Rename-Computer command and use:
+# Reboot-Computer -Force
+
 Rename-Computer -NewName "app-01" -Reboot
-# If you have more work to do, remove the -Reboot from the Rename-Computer command
-# and instead use: Reboot-Computer -Force
 ```
 
 **Rename at Join**
