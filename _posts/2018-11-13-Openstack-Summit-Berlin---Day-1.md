@@ -18,8 +18,7 @@ What follows is going to be a slightly expanded form of the live tweeting I will
 I was a little late to the keynotes today, so missed the beginning. That said, there was a lot going on, and all of it good.
 
 1. OpenStack Summit is now Open Infrastructure Summit
-2. Next one will be in Denver, CO
-    * Week of: 29, April 2019
+2. Next one will be in Denver, CO the week of 29, April 2019
 3. Textiles is crazy interesting.
 
     OpenStack is the infrastructure on which Oerlikon produces 40,000 bobbins of thread a day. They're using OpenStack infrastructure to back end containers, AI/ML (for making real-time decisions on production lines). This takes inputs from about 70k sensors per 120 machines.
