@@ -23,6 +23,7 @@ I was a little late to the keynotes today, so missed the beginning. That said, t
 3) Textiles is crazy interesting.
 
     OpenStack is the infrastructure on which Oerlikon produces 40,000 bobbins of thread a day. They're using OpenStack infrastructure to back end containers, AI/ML (for making real-time decisions on production lines). This takes inputs from about 70k sensors per 120 machines.
+
 4) The theme has been the same as the last bunch of Summits. That is, OpenStack has matured as an infrastructure platform and is the infrastructure supporting more shiny workloads (AI/ML, Kubernetes, etc).
 5) Focus on Day 2 Operations. Infrastructure, at scale, is difficult.
 6) There is an Internet of Cows.
