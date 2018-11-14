@@ -17,17 +17,17 @@ What follows is going to be a slightly expanded form of the live tweeting I will
 
 I was a little late to the keynotes today, so missed the beginning. That said, there was a lot going on, and all of it good.
 
-1) OpenStack Summit is now Open Infrastructure Summit
-2) Next one will be in Denver, CO
+1. OpenStack Summit is now Open Infrastructure Summit
+2. Next one will be in Denver, CO
     * Week of: 29, April 2019
-3) Textiles is crazy interesting.
+3. Textiles is crazy interesting.
 
     OpenStack is the infrastructure on which Oerlikon produces 40,000 bobbins of thread a day. They're using OpenStack infrastructure to back end containers, AI/ML (for making real-time decisions on production lines). This takes inputs from about 70k sensors per 120 machines.
 
-4) The theme has been the same as the last bunch of Summits. That is, OpenStack has matured as an infrastructure platform and is the infrastructure supporting more shiny workloads (AI/ML, Kubernetes, etc).
-5) Focus on Day 2 Operations. Infrastructure, at scale, is difficult.
-6) There is an Internet of Cows.
-7) OSP 14 is coming.
+4. The theme has been the same as the last bunch of Summits. That is, OpenStack has matured as an infrastructure platform and is the infrastructure supporting more shiny workloads (AI/ML, Kubernetes, etc).
+5. Focus on Day 2 Operations. Infrastructure, at scale, is difficult.
+6. There is an Internet of Cows.
+7. OSP 14 is coming.
 
 ## Sign all the books
 
