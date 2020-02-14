@@ -5,8 +5,6 @@ layout: "post"
 categories: vmware, hyper-v, windows, win10, migration, qemu-img
 ---
 
-# Migrating to Hyper-V: Convert VMDK to VHDX
-
 I have been on a desktop OS and tools journey for the last six or nine months. Long story short, my 2012 Retina MacBook Pro gave up the ghost in a most unpleasant way. I grabbed a System76 laptop, and gave Linux on the desktop a shot for a little while. Eventually I repaved that and moved to Windows 10 full time. As part of that, I enabled WSL 2, which breaks VMware desktop products. No biggie, one can convert VMs, right?
 
 Well...
