@@ -48,7 +48,7 @@ The command tells `qemu-img` to convert the VMDK specified in `PathToVMDK` with 
 
 > **Note:** There are some tools that will do this in PowerShell [2] [3]. However, they can be rather flaky depending on the source VMDK. `qemu-img` was quite a bit more robust in this regard.
 
-### Importing into Hyper=V
+### Importing into Hyper-V
 
 Once the conversion is complete, you can import the VM into Hyper-V as you would any other vhdx. You will want to be careful when selecting which generation, that is, unless you installed the VM with UEFI, you will want to select 'Generation 1'.
 
