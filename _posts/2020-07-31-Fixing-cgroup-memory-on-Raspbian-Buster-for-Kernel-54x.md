@@ -5,7 +5,7 @@ layout: "post"
 categories: "rpi, raspberry pi, raspbian, IoT, k3s, k8s"
 ---
 
-After running `sudo apt -y full-upgrade` my Raspberry Pi k3s cluster got upgrade from 4.x kernels to 5.x. Which turbo-broke k3s.
+After running `sudo apt -y full-upgrade` my [Raspberry Pi k3s cluster](https://blog.codybunch.com/2018/01/05/OpenFaaS-on-Kubernetes-on-Raspberry-Pi/) got upgrade from 4.x kernels to 5.x. Which turbo-broke k3s.
 
 ## The Frror
 
