@@ -7,7 +7,9 @@ categories: "led, iot, rpi, raspberry pi, cluster, k8s"
 
 # Visually Identify Raspberry Pi
 
-I run a small Kubernetes cluster on about nine Raspberry Pi nodes, and while they take up much less space, finding a specific fail(ed|ing) node can be just as challenging as finding a random server in a datacenter. Good news is, you can make one of the onboard LEDs flash to give you an idea of which node it is.
+I run a small Kubernetes cluster on about nine Raspberry Pi nodes, and while they take up much less space, finding a specific fail(ed|ing) node can be just as challenging as finding a random server in a datacenter.
+
+Good news is, you can make one of the onboard LEDs flash to give you an idea of which node it is.
 
 ## Make the node blink
 
