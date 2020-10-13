@@ -21,10 +21,12 @@ The following instructions assume you have both remote access (SSH) to your Rasp
 
     ```shell
     $ cat /sys/class/leds/led0/trigger
-    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
-    kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
-    kbd-ctrlrlock timer oneshot heartbeat backlight gpio cpu cpu0 cpu1 cpu2 cpu3 default-on
-    input panic actpwr [mmc0] rfkill-any rfkill-none
+    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock
+    kbd-kanalock kbd-shiftlock  kbd-altgrlock kbd-ctrllock
+    kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
+    kbd-ctrlrlock timer oneshot heartbeat backlight gpio cpu
+    cpu0 cpu1 cpu2 cpu3 default-on input panic actpwr [mmc0]
+    rfkill-any rfkill-none
     ```
 
 2. Enable the `ledtrig_heartbeat` kernel module:
@@ -39,10 +41,12 @@ The following instructions assume you have both remote access (SSH) to your Rasp
     ```shell
     # echo "heartbeat" > /sys/class/leds/led0/trigger
     # cat /sys/class/leds/led0/trigger
-    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
-    kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
-    kbd-ctrlrlock timer oneshot [heartbeat] backlight gpio cpu cpu0 cpu1 cpu2 cpu3 default-on
-    input panic actpwr mmc0 rfkill-any rfkill-none
+    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock
+    kbd-kanalock kbd-shiftlock  kbd-altgrlock kbd-ctrllock
+    kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
+    kbd-ctrlrlock timer oneshot [heartbeat] backlight gpio cpu
+    cpu0 cpu1 cpu2 cpu3 default-on input panic actpwr mmc0
+    rfkill-any rfkill-none
     ```
 
 4. Reset back to SD card access:
@@ -50,10 +54,12 @@ The following instructions assume you have both remote access (SSH) to your Rasp
     ```shell
     # echo "mmc0" > /sys/class/leds/led0/trigger
     # cat /sys/class/leds/led0/trigger
-    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
-    kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
-    kbd-ctrlrlock timer oneshot heartbeat backlight gpio cpu cpu0 cpu1 cpu2 cpu3 default-on
-    input panic actpwr [mmc0] rfkill-any rfkill-none
+    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock
+    kbd-kanalock kbd-shiftlock  kbd-altgrlock kbd-ctrllock
+    kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
+    kbd-ctrlrlock timer oneshot heartbeat backlight gpio cpu
+    cpu0 cpu1 cpu2 cpu3 default-on input panic actpwr [mmc0]
+    rfkill-any rfkill-none
     ```
 
 ## Explanation
