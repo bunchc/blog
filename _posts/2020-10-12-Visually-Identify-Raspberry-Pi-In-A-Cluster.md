@@ -5,7 +5,9 @@ layout: "post"
 categories: "led, iot, rpi, raspberry pi, cluster, k8s"
 ---
 
+
 # Visually Identify Raspberry Pi
+
 
 I run a small Kubernetes cluster on about nine Raspberry Pi nodes, and while they take up much less space, finding a specific fail(ed|ing) node can be just as challenging as finding a random server in a datacenter.
 
