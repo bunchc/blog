@@ -11,7 +11,8 @@ I run a small Kubernetes cluster on about nine Raspberry Pi nodes, and while the
 
 The following instructions assume you have both remote access (SSH) to your Raspberry Pi, as well as `sudo` or root permissions.
 
-1. Verify the current kernel module for LED0:
+1. Verify the current kernel module for `LED0`:
+
     ```shell
     $ cat /sys/class/leds/led0/trigger
     none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
@@ -21,12 +22,14 @@ The following instructions assume you have both remote access (SSH) to your Rasp
     ```
 
 2. Enable the `ledtrig_heartbeat` kernel module:
-   ```shell
+   
+```shell
    $ sudo su -
    # modprobe ledtrig_heartbeat
    ```
 
-3. Set LED0 to blinking:
+3. Set `LED0` to blinking:
+
    ```shell
    # echo "heartbeat" > /sys/class/leds/led0/trigger
    # cat /sys/class/leds/led0/trigger
@@ -37,6 +40,7 @@ The following instructions assume you have both remote access (SSH) to your Rasp
    ```
 
 4. Reset back to SD card access:
+
    ```shell
    # echo "mmc0" > /sys/class/leds/led0/trigger
    # cat /sys/class/leds/led0/trigger
@@ -48,7 +52,7 @@ The following instructions assume you have both remote access (SSH) to your Rasp
 
 ## Explanation
 
-The status LED (the flashy green one, or LED0) on a Raspberry Pi will flash on SD card access. To identify a specific node, we take advantage of the fact that LED0 is programmable, and set it to heartbeat, which makes it flash on and off in a steady pattern.
+The status LED (the flashy green one, or `LED0`) on a Raspberry Pi will flash on SD card access. To identify a specific node, we take advantage of the fact that LED0 is programmable, and set it to heartbeat, which makes it flash on and off in a steady pattern.
 
 You can also configure the red power LED to heartbeat as well by changing `led0` to `led1` in the preceding commands.
 
@@ -56,7 +60,7 @@ You can also configure the red power LED to heartbeat as well by changing `led0`
 
 The commands discussed before work for a single node, but, honestly, they can be hard to remember when you are in a pinch. Have no fear, the following is an Ansible playbook that will set them to blinking for you:
 
-```yaml identify-rpi.yml
+```yaml
 ---
 # Sets led0 on an rPI to heartbeat
 # To allow for identification of a node in a cluster of rPI.
