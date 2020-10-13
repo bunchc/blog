@@ -5,9 +5,11 @@ layout: "post"
 categories: "led, iot, rpi, raspberry pi, cluster, k8s"
 ---
 
-# Visually Identify Raspberry Pi In A Cluster
+# Visually Identify Raspberry Pi
 
-I run a small Kubernetes cluster on about nine Raspberry Pi nodes, and while they take up much less space, finding a specific fail[ed|ing] node can be just as challenging as finding a random server in a datacenter. Good news is, you can make one of the onboard LEDs flash to give you an idea of which node it is.
+I run a small Kubernetes cluster on about nine Raspberry Pi nodes, and while they take up much less space, finding a specific fail(ed|ing) node can be just as challenging as finding a random server in a datacenter. Good news is, you can make one of the onboard LEDs flash to give you an idea of which node it is.
+
+    asdf
 
 ## Make the node blink
 
@@ -24,33 +26,33 @@ The following instructions assume you have both remote access (SSH) to your Rasp
     ```
 
 2. Enable the `ledtrig_heartbeat` kernel module:
-   
-```shell
-   $ sudo su -
-   # modprobe ledtrig_heartbeat
-   ```
+
+    ```shell
+    $ sudo su -
+    # modprobe ledtrig_heartbeat
+    ```
 
 3. Set `LED0` to blinking:
 
-   ```shell
-   # echo "heartbeat" > /sys/class/leds/led0/trigger
-   # cat /sys/class/leds/led0/trigger
-   none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
-   kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
-   kbd-ctrlrlock timer oneshot [heartbeat] backlight gpio cpu cpu0 cpu1 cpu2 cpu3 default-on
-   input panic actpwr mmc0 rfkill-any rfkill-none
-   ```
+    ```shell
+    # echo "heartbeat" > /sys/class/leds/led0/trigger
+    # cat /sys/class/leds/led0/trigger
+    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
+    kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
+    kbd-ctrlrlock timer oneshot [heartbeat] backlight gpio cpu cpu0 cpu1 cpu2 cpu3 default-on
+    input panic actpwr mmc0 rfkill-any rfkill-none
+    ```
 
 4. Reset back to SD card access:
 
-   ```shell
-   # echo "mmc0" > /sys/class/leds/led0/trigger
-   # cat /sys/class/leds/led0/trigger
-   none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
-   kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
-   kbd-ctrlrlock timer oneshot heartbeat backlight gpio cpu cpu0 cpu1 cpu2 cpu3 default-on
-   input panic actpwr [mmc0] rfkill-any rfkill-none
-   ```
+    ```shell
+    # echo "mmc0" > /sys/class/leds/led0/trigger
+    # cat /sys/class/leds/led0/trigger
+    none rc-feedback kbd-scrolllock kbd-numlock kbd-capslock kbd-kanalock kbd-shiftlock
+    kbd-altgrlock kbd-ctrllock kbd-altlock kbd-shiftllock kbd-shiftrlock kbd-ctrlllock
+    kbd-ctrlrlock timer oneshot heartbeat backlight gpio cpu cpu0 cpu1 cpu2 cpu3 default-on
+    input panic actpwr [mmc0] rfkill-any rfkill-none
+    ```
 
 ## Explanation
 
