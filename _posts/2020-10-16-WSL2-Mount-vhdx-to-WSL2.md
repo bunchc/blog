@@ -5,8 +5,6 @@ layout: "post"
 categories: "windows, win10, wsl, wsl2, windows subsystem for linux, troubleshooting"
 ---
 
-# [WSL2] Mount vhdx to WSL2
-
 Sometimes the best blog posts come from Bad Ideas&trade;. Like this one:
 
 ![Screenshot of a tweet that reads: "Why is my AppData folder 54GB? o.O Now to find out how badly Win10 breaks if I move it.](https://pbs.twimg.com/media/EkYbxAWXsAEWc_e?format=jpg&name=large)
