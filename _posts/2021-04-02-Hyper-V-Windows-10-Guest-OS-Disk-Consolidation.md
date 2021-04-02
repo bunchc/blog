@@ -5,8 +5,6 @@ layout: "post"
 categories: "hyper-v, hyperv, virtualization, windows 10, win10, sysadmin"
 ---
 
-# [Hyper-V] Windows 10 Guest OS Dynamic Disk Compaction
-
 This morning I awoke to the Windows 10 VM I use for work having used almost all of my hard drive. This being both the blessing and the curse of using dynamic, or thin provisioned, disks, it was not unexpected. However, having not managed Hyper-V virtual machines before, compacting the disk was a new process for me. I have now documented it here in case you run into this as well.
 
 ## Guest OS Operations
