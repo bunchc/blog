@@ -1,11 +1,9 @@
-<!-- vale off -->
 ---
 title: "[Hyper-V] Windows 10 Guest OS Dynamic Disk Compaction"
 date: 2021-04-02
 layout: "post"
 categories: "hyper-v, hyperv, virtualization, windows 10, win10, sysadmin"
 ---
-<!-- vale on -->
 
 # [Hyper-V] Windows 10 Guest OS Dynamic Disk Compaction
 
@@ -26,7 +24,7 @@ While you can defragment the disk using the GUI disk defragment tool, I find kno
 
 To defragment a disk in the virtual machine, open an Administrator command prompt or PowerShell, and run the following command:
 
-```
+```powershell
 C:\WINDOWS\system32> defrag C: /U /V /H
 ```
 
@@ -44,7 +42,7 @@ Running `sdelete` after a disk defrag may seem like an extra step, and if time i
 
 From an elevated command shell, run the following:
 
-```
+```powershell
 C:\WINDOWS\system32> sdelete -nobanner -z c:
 ```
 
