@@ -19,6 +19,7 @@ You will need a number of things in order for this to work. Here is a list:
   * netboot.xyz & custom menus
   * ESXi installer files
 * Access to ESXi install media
+
 ## Getting Started
 
 There are a few moving parts here, that we'll tackle in the following order:
@@ -37,6 +38,7 @@ The first thing we need to do is make the ESXi install files available over http
 2. Mount the image (the steps on how to do this will vary by system).
 3. Copy all of the files to a folder on your webserver. e.g. `web/VMware/ESXi/v7.0.0U2/`
 4. Ensure the extracted files are lowercase.
+
 ### Customizing ESXi `boot.cfg`
 
 Next, make a copy of the `boot.cfg` file from the extracted ESXi installer. You will need to make the following modifications:
@@ -48,6 +50,7 @@ Next, make a copy of the `boot.cfg` file from the extracted ESXi installer. You 
 * Remove the forward slash `/` from the file names in `kernel=` and `modules=` lines.
   * `kernel=/b.b00` changes to `kernel=b.b00`
   * `modules=/jumpstart.gz --- /useropts.gz ...` changes to `modules=jumpstart.gz --- useropts.gz ...`
+
 ### [Optional] Customizing ESXi Kickstart
 
 Using a Kickstart file can automate the installation to where it is non interactive. My kickstart file follows. You can find various options for this file in the [Resources](#resources) section.
@@ -78,6 +81,7 @@ There are a few interesting bits I would like to call out:
 * Line 23 loads the customized `boot.cfg` we created earlier in the post without loading a kickstart. This allows you to walk the installer by hand.
 * Line 27 loads the kickstart file, and performs the installation for you.
 * The lines (20, 24, 28) that read `boot || goto custom_exit` tell ipxe to attempt to boot the host, or (`||`) if that fails, to exit the custom menu and return to the main menu.
+
 ## Summary
 
 netboot.xyz allows for a good deal of flexibility when running a home lab. Both for rapidly changing the OS on your physical hosts as well as having installers available for any number of other operating systems and utilities available via network boot. You can also add custom options to install things like ESXi, as was shown in this post.
