@@ -1,11 +1,9 @@
-<!-- vale off -->
 ---
 title: "[Lab] Automated Install of ESXi with netboot.xyz"
 date: 2021-05-04
 layout: "post"
 categories: "lab, automation, vmware, vsphere, esx, esxi, pxe, netboot"
 ---
-<!-- vale on -->
 
 Earlier this year, Jake Robinson tweeted about doing a manual ESXi install, and based on some replies to it I shared that I automate ESXi host installation in my lab using [netboot.xyz](https://netboot.xyz/). I then promised a writeup and then procrastinated on getting that done. No longer, it is time!
 
