@@ -69,7 +69,7 @@ If you need to reach out to Cody, you can find him in the following places:
 
 * E-mail: [bunchc@gmail.com](mailto:bunchc@gmail.com)
 * Twitter: [@cody_bunch](http://twitter.com/cody_bunch)
-* Linked-In: [Here](http://www.linkedin.com/pub/gerald-bunch/3/195/421)
+* Linked-In: [Here](https://www.linkedin.com/in/codybunch/)
 
 # Disclosures / Sponsored by
 
